@@ -1,1 +1,114 @@
-/* You can add global styles to this file, and also import other style files */
+/*
+    UNIVERSAL RULES
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* h1, h2, h3 { font-family: 'Open Sans', sans serif; } */
+
+/*
+    LAYOUT COMPONENTS RULES
+*/
+app-root,
+app-header,
+app-footer,
+app-welcome,
+app-auth {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/*
+    LAYOUT ELEMENTS RULES
+*/
+.section {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Top bar with logo */
+.logo-bar {
+    background-color: white;
+    height: 36px;
+    padding-top: 4px;
+}
+
+.logo-bar a img {
+    height: 32px;
+}
+
+/* Horizontal menu */
+.menu-bar {
+    background-color: rgb(8, 59, 102);
+    height: 40px;
+}
+
+.menu-bar a {
+    color: white;
+    padding: 10px;
+}
+
+/* Main content */
+.content {
+    background-color: #EAEDF0;
+    height: 400px;
+}
+
+/* Extra feature#1 */ 
+.feature-1 {
+    background-color: #F5CF8E;
+  }
+
+/* Extra feature#2 */
+.feature-2 {
+    background-color: #F09A9D;
+  }
+
+/* Sign up, Sign in content */
+.auth-content {
+    background-color: lightgreen;
+}
+
+/* Footer */
+.footer {
+    height: auto;
+    padding-top: 30px;
+    padding-bottom: 3px;
+    font-size: x-small;
+}
+
+/*
+    MEDIA DEPENDENT RULES
+*/
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+
+}
+  
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+    .feature-1, .feature-2 {
+        width: 50%;
+    }
+}
+  
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+    app-root {
+        margin: auto;
+        width: 960px;
+    }
+    .feature-1, .feature-2 {
+        width: 50%;
+    }   
+}
