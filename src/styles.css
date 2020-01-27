@@ -17,7 +17,8 @@ app-root,
 app-header,
 app-footer,
 app-welcome,
-app-auth {
+app-auth,
+app-page-not-found {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -76,6 +77,7 @@ app-auth {
 /* Sign up, Sign in content */
 .auth-content {
     background-color: lightgreen;
+    height: 500px;
 }
 
 /* Footer */

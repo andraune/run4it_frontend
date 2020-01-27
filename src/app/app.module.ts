@@ -7,6 +7,7 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AuthComponent } from './auth/auth.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { AuthComponent } from './auth/auth.component';
     FooterComponent,
     AppComponent,
     WelcomeComponent,
-    AuthComponent
+    AuthComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,8 @@ import { AuthComponent } from './auth/auth.component';
       { path: '', component: WelcomeComponent },
       { path: 'register', component: AuthComponent /*,canActivate: [NoAuthGuard] */ },
       { path: 'login', component: AuthComponent /*,canActivate: [NoAuthGuard] */ },
-      { path: 'confirm', component: AuthComponent /*,canActivate: [NoAuthGuard] */ }
+      { path: 'confirm', component: AuthComponent /*,canActivate: [NoAuthGuard] */ },
+      { path: '**', component: PageNotFoundComponent }
     ])
   ],
   providers: [],
