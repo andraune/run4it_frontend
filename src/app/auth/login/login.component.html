@@ -1,0 +1,25 @@
+<div class="section auth-content">
+    <a [routerLink]="['/']" title="Home">
+        <img src="/assets/icon.png" alt="Run4IT logo">
+    </a>
+    <div style="width: 100%; text-align: center;">
+        <h1>Login</h1>
+        <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+            <fieldset [disabled]="isSubmitting">
+                <fieldset>
+                    <input formControlName="email" placeholder="Email" type="text">
+                </fieldset>
+                <fieldset>
+                    <input formControlName="password" placeholder="Password" type="password">
+                </fieldset>
+                <button [disabled]="!loginForm.valid" type="submit">
+                    Log in
+                </button>
+            </fieldset>
+        </form>
+    </div>
+    <div style="width: 100%; text-align: center;">
+        Access token: {{ accessToken }}<br />
+        Refresh token: {{ refreshToken }}
+    </div>
+</div>

@@ -8,17 +8,19 @@
     font-family: 'Roboto', sans-serif;
 }
 
-/* h1, h2, h3 { font-family: 'Open Sans', sans serif; } */
+h1, h2, h3 { 
+    font-family: 'Open Sans', sans-serif;
+}
+
+fieldset {
+    border: none;
+    padding: 2px;
+}
 
 /*
     LAYOUT COMPONENTS RULES
 */
-app-root,
-app-header,
-app-footer,
-app-welcome,
-app-auth,
-app-page-not-found {
+app-root {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -31,7 +33,7 @@ app-page-not-found {
     width: 100%;
     height: 200px;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
