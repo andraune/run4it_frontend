@@ -21,7 +21,6 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/site.webmanifest",
               "src/assets"
             ],
             "styles": [
