@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  enableRouteTracing: true,
   apiUrl: 'http://localhost:5000/v1'
 };
 
