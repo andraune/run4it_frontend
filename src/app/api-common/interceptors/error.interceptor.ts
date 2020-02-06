@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, take, switchMap, finalize } from 'rxjs/operators';
 
@@ -15,7 +14,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor(
         private jwtService: JwtService, 
         private userService: UserService,
-        private router: Router
     ) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

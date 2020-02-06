@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, ReplaySubject, throwError } from 'rxjs';
-import { map, distinctUntilChanged, catchError } from 'rxjs/operators';
+import { map, filter, first, distinctUntilChanged, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
@@ -13,13 +13,11 @@ export class UserService {
     public currentUser: Observable<User>;
 
     private isAuthenticatedSubject: ReplaySubject<boolean>;
-    public isAuthenticated: Observable<boolean>;
 
     constructor(private apiService: ApiService, private jwtService: JwtService) {
         this.currentUserSubject = new BehaviorSubject<User>({} as User);
         this.currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
         this.isAuthenticatedSubject = new ReplaySubject<boolean>(1);
-        this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
     }
 
     /* Call on app-load (in app.component's onInit) */
@@ -39,6 +37,13 @@ export class UserService {
         } else {
             this.clearAuthData();
         }
+    }
+
+    getAuthenticated(): Promise<boolean> {
+        return this.isAuthenticatedSubject.pipe(
+            filter(val => (val !== null && val != undefined)),
+            first()
+        ).toPromise();
     }
 
     login(emailStr: string, passwordStr: string): Observable<User> {
