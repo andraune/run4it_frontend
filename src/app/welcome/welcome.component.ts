@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { User, UserService } from '../api-common';
 
 @Component({
   selector: 'app-welcome',
@@ -7,13 +7,13 @@ import { environment } from '../../environments/environment';
   styles: [':host { display: flex;flex-wrap: wrap;width: 100%;']
 })
 export class WelcomeComponent implements OnInit {
+  private currentUser: User;
   
-  constructor() { }
+  constructor(private userService: UserService) { }
 
-  envMode: string
-
-  ngOnInit() {
-    this.envMode = (environment.production ? "Production" : "Development");
+  ngOnInit() {   
+    this.userService.currentUser.subscribe(
+      user => { this.currentUser = user; }
+    )
   }
-
 }

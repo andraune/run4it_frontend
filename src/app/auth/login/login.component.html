@@ -3,8 +3,9 @@
         <img src="/assets/icon.png" alt="Run4IT logo">
     </a>
     <div style="width: 100%; text-align: center;">
-        <h1>Login</h1>
         <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+            <h1>Please sign in</h1>
+            <span style="color: red;font-weight: 400;font-size:small;">{{ loginResponse }}</span>
             <fieldset [disabled]="isSubmitting">
                 <fieldset>
                     <input formControlName="email" placeholder="Email" type="text">
@@ -12,14 +13,16 @@
                 <fieldset>
                     <input formControlName="password" placeholder="Password" type="password">
                 </fieldset>
-                <button [disabled]="!loginForm.valid" type="submit">
+                <button type="submit">
                     Log in
                 </button>
             </fieldset>
         </form>
     </div>
     <div style="width: 100%; text-align: center;">
-        Access token: {{ accessToken }}<br />
-        Refresh token: {{ refreshToken }}
+        <br />
+        <a [routerLink]="['/register']" title="Register">
+            New user? Register here!
+        </a>
     </div>
 </div>

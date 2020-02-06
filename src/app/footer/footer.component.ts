@@ -18,7 +18,7 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
     this.apiService.get("/").subscribe(
       apiData => this.apiVersion = apiData.version,
-      err => this.apiVersion = 0);
+      error => this.apiVersion = 0);
   }
 
 }
