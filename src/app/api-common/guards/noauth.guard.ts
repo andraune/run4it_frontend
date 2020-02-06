@@ -11,7 +11,7 @@ export class NotAuthenticatedGuard implements CanActivate {
 
     async canActivate(activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot) {
         
-        const isAuthenticated = await this.userService.getAuthenticated();
+        const isAuthenticated = await this.userService.isAuthenticated();
 
         if (!isAuthenticated) {
             return true;
@@ -19,7 +19,7 @@ export class NotAuthenticatedGuard implements CanActivate {
         else {
             // TODO: Consider adding a notification
             console.log('NotAuthenticatedGuard: Already authed, redirecting to home');
-            return this.router.parseUrl('');
+            return this.router.parseUrl('/home');
         }
     }
 }

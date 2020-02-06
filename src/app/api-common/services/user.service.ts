@@ -39,7 +39,7 @@ export class UserService {
         }
     }
 
-    getAuthenticated(): Promise<boolean> {
+    isAuthenticated(): Promise<boolean> {
         return this.isAuthenticatedSubject.pipe(
             filter(val => (val !== null && val != undefined)),
             first()

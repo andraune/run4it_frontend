@@ -10,7 +10,7 @@ export class AuthenticatedGuard implements CanActivate {
     constructor(private router: Router, private userService: UserService) {}
 
     async canActivate(activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot) {
-        const isAuthenticated = await this.userService.getAuthenticated();
+        const isAuthenticated = await this.userService.isAuthenticated();
 
         if (isAuthenticated) {
             return true;
