@@ -44,7 +44,11 @@ export class LoginComponent implements OnInit {
           },
           err => {
             this.isSubmitting = false;
-            this.loginResponse = err.statusText;
+            this.loginResponse = err[0];
+
+            for (const name in controls) {
+              controls[name].reset();
+            }
           }
         );
     }

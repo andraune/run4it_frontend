@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
-import { map, distinctUntilChanged } from 'rxjs/operators';
+import { BehaviorSubject, Observable, ReplaySubject, throwError } from 'rxjs';
+import { map, distinctUntilChanged, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
@@ -45,11 +45,16 @@ export class UserService {
         return this.apiService.post('/users/login', { email: emailStr, password: passwordStr })
             .pipe(map(
                 data => {
-                    console.log(`setting auth data after login`);
+                    console.log("setting auth data after login");
                     this.setAuthData(data);
                     return this.currentUserSubject.value;
-                }
-            ));
+                }),
+                catchError((error) => {
+                    console.log("clearing auth data after failed login");
+                    this.clearAuthData();
+                    return throwError(error);
+                })
+            );
     }
 
     loginRefresh(): Observable<User> {
