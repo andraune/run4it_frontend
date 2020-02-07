@@ -1,0 +1,46 @@
+:host { 
+    color: rgb(8, 59, 102);
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* Layout stuff */
+
+
+.logo {
+    width: 180px;
+    float: left;
+}
+
+.menu {
+    width: auto;
+    float: left;
+}
+
+.user, .user-menu {
+    width: 100px;
+    float: right;
+}
+
+@media only screen and (max-width: 600px) {
+    .user, .menu {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .user-menu {
+        display: none;
+    }
+}
+
+/* Look 'n' feel */
+
+.user button {
+    background-color: white;
+    border-color: rgb(8, 59, 102);
+    color: rgb(8, 59, 102);
+    width: 90%;
+    margin: 0 5px;
+}

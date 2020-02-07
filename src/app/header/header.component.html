@@ -1,11 +1,26 @@
-<div class="section logo-bar">
-    <a [routerLink]="['/']" title="Home">
+ <!-- For unauthenticated users -->
+<div class="section logo-bar" *appShowAuthenticated="false">
+    <a [routerLink]="['/']" title="Welcome">
         <img src="/assets/logo.png" alt="Run4IT logo">
     </a>
 </div>
-<!-- TODO: Show a menu bar when logged in
-<nav class="section menu-bar">
-    <a [routerLink]="['/register']" title="Register">Register</a>
-    <a [routerLink]="['/login']" title="Login">Sign in</a>
-</nav>
--->
+
+<!-- For unauthenticated users -->
+<div class="section menu-bar" *appShowAuthenticated="true">
+    <div class="logo">
+        <a [routerLink]="['/home']" title="Home">
+            <img src="/assets/logo.png" alt="Run4IT logo">
+        </a>        
+    </div>
+    <div class="menu">
+        <span>Feed | </span>
+        <span>Workouts | </span>
+        <span>Add Workout</span>
+    </div>
+    <div class="user">
+        <button (click)="logout()" title="Sign out">Sign Out</button>
+    </div>
+    <div class="user-menu">
+        <p>Menu icon</p>
+    </div>
+</div>

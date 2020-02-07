@@ -74,25 +74,13 @@ app-root {
     align-items: center;
 }
 
-/* Top bar with logo */
-.logo-bar {
+/* Top bar with logo and menu */
+.logo-bar, .menu-bar {
     height: 36px;
     padding-top: 4px;
 }
-
-.logo-bar a img {
-    height: 32px;
-}
-
-/* Horizontal menu */
 .menu-bar {
-    background-color: rgb(8, 59, 102);
-    height: 40px;
-}
-
-.menu-bar a {
-    color: white;
-    padding: 10px;
+    display: block;
 }
 
 /* Welcome content */

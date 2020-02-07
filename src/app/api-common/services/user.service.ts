@@ -13,11 +13,13 @@ export class UserService {
     public currentUser: Observable<User>;
 
     private isAuthenticatedSubject: ReplaySubject<boolean>;
+    public isAuthenticatedObservable: Observable<boolean>;
 
     constructor(private apiService: ApiService, private jwtService: JwtService) {
         this.currentUserSubject = new BehaviorSubject<User>({} as User);
         this.currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
         this.isAuthenticatedSubject = new ReplaySubject<boolean>(1);
+        this.isAuthenticatedObservable = this.isAuthenticatedSubject.asObservable();
     }
 
     /* Call on app-load (in app.component's onInit) */
@@ -64,13 +66,45 @@ export class UserService {
 
     loginRefresh(): Observable<User> {
         return this.apiService.post('/users/loginRefresh')
-        .pipe(map(
-            data => {
-                console.log(`setting auth data after loginRefresh`);
-                this.setAuthData(data);
-                return this.currentUserSubject.value;
-            }
-        ));
+            .pipe(map(
+                data => {
+                    console.log(`setting auth data after loginRefresh`);
+                    this.setAuthData(data);
+                    return this.currentUserSubject.value;
+                })
+            );
+    }
+
+    logout() : Observable<boolean> {
+        return this.apiService.delete('/users/logout')
+            .pipe(map(
+                data => {
+                    console.log(`clearing auth data after logout`);
+                    this.clearAuthData();
+                    return data;
+                }),
+                catchError((error) => {
+                    console.log("clearing auth data after failed logout");
+                    this.clearAuthData();
+                    return throwError(error);
+                })
+            );
+    }
+
+    logoutRefresh() : Observable<boolean> {
+        return this.apiService.delete('/users/logoutRefresh')
+            .pipe(map(
+                data => {
+                    console.log(`clearing refreshToken after logoutRefresh`);
+                    this.jwtService.destroyRefreshToken();
+                    return data;
+                }),
+                catchError((error) => {
+                    console.log("clearing refreshToken data after failed logoutRefresh");
+                    this.clearAuthData();
+                    return throwError(error);
+                })
+            );
     }
 
     setAuthData(user: User) {

@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenticatedGuard, NotAuthenticatedGuard} from './guards';
 import { ErrorInterceptor, JsonHeaderInterceptor, AuthInterceptor } from './interceptors';
 import { ApiService, JwtService, UserService } from './services';
+import { ShowAuthenticatedDirective } from './show-authenticated.directive';
 
 @NgModule({
     imports: [],
@@ -17,6 +18,11 @@ import { ApiService, JwtService, UserService } from './services';
         AuthenticatedGuard,
         NotAuthenticatedGuard
     ],
-    declarations: []
+    declarations: [
+        ShowAuthenticatedDirective
+    ],
+    exports: [
+        ShowAuthenticatedDirective
+    ]
 })
 export class ApiCommonModule {}

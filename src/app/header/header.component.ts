@@ -1,15 +1,42 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { first, finalize } from 'rxjs/operators';
+
+import { User, UserService } from '../api-common';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styles: [':host { display: flex;flex-wrap: wrap;width: 100%;']
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  private currentUser: User;
+
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    this.userService.currentUser.subscribe(
+      (userData: User) => this.currentUser = userData
+    );
   }
 
+  logout() {
+    this.userService.logoutRefresh()
+      .pipe(
+        first(),
+        finalize(() => {
+          this.userService.logout()
+          .pipe(
+            first(),
+            finalize(() => {
+              // TODO: Add notification?
+              this.router.navigateByUrl("/");
+            })
+          )
+          .subscribe(); 
+        })
+      )
+      .subscribe();
+  }
 }
