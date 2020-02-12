@@ -3,7 +3,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, take, switchMap, finalize } from 'rxjs/operators';
 
-import { JwtService, UserService } from '../services';
+import { JwtService, UserService, NotificationService } from '../services';
 import { User } from '../models';
 
 @Injectable()
@@ -14,6 +14,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor(
         private jwtService: JwtService, 
         private userService: UserService,
+        private notificationService: NotificationService
     ) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -74,8 +75,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     collectErrorStrings(error: HttpErrorResponse) : string[] {
         var errors = [];
 
-        if (error.error.message) {
+        if (error.error.msg) {
             errors.push(error.error.msg);
+            this.notificationService.addError(error.status, '', error.error.msg);
         }
 
         if (error.error.errors && Object.keys(error.error.errors)) {
@@ -83,12 +85,14 @@ export class ErrorInterceptor implements HttpInterceptor {
                
                 for (var idx in error.error.errors[errorKey]) {
                     errors.push(error.error.errors[errorKey][idx]); 
+                    this.notificationService.addError(error.status, errorKey, error.error.errors[errorKey][idx]);
                 }       
             }
         }
 
         if (errors.length == 0) {
             errors.push(error.statusText);
+            this.notificationService.addError(error.status, '', error.statusText);
         }
 
         return errors;

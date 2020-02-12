@@ -107,6 +107,15 @@ export class UserService {
             );
     }
 
+    register(usernameStr: string, emailStr: string, passwordStr: string): Observable<User> {
+        return this.apiService.post('/users', { username: usernameStr, email: emailStr, password: passwordStr })
+            .pipe(map(
+                data => {
+                    return this.currentUserSubject.value;
+                })
+            );
+    }
+
     setAuthData(user: User) {
         if (user.accessToken) {
             this.jwtService.saveAccessToken(user.accessToken);

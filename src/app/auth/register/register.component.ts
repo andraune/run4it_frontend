@@ -6,12 +6,12 @@ import { first } from 'rxjs/operators';
 import { NotificationService, UserService } from '../../api-common';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
+  selector: 'app-register',
+  templateUrl: './register.component.html',
   styles: [':host { display: flex;width: 100%;']
 })
-export class LoginComponent implements OnInit {
-  private loginForm: FormGroup;
+export class RegisterComponent implements OnInit {
+  private registerForm: FormGroup;
   private isSubmitting = false;
 
 
@@ -21,25 +21,30 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
-    this.loginForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
+      'username': ['', Validators.compose([Validators.required, Validators.minLength(4),Validators.maxLength(16)])],
       'email': ['', Validators.compose([Validators.required, Validators.email])],
-      'password': ['', Validators.required]
+      'password': ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(32)])],
+      'confirm_password': ['', Validators.required]
     });
   }
 
   ngOnInit() {}
 
   submitForm() {
-    const canSubmit = !this.loginForm.invalid;
-    const controls = this.loginForm.controls;
+    const controls = this.registerForm.controls;
+    const passwordsMatch = (controls.password.value === controls.confirm_password.value);
+    const canSubmit = ((!this.registerForm.invalid) && passwordsMatch);
+
     this.notificationService.clearAll();
 
     if (canSubmit) {   
       this.isSubmitting = true;
-      this.userService.login(controls.email.value, controls.password.value)
+      this.userService.register(controls.username.value, controls.email.value, controls.password.value)
         .pipe(first())
         .subscribe(
           data => {
+            this.notificationService.addInfo(0, 'New user', `User '${data.username}'  has been registered. Check email for verification code.`)
             this.router.navigateByUrl("/");           
           },
           err => {
@@ -57,7 +62,9 @@ export class LoginComponent implements OnInit {
           this.notificationService.addError(0, '', `Invalid value provided for '${name}'.`);
         }
       }
+      if (!passwordsMatch) {
+        this.notificationService.addError(0, '', "Passwords doesn't match.");
+      }
     }
   }
-
 }

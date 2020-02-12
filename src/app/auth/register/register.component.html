@@ -4,26 +4,32 @@
     </a>
 
     <div style="width: 100%; text-align: center;">
-        <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
-            <h1>Please sign in</h1>
+        <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+            <h1>Please register</h1>
             <app-notification></app-notification>
             <fieldset [disabled]="isSubmitting">
                 <fieldset>
-                    <input formControlName="email" placeholder="Email" type="text">
+                    <input formControlName="username" placeholder="Username (displayed name)" type="text">
+                </fieldset>
+                <fieldset>
+                    <input formControlName="email" placeholder="Email (user for login)" type="text">
                 </fieldset>
                 <fieldset>
                     <input formControlName="password" placeholder="Password" type="password">
                 </fieldset>
+                <fieldset>
+                    <input formControlName="confirm_password" placeholder="Confirm password" type="password">
+                </fieldset>
                 <button type="submit">
-                    Log in
+                    Create account
                 </button>
             </fieldset>
         </form>
     </div>
     <div style="width: 100%; text-align: center;">
         <br />
-        <a [routerLink]="['/register']" title="Register">
-            New user? Register here!
+        <a [routerLink]="['/login']" title="Sign in">
+            Existing user? Sign in here!
         </a>
     </div>
 </div>
