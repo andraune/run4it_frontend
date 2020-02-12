@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -25,8 +23,6 @@ import { HomeComponent } from './home/home.component';
   ],
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
     WelcomeComponent,
     HomeComponent,
     PageNotFoundComponent

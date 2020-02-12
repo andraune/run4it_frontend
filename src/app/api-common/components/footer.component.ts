@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { map, tap } from 'rxjs/operators';
 
-import { ApiService } from "../api-common";
+import { ApiService } from "../services";
 
 @Component({
   selector: 'app-footer',
@@ -20,5 +19,4 @@ export class FooterComponent implements OnInit {
       apiData => this.apiVersion = apiData.version,
       error => this.apiVersion = 0);
   }
-
 }

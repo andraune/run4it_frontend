@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { first, finalize } from 'rxjs/operators';
 
-import { User, UserService } from '../api-common';
+import { User } from '../models';
+import { UserService } from '../services';
 
 @Component({
   selector: 'app-header',
