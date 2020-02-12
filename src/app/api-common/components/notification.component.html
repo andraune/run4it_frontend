@@ -1,0 +1,14 @@
+<div class="info" *ngIf="messages.length > 0">
+    <ul>
+        <li *ngFor="let msg of messages">
+            {{ msg.text }}
+        </li>
+    </ul>
+</div>
+<div class="error" *ngIf="errors.length > 0">
+    <ul>
+        <li *ngFor="let error of errors">
+            {{ error.text }}
+        </li>
+    </ul>
+</div>

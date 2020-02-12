@@ -1,0 +1,22 @@
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.info, .error {
+    width: 100%;
+    border-radius: 3px;
+}
+
+.info {
+    border: solid green 1px;
+    background-color: lightgreen;
+    color: darkgreen;
+}
+
+.error {
+    border: solid red 1px;
+    background-color: lightcoral;
+    color: darkred
+}
