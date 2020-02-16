@@ -26,8 +26,8 @@ ul {
     list-style: square inside;
     text-align: left;
     padding: 2px;
+    cursor:     ;
 }
-
 
 li {
     font-size: small;

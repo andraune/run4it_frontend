@@ -31,4 +31,12 @@ export class NotificationComponent implements OnInit, OnDestroy {
         this.msgListener.unsubscribe();
         this.errListener.unsubscribe();
     }
+
+    clearMessages() {
+        this.notificationService.clearInfoList();
+    }
+
+    clearErrors() {
+        this.notificationService.clearErrorList();
+    }
 }
