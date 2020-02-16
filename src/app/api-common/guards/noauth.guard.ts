@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { map, take } from 'rxjs/operators';
 
 import { UserService } from '../services';
 
@@ -9,8 +8,7 @@ export class NotAuthenticatedGuard implements CanActivate {
 
     constructor(private router: Router, private userService: UserService) {}
 
-    async canActivate(activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot) {
-        
+    async canActivate(activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot) {  
         const isAuthenticated = await this.userService.isAuthenticated();
 
         if (!isAuthenticated) {

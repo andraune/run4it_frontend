@@ -8,7 +8,7 @@ import { NotificationService, UserService } from '../../api-common';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styles: [':host { display: flex;width: 100%;']
+  styleUrls: ['../auth.component.css']
 })
 export class RegisterComponent implements OnInit {
   private registerForm: FormGroup;
@@ -44,8 +44,8 @@ export class RegisterComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.notificationService.addInfo(0, 'New user', `User '${data.username}'  has been registered. Check email for verification code.`)
-            this.router.navigateByUrl("/");           
+            this.notificationService.addInfo(0, 'New user', `User '${data.username}'  has been registered. Check email for verification code.`, true);
+            this.router.navigate(['/confirmation'], { queryParams: {username: data.username}});           
           },
           err => {
             this.isSubmitting = false;

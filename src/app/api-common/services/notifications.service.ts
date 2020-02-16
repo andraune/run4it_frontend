@@ -1,5 +1,6 @@
 import { Injectable} from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Router, NavigationStart } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Notification } from '../models';
 
@@ -7,10 +8,24 @@ import { Notification } from '../models';
 export class NotificationService {
     private messages = [];
     private errors = [];
-    private messagesSubject = new Subject<any>();
-    private errorsSubject = new Subject<any>();
+    private messagesSubject = new BehaviorSubject<any>([]);
+    private errorsSubject = new BehaviorSubject<any>([]);
+    private keepAfterRouteChange = false;
 
-    constructor() {}
+    constructor(private router: Router) {
+        this.router.events.subscribe(
+            event => {
+                if (event instanceof NavigationStart) {
+                    if (this.keepAfterRouteChange) {
+                        this.keepAfterRouteChange = false;
+                    }
+                    else {
+                        this.clearAll();
+                    }
+                }
+            }
+        )
+    }
 
     getInfoList(): Observable<any> {
         return this.messagesSubject.asObservable();
@@ -20,12 +35,14 @@ export class NotificationService {
         return this.errorsSubject.asObservable();
     }
 
-    addInfo(code: number, subject: string, message: string) {
+    addInfo(code: number, subject: string, message: string, keepOnRouteChange = false) {
+        this.keepAfterRouteChange = keepOnRouteChange;
         this.messages.push(this._createNotification(code, subject,message));
         this.messagesSubject.next(this.messages);
     }
 
-    addError(code: number, subject: string, message: string) {
+    addError(code: number, subject: string, message: string, keepOnRouteChange = false) {
+        this.keepAfterRouteChange = keepOnRouteChange;
         this.errors.push(this._createNotification(code, subject,message));
         this.errorsSubject.next(this.errors);
     }
@@ -37,7 +54,7 @@ export class NotificationService {
 
     clearErrorList() {
         this.errors = [];
-        this.errorsSubject.next(this.messages);
+        this.errorsSubject.next(this.errors);
     }
 
     clearAll() {

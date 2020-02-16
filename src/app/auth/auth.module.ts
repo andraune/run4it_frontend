@@ -1,5 +1,6 @@
 import { NgModule }       from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfirmationComponent }    from './confirmation/confirmation.component';
 import { LoginComponent }    from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -13,6 +14,7 @@ import { ApiCommonModule } from '../api-common';
     ApiCommonModule
   ],
   declarations: [
+    ConfirmationComponent,
     LoginComponent,
     RegisterComponent
   ]

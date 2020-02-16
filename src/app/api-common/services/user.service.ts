@@ -111,7 +111,16 @@ export class UserService {
         return this.apiService.post('/users', { username: usernameStr, email: emailStr, password: passwordStr })
             .pipe(map(
                 data => {
-                    return this.currentUserSubject.value;
+                    return data;
+                })
+            );
+    }
+
+    confirm(usernameStr: string, confirmationCodeStr: string): Observable<User> {
+        return this.apiService.post('/users/confirmation', { username: usernameStr, confirmationCode: confirmationCodeStr })
+            .pipe(map(
+                data => {
+                    return data;
                 })
             );
     }

@@ -1,0 +1,17 @@
+:host {
+    display: flex;
+    width: 100%;
+}
+
+form {
+    max-width: 350px;
+    margin: auto;
+}
+
+.auth-content a img {
+    height: 50px;
+}
+
+input, button {
+    width: 270px;
+}

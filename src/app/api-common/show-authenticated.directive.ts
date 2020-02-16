@@ -21,10 +21,9 @@ import {
     ngOnInit() {
       this.userService.isAuthenticatedObservable.subscribe(
         (isAuthenticated) => {
+          this.viewContainer.clear();
           if (isAuthenticated && this.showWhenAuthenticated || !isAuthenticated && !this.showWhenAuthenticated) {
             this.viewContainer.createEmbeddedView(this.templateRef);
-          } else {
-            this.viewContainer.clear();
           }
         }
       );

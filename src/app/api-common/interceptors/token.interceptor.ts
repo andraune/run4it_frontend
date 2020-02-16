@@ -6,7 +6,6 @@ import { JwtService } from '../services';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    private tokenRefreshInProgress = false;
 
     constructor(private jwtService: JwtService) {}
 

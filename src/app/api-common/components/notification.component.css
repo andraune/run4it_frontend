@@ -5,8 +5,9 @@
 }
 
 .info, .error {
-    width: 100%;
     border-radius: 3px;
+    margin: 2px;
+    width: 100%;
 }
 
 .info {
@@ -19,4 +20,17 @@
     border: solid red 1px;
     background-color: lightcoral;
     color: darkred
+}
+
+ul {
+    list-style: square inside;
+    text-align: left;
+    padding: 2px;
+}
+
+
+li {
+    font-size: small;
+    margin: 0;
+    padding: 2px;
 }

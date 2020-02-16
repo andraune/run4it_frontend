@@ -8,7 +8,7 @@ import { NotificationService, UserService } from '../../api-common';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styles: [':host { display: flex;width: 100%;']
+  styleUrls: ['../auth.component.css']
 })
 export class LoginComponent implements OnInit {
   private loginForm: FormGroup;
