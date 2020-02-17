@@ -1,26 +1,50 @@
  <!-- For unauthenticated users -->
-<div class="section logo-bar" *appShowAuthenticated="false">
+<header class="section logo-bar" *appShowAuthenticated="false">
     <a [routerLink]="['/']" title="Welcome">
         <img src="/assets/logo.png" alt="Run4IT logo">
     </a>
-</div>
+</header>
 
-<!-- For unauthenticated users -->
-<div class="section menu-bar" *appShowAuthenticated="true">
+<!-- For authenticated users -->
+<header class="section menu-bar" *appShowAuthenticated="true">
     <div class="logo">
         <a [routerLink]="['/home']" title="Home">
             <img src="/assets/logo.png" alt="Run4IT logo">
         </a>        
     </div>
     <div class="menu">
-        <span>Feed | </span>
-        <span>Workouts | </span>
-        <span>Add Workout</span>
+        <ul>
+            <li class="menu-item-hor" *ngFor="let item of menuItems">
+                <a [routerLink]="item.route">{{item.title}}</a>    
+            </li>
+        </ul>
     </div>
     <div class="user">
-        <button (click)="logout()" title="Sign out">Sign Out</button>
+        <a [routerLink]="['/profile']" class="fancy-button">
+            <i class="material-icons-round">person</i>
+            <span>{{ currentUser.username }}</span>
+        </a>
     </div>
-    <div class="user-menu">
-        <p>Menu icon</p>
+    <div class="user-menu" *ngIf="!userMenuOpen">
+        <div (click)="showUserMenu(true)" class="fancy-button">
+            <i class="material-icons-round">menu</i>
+            <span>Menu</span>
+        </div>
     </div>
-</div>
+    <div class="user-menu user-menu-open" *ngIf="userMenuOpen">
+        <div (click)="showUserMenu(false)" class="fancy-button">
+            <i class="material-icons-round">menu_open</i>
+            <span>Menu</span>
+        </div>
+        <div class="user-menu-contents">
+            <ul>
+                <li *ngFor="let item of menuItems">
+                    <a [routerLink]="item.route">{{item.title}}</a>    
+                </li>
+                <li>
+                    <a [routerLink]="['/profile']">Profile</a>
+                </li>
+            </ul>
+        </div>        
+    </div>
+</header>

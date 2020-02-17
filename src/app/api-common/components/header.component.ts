@@ -12,15 +12,30 @@ import { UserService } from '../services';
 })
 export class HeaderComponent implements OnInit {
 
+  private userMenuOpen: boolean;
+  private menuItems: any[] = [];
   private currentUser: User;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) {
+  }
 
   ngOnInit() {
     this.userService.currentUser.subscribe(
       (userData: User) => this.currentUser = userData
     );
+
+    this.userMenuOpen = false;
+    this.menuItems.push({route: "/home", title: "Home"})
+    this.menuItems.push({route: "/workouts", title: "Workouts"})
+    this.menuItems.push({route: "/new-workout", title: "Add Workouts"})
   }
+
+  showUserMenu(doShow:boolean) {
+    this.userMenuOpen = doShow;
+  }
+
+
+
 
   logout() {
     this.userService.logoutRefresh()

@@ -9,18 +9,35 @@
 
 
 .logo {
-    width: 180px;
+    width: 160px;
     float: left;
 }
 
 .menu {
-    width: auto;
     float: left;
+    height: 100%;
+    width: auto;
 }
 
 .user, .user-menu {
-    width: 100px;
     float: right;
+    margin-right: 2px;
+    text-align: right;
+}
+
+.user-menu-open {
+    background-color: white;
+}
+
+.user-menu-contents {
+    background-color: white;
+    display: block;
+    margin-right: 2px;
+    padding: 5px;
+    position: absolute;
+    right: 0;
+    top: 32px;
+    z-index: 1;
 }
 
 @media only screen and (max-width: 600px) {
@@ -37,10 +54,39 @@
 
 /* Look 'n' feel */
 
-.user button {
-    background-color: white;
-    border-color: rgb(8, 59, 102);
-    color: rgb(8, 59, 102);
-    width: 90%;
-    margin: 0 5px;
+ul {
+    height: 100%;
+    list-style-type: none;
+    list-style-position: inside;
+    padding: 2px;
+}
+
+li.menu-item-hor {
+    float: left;
+    height: 100%;
+    padding: 6px 8px;
+}
+
+.fancy-button {
+    cursor: pointer;
+    display: block;
+    height: 100%;
+}
+
+li a, .fancy-button span {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.fancy-button i {
+    float: left;
+    height: 100%;
+    padding-top: 5px;
+}
+
+.fancy-button span {
+    float: left;
+    height: 100%;
+    padding: 2px 4px;
+    margin-top: 6px;
 }
