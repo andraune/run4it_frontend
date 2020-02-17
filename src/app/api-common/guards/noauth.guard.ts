@@ -17,7 +17,7 @@ export class NotAuthenticatedGuard implements CanActivate {
         else {
             // TODO: Consider adding a notification
             console.log('NotAuthenticatedGuard: Already authed, redirecting to home');
-            return this.router.parseUrl('/home');
+            return this.router.parseUrl('/dashboard');
         }
     }
 }

@@ -8,7 +8,7 @@
 <!-- For authenticated users -->
 <header class="section menu-bar" *appShowAuthenticated="true">
     <div class="logo">
-        <a [routerLink]="['/home']" title="Home">
+        <a [routerLink]="['/dashboard']" title="Home">
             <img src="/assets/logo.png" alt="Run4IT logo">
         </a>        
     </div>
@@ -31,7 +31,7 @@
             <span>Menu</span>
         </div>
     </div>
-    <div class="user-menu user-menu-open" *ngIf="userMenuOpen">
+    <div class="user-menu" *ngIf="userMenuOpen">
         <div (click)="showUserMenu(false)" class="fancy-button">
             <i class="material-icons-round">menu_open</i>
             <span>Menu</span>

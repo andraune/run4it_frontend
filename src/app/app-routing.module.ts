@@ -11,7 +11,7 @@ import { AuthenticatedGuard, NotAuthenticatedGuard } from './api-common';
 
 const appRoutes: Routes = [
     { path: '', component: WelcomeComponent, canActivate: [NotAuthenticatedGuard] },
-    { path: 'home', component: HomeComponent, canActivate: [AuthenticatedGuard] },
+    { path: 'dashboard', component: HomeComponent, canActivate: [AuthenticatedGuard] },
     { path: '**', component: PageNotFoundComponent }
 ];
 

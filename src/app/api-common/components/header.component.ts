@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     );
 
     this.userMenuOpen = false;
-    this.menuItems.push({route: "/home", title: "Home"})
+    this.menuItems.push({route: "/dashboard", title: "Dashboard"})
     this.menuItems.push({route: "/workouts", title: "Workouts"})
     this.menuItems.push({route: "/new-workout", title: "Add Workouts"})
   }
@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
             first(),
             finalize(() => {
               // TODO: Add notification?
-              this.router.navigateByUrl("/");
+              this.router.navigate(['/']);
             })
           )
           .subscribe(); 
