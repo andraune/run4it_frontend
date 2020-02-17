@@ -23,7 +23,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 const errorCode = err.status;
                 console.log(`Request ${request.url} error code ${errorCode}`);
 
-                if (this.shouldTryTokenRefresh(errorCode)) {
+                if (this.shouldTryTokenRefresh(errorCode, request.url)) {
                     if (this.refreshTokenInProgress) {
                         console.log(`refresh-token already in progress, wait for it to complete, then retry request ${request.url}`);
                         // already in progress, so wait for it to complete before
@@ -31,7 +31,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                         return this.refreshTokenSubject.pipe(
                             filter(result => result !== null),
                             take(1),
-                            switchMap(() => next.handle(request))
+                            switchMap(
+                                () => {
+                                    console.log(`done waiting for token refresh, retry ${request.url}`);
+                                    return next.handle(request);
+                                }
+                            )
                         );
                     }
                     else {
@@ -57,14 +62,17 @@ export class ErrorInterceptor implements HttpInterceptor {
         );
     }
 
-    shouldTryTokenRefresh(errorCode: number): boolean {
+    shouldTryTokenRefresh(errorCode: number, url: string): boolean {
         var shouldRefresh = false;
 
-        if (errorCode === 401) {
-            // Not authorized
+        if (errorCode === 401) { // Not authorized
+            const isRefreshRequest = url.match(/\/users\/loginRefresh$/);
             const isAccessTokenExpired = this.jwtService.isTokenExpired(this.jwtService.getAccessToken());
 
-            if (isAccessTokenExpired) {
+            if (isRefreshRequest) {
+                shouldRefresh = false;
+            }
+            else if (isAccessTokenExpired) {
                 shouldRefresh = this.jwtService.getRefreshToken() ? true : false;
             }
         }
