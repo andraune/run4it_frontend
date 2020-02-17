@@ -80,6 +80,8 @@ app-root {
     padding-top: 4px;
 }
 .menu-bar {
+    background-color: white;
+    border-bottom: solid 1px lightgray;
     display: block;
 }
 
@@ -95,6 +97,12 @@ app-root {
     width: 50%;
     height: 40%;
     display: flex;    
+}
+
+/* Default content, used on pages with user content */
+.main-content {
+    width: 100%;
+    margin: 20px auto;
 }
 
 /* Sign up, Sign in content, page not found */

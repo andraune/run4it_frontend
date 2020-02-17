@@ -21,22 +21,19 @@
 
 .user, .user-menu {
     float: right;
-    margin-right: 2px;
-    text-align: right;
-}
-
-.user-menu-open {
-    background-color: white;
+    margin-right: 5px;
 }
 
 .user-menu-contents {
     background-color: white;
+    border: solid lightgray 1px;
+    border-top: none;
     display: block;
     margin-right: 2px;
-    padding: 5px;
+    padding: 10px 20px;
     position: absolute;
     right: 0;
-    top: 32px;
+    top: 35px;
     z-index: 1;
 }
 
