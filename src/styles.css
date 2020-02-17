@@ -97,8 +97,8 @@ app-root {
     display: flex;    
 }
 
-/* Sign up, Sign in content */
-.auth-content {
+/* Sign up, Sign in content, page not found */
+.auth-content, .not-found-content {
     margin: 50px auto;
 }
 
