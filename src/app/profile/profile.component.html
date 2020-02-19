@@ -1,5 +1,11 @@
 <app-header></app-header>
 <div class="section main-content">
     <app-notification></app-notification>
-    Hey, profile!
+    Hey, {{ profile.username }}!<br />
+    {{ profile.birthDate }}<br />
+    {{ profile.height }} cm<br />
+    {{ profile.weight }} kg<br />
+    {{ profile.createdAt }}<br />
+    {{ profile.updatedAt }}
+
 </div>

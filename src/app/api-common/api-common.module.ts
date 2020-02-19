@@ -6,7 +6,15 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FooterComponent, HeaderComponent, NotificationComponent } from './components';
 import { AuthenticatedGuard, NotAuthenticatedGuard} from './guards';
 import { ErrorInterceptor, JsonHeaderInterceptor, AuthInterceptor } from './interceptors';
-import { ApiService, JwtService, NotificationService, UserService } from './services';
+
+import {
+    ApiService,
+    JwtService,
+    NotificationService,
+    ProfileService,
+    UserService
+} from './services';
+
 import { ShowAuthenticatedDirective } from './show-authenticated.directive';
 
 @NgModule({
@@ -21,6 +29,7 @@ import { ShowAuthenticatedDirective } from './show-authenticated.directive';
         ApiService,
         JwtService,
         NotificationService,
+        ProfileService,
         UserService,
         AuthenticatedGuard,
         NotAuthenticatedGuard

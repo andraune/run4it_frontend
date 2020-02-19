@@ -3,4 +3,6 @@ export interface Profile {
     birthDate: string;
     height: number;
     weight: number;
+    createdAt: string;
+    updatedAt: string;
 }
