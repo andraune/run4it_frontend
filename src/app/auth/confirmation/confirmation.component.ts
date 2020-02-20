@@ -11,8 +11,8 @@ import { NotificationService, UserService } from '../../api-common';
   styleUrls: ['../auth.component.css']
 })
 export class ConfirmationComponent implements OnInit {
-  private confirmationForm: FormGroup;
-  private isSubmitting = false;
+  public confirmationForm: FormGroup;
+  public isSubmitting = false;
 
   constructor(
     private notificationService: NotificationService,

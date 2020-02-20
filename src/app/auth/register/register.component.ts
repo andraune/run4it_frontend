@@ -11,8 +11,8 @@ import { NotificationService, UserService } from '../../api-common';
   styleUrls: ['../auth.component.css']
 })
 export class RegisterComponent implements OnInit {
-  private registerForm: FormGroup;
-  private isSubmitting = false;
+  public registerForm: FormGroup;
+  public isSubmitting = false;
 
 
   constructor(

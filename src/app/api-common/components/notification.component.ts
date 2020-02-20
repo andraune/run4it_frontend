@@ -14,8 +14,8 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 export class NotificationComponent implements OnInit, OnDestroy {
     private msgListener: Subscription;
     private errListener: Subscription;
-    private messages = [];
-    private errors = [];
+    public messages = [];
+    public errors = [];
 
     constructor(private notificationService: NotificationService) {}
 

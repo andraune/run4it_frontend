@@ -9,7 +9,7 @@ import { Profile, User, ProfileService, UserService, NotificationService } from 
 })
 export class ProfileComponent implements OnInit {
 
-  private profile: Profile;
+  public profile: Profile;
 
   constructor(
     private route: ActivatedRoute,

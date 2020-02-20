@@ -12,9 +12,9 @@ import { UserService } from '../services';
 })
 export class HeaderComponent implements OnInit {
 
-  private userMenuOpen: boolean;
-  private menuItems: any[] = [];
-  private currentUser: User;
+  public userMenuOpen: boolean;
+  public menuItems: any[] = [];
+  public currentUser: User;
 
   constructor(private userService: UserService, private router: Router) {
   }
