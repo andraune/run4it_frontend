@@ -3,3 +3,19 @@
     flex-wrap: wrap;
     width: 100%;
 }
+
+td {
+    padding: 3px;
+}
+
+button {
+    padding: 5px 15px;
+}
+
+input {
+    padding: 1px;
+}
+
+input.small {
+    width: 50px;
+}
