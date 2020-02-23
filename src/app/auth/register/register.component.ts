@@ -21,6 +21,9 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
+  }
+
+  ngOnInit() {
     this.registerForm = this.formBuilder.group({
       'username': ['', Validators.compose([Validators.required, Validators.minLength(4),Validators.maxLength(16)])],
       'email': ['', Validators.compose([Validators.required, Validators.email])],
@@ -28,8 +31,6 @@ export class RegisterComponent implements OnInit {
       'confirm_password': ['', Validators.required]
     });
   }
-
-  ngOnInit() {}
 
   submitForm() {
     const controls = this.registerForm.controls;

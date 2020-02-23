@@ -21,13 +21,14 @@ export class ConfirmationComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
+  }
+
+  ngOnInit() {
     this.confirmationForm = this.formBuilder.group({
       'username': ['', Validators.required],
       'confirmationCode': ['', Validators.required]
     });
-  }
-
-  ngOnInit() {
+    
     this.confirmationForm.controls.username.setValue(this.route.snapshot.queryParamMap.get("username"));
     this.confirmationForm.controls.confirmationCode.setValue(this.route.snapshot.queryParamMap.get("code"));
   }

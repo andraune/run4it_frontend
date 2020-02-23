@@ -21,18 +21,19 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
+  }
+
+  ngOnInit() {
     this.loginForm = this.formBuilder.group({
       'email': ['', Validators.compose([Validators.required, Validators.email])],
       'password': ['', Validators.required]
     });
   }
 
-  ngOnInit() {}
-
   submitForm() {
+    this.notificationService.clearAll();
     const canSubmit = !this.loginForm.invalid;
     const controls = this.loginForm.controls;
-    this.notificationService.clearAll();
 
     if (canSubmit) {   
       this.isSubmitting = true;
