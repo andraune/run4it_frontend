@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { first, finalize } from 'rxjs/operators';
 
 import { User } from '../models';
 import { UserService } from '../services';
@@ -32,27 +31,5 @@ export class HeaderComponent implements OnInit {
 
   showUserMenu(doShow:boolean) {
     this.userMenuOpen = doShow;
-  }
-
-
-
-
-  logout() {
-    this.userService.logoutRefresh()
-      .pipe(
-        first(),
-        finalize(() => {
-          this.userService.logout()
-          .pipe(
-            first(),
-            finalize(() => {
-              // TODO: Add notification?
-              this.router.navigate(['/']);
-            })
-          )
-          .subscribe(); 
-        })
-      )
-      .subscribe();
   }
 }

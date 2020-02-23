@@ -28,8 +28,8 @@
     background-color: white;
     border: solid lightgray 1px;
     border-top: none;
+    border-right: none;
     display: block;
-    margin-right: 2px;
     padding: 10px 20px;
     position: absolute;
     right: 0;
@@ -71,6 +71,7 @@ li.menu-item-hor {
 }
 
 li a, .fancy-button span {
+    font-size: 16px;
     font-weight: 500;
     text-decoration: none;
 }
