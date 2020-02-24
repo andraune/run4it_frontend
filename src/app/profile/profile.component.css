@@ -16,7 +16,7 @@ button {
     padding: 5px 15px;
 }
 
-input {
+input, select {
     padding: 1px;
 }
 

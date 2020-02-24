@@ -48,11 +48,13 @@
                         <tr>
                             <td>Date of birth: </td>
                             <td>
-                                <input formControlName="birthYear" class="small" placeholder="Year" type="text" maxlength="4"> - 
-                                <select formControlName="birthMonth">
+                                <input formControlName="birthYear" (change)="onYearChanged()" class="small" placeholder="Year" type="text" maxlength="4"> - 
+                                <select formControlName="birthMonth" (change)="onMonthChanged()">
                                     <option *ngFor="let month of months" [ngValue]="month.val">{{month.name}}</option>
                                 </select> -
-                                <input formControlName="birthDay" class="small" placeholder="Day" type="text" maxlength="2">
+                                <select formControlName="birthDay">
+                                    <option *ngFor="let day of days" [ngValue]="day.num">{{day.numStr}}</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>

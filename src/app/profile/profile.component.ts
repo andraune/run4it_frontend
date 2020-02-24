@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
     { name: 'Nov', val: 11, days: 30},
     { name: 'Dec', val: 12, days: 31}
   ];
+  public days = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -42,10 +43,11 @@ export class ProfileComponent implements OnInit {
   {}
 
   ngOnInit() {
+    this._populateDays(2000, 0); // default: January 2000
     this.userInfoForm = this.formBuilder.group({
       'birthYear': ['', Validators.compose([Validators.required, Validators.min(1900), Validators.max(2009)])], // TODO: Max-value given by current year
       'birthMonth': [ 1 ],
-      'birthDay': ['', Validators.compose([Validators.required, Validators.min(1), Validators.max(31)])],
+      'birthDay': [ 1 ],
       'weight': ['', Validators.compose([Validators.min(0), Validators.max(999)])],
       'height': ['', Validators.compose([Validators.required, Validators.min(0), Validators.max(299)])]
     });
@@ -115,9 +117,10 @@ export class ProfileComponent implements OnInit {
   private _updateUserInfoForm() {
     if (this.profile.birthDate) {
       var birthDate = new Date(this.profile.birthDate);
+      this._populateDays(birthDate.getUTCFullYear(), birthDate.getUTCMonth());
       this.userInfoForm.controls.birthYear.setValue(birthDate.getUTCFullYear());
       this.userInfoForm.controls.birthMonth.setValue(birthDate.getUTCMonth() + 1);
-      this.userInfoForm.controls.birthDay.setValue(birthDate.getUTCDate().toString().padStart(2, '0'));
+      this.userInfoForm.controls.birthDay.setValue(birthDate.getUTCDate());
     }
 
     if (this.profile.height) {
@@ -126,6 +129,31 @@ export class ProfileComponent implements OnInit {
     
     if (this.profile.weight) {
       this.userInfoForm.controls.weight.setValue(this.profile.weight);
+    }
+  }
+
+  onMonthChanged(month: number) {
+    this._populateDays(this.userInfoForm.controls.birthYear.value, this.userInfoForm.controls.birthMonth.value - 1);
+  }
+
+  onYearChanged(year: number) {
+    this._populateDays(this.userInfoForm.controls.birthYear.value, this.userInfoForm.controls.birthMonth.value - 1);
+  }
+
+  private _populateDays(year:number, month:number) {
+    this.days = [];
+    var i = 1;
+    while (i <= this.months[month].days) {
+      if (month == 1) { // February
+        const isLeapYear = (new Date(year, 1, 29).getMonth() == 1);
+
+        if (!isLeapYear && (i > 28)) {
+          break;
+        } 
+      }
+
+      this.days.push({num: i, numStr: i.toString().padStart(2, '0')});
+      i++;
     }
   }
 }
