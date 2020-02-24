@@ -33,4 +33,30 @@ export class ProfileService {
             )
         );
     }
+
+    updateProfileUserInfo(username: string, birthDate:string, height:number, weight:number) {  
+        return this.apiService.put(`/profiles/${username}`, { birthDate: birthDate, height: height, weight: weight})
+            .pipe(
+                map(
+                    (data: Profile) => {
+                        console.log("Profile user information updated.");
+                        this.profileSubject.next(data);
+                        return this.profileSubject.value;
+                    }
+                )
+            );
+    }
+
+    updateProfileWeight(username: string, weight: number) {
+        return this.apiService.put(`/profiles/${username}`, { weight: weight})
+            .pipe(
+                map(
+                    (data: Profile) => {
+                        console.log("Profile weight updated.");
+                        this.profileSubject.next(data);
+                        return this.profileSubject.value;
+                    }
+                )
+            );
+    }
 }

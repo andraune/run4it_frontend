@@ -2,7 +2,7 @@
 <div class="section main-container">
     <app-notification></app-notification>
     <div class="sub-content-100">
-      <h1>{{ profile.username }} profile</h1>  
+      <h1>{{ profile.username | uppercase }}</h1>  
     </div>
 
     <div class="sub-content-50">
@@ -49,7 +49,9 @@
                             <td>Date of birth: </td>
                             <td>
                                 <input formControlName="birthYear" class="small" placeholder="Year" type="text" maxlength="4"> - 
-                                <input formControlName="birthMonth" class="small" placeholder="Month" type="text" maxlength="2"> -
+                                <select formControlName="birthMonth">
+                                    <option *ngFor="let month of months" [ngValue]="month.val">{{month.name}}</option>
+                                </select> -
                                 <input formControlName="birthDay" class="small" placeholder="Day" type="text" maxlength="2">
                             </td>
                         </tr>
