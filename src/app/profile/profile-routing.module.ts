@@ -6,7 +6,7 @@ import { AuthenticatedGuard } from '../api-common';
 
 const profileRoutes: Routes = [
   {
-    path: 'profiles/:username',
+    path: 'profile',
     component: ProfileComponent,
     canActivate: [AuthenticatedGuard],
     resolve: { profile: ProfileResolver }

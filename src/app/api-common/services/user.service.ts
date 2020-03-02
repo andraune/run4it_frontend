@@ -41,6 +41,16 @@ export class UserService {
         }
     }
 
+    getUsername(): string {
+        let retVal = "";
+        const currentUser = this.currentUserSubject.value;
+
+        if (currentUser.username != undefined && currentUser.username != null) {
+            retVal = currentUser.username;
+        }
+        return retVal;
+    }
+
     isAuthenticated(): Promise<boolean> {
         return this.isAuthenticatedSubject.pipe(
             filter(val => (val !== null && val != undefined)),

@@ -1,24 +1,38 @@
 import { Injectable, } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
-import { Profile, ProfileService } from '../api-common';
+import { NotificationService, UserService, Profile, ProfileService } from '../api-common';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileResolver implements Resolve<Profile> {
   constructor(
+    private notificationService: NotificationService,
+    private userService: UserService,
     private profileService: ProfileService,
     private router: Router
   ) {}
 
   resolve(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    route: ActivatedRouteSnapshot
   ): Observable<any> {
 
+    const authUser = this.userService.getUsername();
 
-    return this.profileService.getProfile(route.params['username'])
-      .pipe(catchError((err) => this.router.navigate(['/'])));
+    if (authUser != "") {
+      return this.profileService.getProfile(authUser)
+        .pipe(
+          catchError((err) => {
+            this.notificationService.addError(0, 'resolve', 'Failed to resolve profile.', true);
+            this.router.navigate(['/']);
+            return throwError(err);
+          })
+        );
+    } else {
+      this.notificationService.addError(0, 'resolve', 'Failed to resolve profile due to invalid username.', true);
+      this.router.navigate(['/']);
+      return throwError('Unknown resolve error');    
+    }
   }
 }
