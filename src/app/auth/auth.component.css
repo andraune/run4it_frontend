@@ -3,6 +3,15 @@
     width: 100%;
 }
 
+div.auth-sub-content {
+    width: 100%;
+    text-align: center;
+}
+
+div.auth-sub-content div {
+    padding-top: 20px;
+}
+
 form {
     max-width: 350px;
     margin: auto;

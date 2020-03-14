@@ -1,35 +1,21 @@
-<div class="section auth-content">
-    <a [routerLink]="['/']" title="Home">
-        <img src="/assets/icon.png" alt="Run4IT logo">
-    </a>
-
-    <div style="width: 100%; text-align: center;">
-        <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
-            <h1>Please register</h1>
-            <app-notification></app-notification>
-            <fieldset [disabled]="isSubmitting">
-                <fieldset>
-                    <input formControlName="username" placeholder="Username (profile name)" type="text">
-                </fieldset>
-                <fieldset>
-                    <input formControlName="email" placeholder="Email (used for login)" type="text">
-                </fieldset>
-                <fieldset>
-                    <input formControlName="password" placeholder="Password" type="password">
-                </fieldset>
-                <fieldset>
-                    <input formControlName="confirm_password" placeholder="Confirm password" type="password">
-                </fieldset>
-                <button type="submit">
-                    Create account
-                </button>
-            </fieldset>
-        </form>
-    </div>
-    <div style="width: 100%; text-align: center;">
-        <br />
-        <a [routerLink]="['/login']" title="Sign in">
-            Existing user? Sign in here!
-        </a>
-    </div>
-</div>
+<form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+    <h1>Please register</h1>
+    <app-notification></app-notification>
+    <fieldset [disabled]="isSubmitting">
+        <fieldset>
+            <input formControlName="username" placeholder="Username (profile name)" type="text">
+        </fieldset>
+        <fieldset>
+            <input formControlName="email" placeholder="Email (used for login)" type="text">
+        </fieldset>
+        <fieldset>
+            <input formControlName="password" placeholder="Password" type="password">
+        </fieldset>
+        <fieldset>
+            <input formControlName="confirm_password" placeholder="Confirm password" type="password">
+        </fieldset>
+        <button type="submit">
+            Create account
+        </button>
+    </fieldset>
+</form>
