@@ -1,0 +1,61 @@
+<app-header></app-header>
+<div class="section main-container">
+    <app-notification></app-notification>
+
+    <div class="sub-content-100" *ngIf="activeGoals.length == 0">
+        You currently have no active goals.<br />
+        TODO: Add link to create new goals.
+    </div>
+
+    <!-- ACTIVE GOALS -->
+    <div class="sub-content-50" *ngIf="activeGoals.length > 0">
+        <h3>Active goals</h3>
+
+        <table class="goal-list">
+            <tr>
+                <th>Time Left</th>
+                <th>Goal</th>
+                <th>Progress</th>
+            </tr>
+            <tr *ngFor="let goal of activeGoals">
+                <td>{{ currentTime | timeToEnd:goal.endAt }}</td>
+                <td>{{ goal.categoryName }} {{ goal.targetValue }}{{ goal.categoryUnit }}</td>
+                <td class="meter">
+                    <span class="meter-label-min">{{ goal.startValue | formatLabel:goal.targetValue:goal.categoryUnit:true }}</span>
+                    <meter min="{{ goal.startValue | progressValue:goal.targetValue:true }}" max="{{ goal.startValue | progressValue:goal.targetValue:false }}" value="{{ goal.currentValue }}">Test</meter>    
+                    <span class="meter-label-max">{{ goal.startValue | formatLabel:goal.targetValue:goal.categoryUnit:false }}</span><br />
+                    <span class="meter-label">{{ goal.currentValue | number:'1.1-1' }}{{ goal.categoryUnit }}</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="sub-content-50" *ngIf="activeGoals.length > 0">
+        TBD: Display graph or something related to selected goal. Default is table's top row.
+    </div>
+
+    <!-- UPCOMING + RECENTLY EXPIRED GOALS -->
+    <div class="sub-content-50" *ngIf="futureGoals.length > 0">
+        <h3>Upcoming goals</h3>
+
+        <table class="goal-list">
+            <tr>
+                <th>Start time</th>
+                <th>Goal</th>
+                <th>Start value</th>
+                <th>Target value</th>
+            </tr>
+            <tr *ngFor="let goal of futureGoals">
+                <td>{{ currentTime | timeToStart:goal.startAt }}</td>
+                <td>{{ goal.categoryName }}</td>
+                <td>{{ goal.startValue }}{{ goal.categoryUnit }}</td>
+                <td>{{ goal.targetValue }}{{ goal.categoryUnit }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="sub-content-50" *ngIf="activeGoals.length >= 0">
+        List of expired goals.
+    </div>
+
+</div>

@@ -9,6 +9,7 @@ import { ErrorInterceptor, JsonHeaderInterceptor, AuthInterceptor } from './inte
 
 import {
     ApiService,
+    GoalService,
     JwtService,
     NotificationService,
     ProfileService,
@@ -27,6 +28,7 @@ import { ShowAuthenticatedDirective } from './show-authenticated.directive';
         { provide: HTTP_INTERCEPTORS, useClass: JsonHeaderInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         ApiService,
+        GoalService,
         JwtService,
         NotificationService,
         ProfileService,

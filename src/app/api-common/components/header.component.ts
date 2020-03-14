@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { User } from '../models';
 import { UserService } from '../services';
@@ -11,22 +10,21 @@ import { UserService } from '../services';
 })
 export class HeaderComponent implements OnInit {
 
-  public userMenuOpen: boolean;
-  public menuItems: any[] = [];
   public currentUser: User;
+  public userMenuOpen = false;
+  public menuItems = [
+    {route: "/dashboard", title: "Dashboard"},
+    {route: "/workouts", title: "Workouts"},
+    {route: "/goals", title: "Goals"}
+  ];
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit() {
     this.userService.currentUser.subscribe(
       (userData: User) => this.currentUser = userData
     );
-
-    this.userMenuOpen = false;
-    this.menuItems.push({route: "/dashboard", title: "Dashboard"})
-    this.menuItems.push({route: "/workouts", title: "Workouts"})
-    this.menuItems.push({route: "/new-workout", title: "Add Workouts"})
   }
 
   showUserMenu(doShow:boolean) {

@@ -20,7 +20,7 @@
         </ul>
     </div>
     <div class="user">
-        <a [routerLink]="['/profiles', currentUser.username]" class="fancy-button">
+        <a [routerLink]="['/profile']" class="fancy-button">
             <i class="material-icons-round">person</i>
             <span>{{ currentUser.username }}</span>
         </a>
@@ -42,7 +42,7 @@
                     <a [routerLink]="item.route">{{item.title}}</a>    
                 </li>
                 <li>
-                    <a [routerLink]="['/profiles', currentUser.username]">Profile</a>
+                    <a [routerLink]="['/profile']">Profile</a>
                 </li>
             </ul>
         </div>        

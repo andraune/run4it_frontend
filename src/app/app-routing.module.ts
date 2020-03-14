@@ -3,15 +3,18 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 import { WelcomeComponent } from './welcome/welcome.component';
 import { HomeComponent } from './home/home.component';
+import { GoalsComponent } from './goals/goals.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 import { environment } from '../environments/environment';
 
 import { AuthenticatedGuard, NotAuthenticatedGuard } from './api-common';
+import { GoalResolver } from './goals/goal-resolver.service';
 
 const appRoutes: Routes = [
     { path: '', component: WelcomeComponent, canActivate: [NotAuthenticatedGuard] },
     { path: 'dashboard', component: HomeComponent, canActivate: [AuthenticatedGuard] },
+    { path: 'goals', component: GoalsComponent, canActivate: [AuthenticatedGuard], resolve: { goals: GoalResolver }  },
     { path: '**', component: PageNotFoundComponent }
 ];
 
