@@ -45,7 +45,7 @@ export class ConfirmationComponent implements OnInit {
         .subscribe(
           data => {
             this.notificationService.addInfo(0, 'Confirmed user', `User '${data.username}'  confirmed.`, true)
-            this.router.navigate(['/login']);           
+            this.router.navigate(['/auth/login']);           
           },
           err => {
             this.isSubmitting = false;

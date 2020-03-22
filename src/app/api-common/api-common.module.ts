@@ -13,7 +13,8 @@ import {
     JwtService,
     NotificationService,
     ProfileService,
-    UserService
+    UserService,
+    AuthenticationService
 } from './services';
 
 import { ShowAuthenticatedDirective } from './show-authenticated.directive';
@@ -33,6 +34,7 @@ import { ShowAuthenticatedDirective } from './show-authenticated.directive';
         NotificationService,
         ProfileService,
         UserService,
+        AuthenticationService,
         AuthenticatedGuard,
         NotAuthenticatedGuard
     ],

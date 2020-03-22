@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './api-common';
+import { AuthenticationService } from './api-common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  constructor(private userService: UserService) {}
+  constructor(private authService: AuthenticationService) {}
 
   ngOnInit() {
-    this.userService.populate();
+    this.authService.populate();
   }
 
 }

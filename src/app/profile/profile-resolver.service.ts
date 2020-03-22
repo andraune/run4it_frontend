@@ -2,14 +2,14 @@ import { Injectable, } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 
-import { NotificationService, UserService, Profile, ProfileService } from '../api-common';
+import { NotificationService, AuthenticationService, Profile, ProfileService } from '../api-common';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileResolver implements Resolve<Profile> {
   constructor(
     private notificationService: NotificationService,
-    private userService: UserService,
+    private authService: AuthenticationService,
     private profileService: ProfileService,
     private router: Router
   ) {}
@@ -18,7 +18,7 @@ export class ProfileResolver implements Resolve<Profile> {
     route: ActivatedRouteSnapshot
   ): Observable<any> {
 
-    const authUser = this.userService.getUsername();
+    const authUser = this.authService.getAuthUsername();
 
     if (authUser != "") {
       return this.profileService.getProfile(authUser)

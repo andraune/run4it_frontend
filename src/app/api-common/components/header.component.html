@@ -22,7 +22,7 @@
     <div class="user">
         <a [routerLink]="['/profile']" class="fancy-button">
             <i class="material-icons-round">person</i>
-            <span>{{ currentUser.username }}</span>
+            <span>{{ authUser.username }}</span>
         </a>
     </div>
     <div class="user-menu" *ngIf="!userMenuOpen">

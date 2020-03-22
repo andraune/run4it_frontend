@@ -3,21 +3,21 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@a
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { NotificationService, UserService, GoalInterface, GoalService } from '../api-common';
+import { NotificationService, AuthenticationService, GoalInterface, GoalService } from '../api-common';
 
 
 @Injectable({ providedIn: 'root' })
 export class GoalResolver implements Resolve<GoalInterface[]> {
   constructor(
     private notificationService: NotificationService,
-    private userService: UserService,
+    private authService: AuthenticationService,
     private goalService: GoalService,
   ) {}
 
   resolve(
   ): Observable<any> {
 
-    const authUser = this.userService.getUsername();
+    const authUser = this.authService.getAuthUsername();
 
     if (authUser != "") {
       return this.goalService.getActiveGoals(authUser)

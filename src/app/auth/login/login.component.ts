@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
-import { NotificationService, UserService } from '../../api-common';
+import { NotificationService, AuthenticationService } from '../../api-common';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private notificationService: NotificationService,
-    private userService: UserService,
+    private authService: AuthenticationService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
 
     if (canSubmit) {   
       this.isSubmitting = true;
-      this.userService.login(controls.email.value, controls.password.value)
+      this.authService.login(controls.email.value, controls.password.value)
         .pipe(first())
         .subscribe(
           data => {

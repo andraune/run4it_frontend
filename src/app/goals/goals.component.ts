@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User, UserService, GoalInterface, GoalService, ApiService } from '../api-common';
+import { User, AuthenticationService, GoalInterface, GoalService, ApiService } from '../api-common';
 
 
 @Component({
@@ -14,17 +14,12 @@ export class GoalsComponent implements OnInit {
     public futureGoals: GoalInterface[] = [];
     public currentTime: Date = new Date();
 
-    constructor(
-        private userService: UserService,
-        private goalService: GoalService,
-        private apiService: ApiService
-    ) 
-    {
+    constructor(private authService: AuthenticationService, private goalService: GoalService) {
         setInterval(() => { this.currentTime = new Date() }, 60000);
     }
 
     ngOnInit() {
-        this.userService.currentUser.subscribe(
+        this.authService.authenticatedUser$.subscribe(
             (userData: User) => this.currentUser = userData
         );
 

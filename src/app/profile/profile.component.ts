@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first, finalize } from 'rxjs/operators';
-import { Profile, ProfileService, UserService, NotificationService, User } from '../api-common';
+import { Profile, ProfileService, AuthenticationService, NotificationService, User } from '../api-common';
 
 @Component({
   selector: 'app-profile',
@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private profileService: ProfileService,
-    private userService: UserService,
+    private authService: AuthenticationService,
     private notificationService: NotificationService,
     private formBuilder: FormBuilder,
   )
@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
       'height': ['', Validators.compose([Validators.required, Validators.min(0), Validators.max(299)])]
     });
 
-    this.userService.currentUser.subscribe(
+    this.authService.authenticatedUser$.subscribe(
       (userData: User) => this.currentUser = userData
     );
 
@@ -60,7 +60,6 @@ export class ProfileComponent implements OnInit {
       (profileData: Profile) => {
         this.profile = profileData;
         this._updateUserInfoForm();
-        // TODO: Fetch currentUser and check that usernames match
       }
     );
   }
@@ -97,11 +96,11 @@ export class ProfileComponent implements OnInit {
 
   logout() {
     this.isSubmitting = true;
-    this.userService.logoutRefresh()
+    this.authService.logoutRefresh()
       .pipe(
         first(),
         finalize(() => {
-          this.userService.logout()
+          this.authService.logout()
           .pipe(
             first(),
             finalize(() => {

@@ -3,7 +3,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, filter, take, switchMap, finalize } from 'rxjs/operators';
 
-import { JwtService, UserService, NotificationService } from '../services';
+import { JwtService, AuthenticationService, NotificationService } from '../services';
 import { User } from '../models';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
     constructor(
         private jwtService: JwtService, 
-        private userService: UserService,
+        private authService: AuthenticationService,
         private notificationService: NotificationService
     ) {}
 
@@ -44,7 +44,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                         this.refreshTokenInProgress = true;
                         this.refreshTokenSubject.next(null);
 
-                        return this.userService.loginRefresh().pipe(
+                        return this.authService.loginRefresh().pipe(
                             switchMap(
                                 (user: User) => {
                                     this.refreshTokenSubject.next(user ? true : false);

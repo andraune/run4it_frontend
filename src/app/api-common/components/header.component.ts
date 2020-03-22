@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { User } from '../models';
-import { UserService } from '../services';
+import { AuthenticationService } from '../services';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,7 @@ import { UserService } from '../services';
 })
 export class HeaderComponent implements OnInit {
 
-  public currentUser: User;
+  public authUser: User;
   public userMenuOpen = false;
   public menuItems = [
     {route: "/dashboard", title: "Dashboard"},
@@ -18,12 +18,12 @@ export class HeaderComponent implements OnInit {
     {route: "/goals", title: "Goals"}
   ];
 
-  constructor(private userService: UserService) {
+  constructor(private authService: AuthenticationService) {
   }
 
   ngOnInit() {
-    this.userService.currentUser.subscribe(
-      (userData: User) => this.currentUser = userData
+    this.authService.authenticatedUser$.subscribe(
+      (userData: User) => this.authUser = userData
     );
   }
 
