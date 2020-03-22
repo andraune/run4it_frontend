@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User, UserService } from '../api-common';
 
 @Component({
   selector: 'app-welcome',
@@ -7,13 +6,13 @@ import { User, UserService } from '../api-common';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
-  private currentUser: User;
-  
-  constructor(private userService: UserService) { }
 
-  ngOnInit() {   
-    this.userService.currentUser.subscribe(
-      user => { this.currentUser = user; }
-    )
+  private backgroundImage = new Image();
+  
+  constructor() { }
+
+  ngOnInit() {  
+    this.backgroundImage.src = '/assets/welcome.jpg'; 
+    console.log('Preloaded Welcome background image');
   }
 }
