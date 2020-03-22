@@ -131,11 +131,11 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onMonthChanged(month: number) {
+  onMonthChanged() {
     this._populateDays(this.userInfoForm.controls.birthYear.value, this.userInfoForm.controls.birthMonth.value - 1);
   }
 
-  onYearChanged(year: number) {
+  onYearChanged() {
     this._populateDays(this.userInfoForm.controls.birthYear.value, this.userInfoForm.controls.birthMonth.value - 1);
   }
 
