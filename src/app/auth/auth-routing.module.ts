@@ -10,7 +10,7 @@ import { NotAuthenticatedGuard } from '../api-common';
 const authRoutes: Routes = [
   {
     path: 'auth',
-    component: AuthComponent, // TODO: Resolve isAuthenticated / AuthUser
+    component: AuthComponent,
     canActivate: [NotAuthenticatedGuard],
     children: [
       {
