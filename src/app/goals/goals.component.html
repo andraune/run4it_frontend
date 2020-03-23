@@ -31,7 +31,9 @@
     </div>
 
     <div class="sub-content-50" *ngIf="activeGoals.length > 0">
+        <br />
         TBD: Display graph or something related to selected goal. Default is table's top row.
+        <br />
     </div>
 
     <!-- UPCOMING + RECENTLY EXPIRED GOALS -->
@@ -42,20 +44,33 @@
             <tr>
                 <th>Start time</th>
                 <th>Goal</th>
-                <th>Start value</th>
                 <th>Target value</th>
             </tr>
             <tr *ngFor="let goal of futureGoals">
                 <td>{{ currentTime | timeToStart:goal.startAt }}</td>
                 <td>{{ goal.categoryName }}</td>
-                <td>{{ goal.startValue }}{{ goal.categoryUnit }}</td>
                 <td>{{ goal.targetValue }}{{ goal.categoryUnit }}</td>
             </tr>
         </table>
     </div>
 
-    <div class="sub-content-50" *ngIf="activeGoals.length >= 0">
-        List of expired goals.
+    <div class="sub-content-50" *ngIf="expiredGoals.length > 0">
+        <h3>Expired goals</h3>
+
+        <table class="goal-list">
+            <tr>
+                <th>Ended</th>
+                <th>Goal</th>
+                <th>Target value</th>
+                <th>Actual value</th>
+            </tr>
+            <tr *ngFor="let goal of expiredGoals">
+                <td>{{ goal.endAt | date:'yyyy-MM-dd' }}</td>
+                <td>{{ goal.categoryName }}</td>
+                <td>{{ goal.targetValue }}{{ goal.categoryUnit }}</td>
+                <td>{{ goal.currentValue }}{{ goal.categoryUnit }}</td>
+            </tr>
+        </table>
     </div>
 
 </div>

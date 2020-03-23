@@ -3,53 +3,71 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
-import { GoalInterface } from '../models';
+import { Goal } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class GoalService {
-    private activeGoalsSubject: BehaviorSubject<GoalInterface[]>;
-    public activeGoals: Observable<GoalInterface[]>; 
-    private futureGoalsSubject: BehaviorSubject<GoalInterface[]>;
-    public futureGoals: Observable<GoalInterface[]>; 
+    private activeGoalsSubject: BehaviorSubject<Goal[]>;
+    public activeGoals: Observable<Goal[]>; 
+    private futureGoalsSubject: BehaviorSubject<Goal[]>;
+    public futureGoals: Observable<Goal[]>;
+    private expiredGoalsSubject: BehaviorSubject<Goal[]>;
+    public expiredGoals: Observable<Goal[]>;
+
     constructor(private apiService: ApiService) {
-        this.activeGoalsSubject = new BehaviorSubject<GoalInterface[]>([] as GoalInterface[]);
-        this.activeGoals = this.activeGoalsSubject.asObservable().pipe();
-        this.futureGoalsSubject = new BehaviorSubject<GoalInterface[]>([] as GoalInterface[]);
-        this.futureGoals = this.futureGoalsSubject.asObservable().pipe();
+        this.activeGoalsSubject = new BehaviorSubject<Goal[]>([] as Goal[]);
+        this.activeGoals = this.activeGoalsSubject.asObservable();
+        this.futureGoalsSubject = new BehaviorSubject<Goal[]>([] as Goal[]);
+        this.futureGoals = this.futureGoalsSubject.asObservable();
+        this.expiredGoalsSubject = new BehaviorSubject<Goal[]>([] as Goal[]);
+        this.expiredGoals = this.expiredGoalsSubject.asObservable();
     }
 
-    getActiveGoals(username: string): Observable<GoalInterface[]> {
-        return this.apiService.get(`/profiles/JonnyIT/goals`).pipe(
+    getActiveGoals(username: string): Observable<Goal[]> {
+        return this.apiService.get(`/profiles/${username}/goals`).pipe(
             map(
                 data => {
-                    console.log("received active goals data");
                     this.activeGoalsSubject.next(data);
                     return this.activeGoalsSubject.value;
                 }
             ),
             catchError(
                 error => {
-                    console.log("failed to get future goals");
-                    this.activeGoalsSubject.next([] as GoalInterface[]);
+                    this.activeGoalsSubject.next([] as Goal[]);
                     return throwError(error);
                 }
             )
         );
     }
 
-    getFutureGoals(username: string): Observable<GoalInterface[]> {
-        return this.apiService.get(`/profiles/JonnyIT/goals?filter=future`).pipe(
+    getFutureGoals(username: string): Observable<Goal[]> {
+        return this.apiService.get(`/profiles/${username}/goals?filter=future`).pipe(
             map(
                 data => {
-                    console.log("received future goals data");
                     this.futureGoalsSubject.next(data);
                     return this.futureGoalsSubject.value;
                 }
             ),
             catchError(
                 error => {
-                    console.log("failed to get future goals");
-                    this.futureGoalsSubject.next([] as GoalInterface[]);
+                    this.futureGoalsSubject.next([] as Goal[]);
+                    return throwError(error);
+                }
+            )
+        );
+    }
+
+    getExpiredGoals(username: string): Observable<Goal[]> {
+        return this.apiService.get(`/profiles/${username}/goals?filter=expired`).pipe(
+            map(
+                data => {
+                    this.expiredGoalsSubject.next(data);
+                    return this.expiredGoalsSubject.value;
+                }
+            ),
+            catchError(
+                error => {
+                    this.expiredGoalsSubject.next([] as Goal[]);
                     return throwError(error);
                 }
             )

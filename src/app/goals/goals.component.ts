@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User, AuthenticationService, GoalInterface, GoalService, ApiService } from '../api-common';
+import { User, AuthenticationService, Goal, GoalService, ApiService } from '../api-common';
 
 
 @Component({
@@ -10,8 +10,9 @@ import { User, AuthenticationService, GoalInterface, GoalService, ApiService } f
 })
 export class GoalsComponent implements OnInit {
     private currentUser: User;
-    public activeGoals: GoalInterface[] = [];
-    public futureGoals: GoalInterface[] = [];
+    public activeGoals: Goal[] = [];
+    public futureGoals: Goal[] = [];
+    public expiredGoals: Goal[] = [];
     public currentTime: Date = new Date();
 
     constructor(private authService: AuthenticationService, private goalService: GoalService) {
@@ -24,18 +25,15 @@ export class GoalsComponent implements OnInit {
         );
 
         this.goalService.activeGoals.subscribe(
-            (goalData: GoalInterface[]) => {
-                this.activeGoals = goalData;
-            }
-        )
+            (goalData: Goal[]) => { this.activeGoals = goalData; }
+        );
 
-        this.goalService.getFutureGoals(this.currentUser.username)
-        .pipe()
-          .subscribe(
-            (goalData: GoalInterface[]) => { this.futureGoals = goalData; },
-            err => {
-                // TODO: Add error note or sumtin'
-            }
-          );
+        this.goalService.futureGoals.subscribe(
+            (goalData: Goal[]) => { this.futureGoals = goalData; }
+        );
+
+        this.goalService.expiredGoals.subscribe(
+            (goalData: Goal[]) => { this.expiredGoals = goalData; }
+        );
     }
 }
