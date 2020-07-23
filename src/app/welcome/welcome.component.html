@@ -1,16 +1,27 @@
 <app-header></app-header>
 <app-notification></app-notification>
-<div class="section welcome">
-    <h1>Running for IT training since ... a while ago</h1>
+
+<!-- WELCOME MESSAGE -->
+<div class="layout-section welcome-message">
+    <h1>Run4IT</h1>
+    <h2>Running for IT training since ... a while ago</h2>
     <p>- Feel free to join us in the run for knowledge!</p>
 </div>
-<div class="section welcome-button">
-    <button [routerLink]="['/auth/register']">Register</button>
+
+<!-- WELCOME BUTTONS FOR REGISTER / LOGIN -->
+<div class="layout-section welcome-button">
+    <a mat-raised-button color="primary" [routerLink]="['/auth/register']">
+        <span>Register</span>
+    </a>
 </div>
-<div class="section welcome-button">
-   <button [routerLink]="['/auth/login']">Sign In</button> 
+<div class="layout-section welcome-button">
+    <a mat-raised-button color="primary" [routerLink]="['/auth/register']">
+        <span>Sign In</span>
+    </a> 
 </div>
-<div class="section footer">
+
+<!-- CREDITS -->
+<div class="layout-section credits">
     <p>
         Backgound image from <a href="https://pixabay.com/users/RemazteredStudio-1714780/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1201014" target="_blank">Remaztered Studio</a>
         from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1201014" target="_blank">Pixabay</a>

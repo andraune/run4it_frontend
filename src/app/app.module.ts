@@ -13,6 +13,7 @@ import { ApiCommonModule} from './api-common/api-common.module';
 import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
 import { GoalsModule } from './goals/goals.module';
+import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProfileModule,
     GoalsModule,
     AppRoutingModule,
+    MatButtonModule,
     BrowserAnimationsModule
   ],
   declarations: [

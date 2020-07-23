@@ -1,11 +1,13 @@
  <!-- For unauthenticated users -->
 <header *appShowAuthenticated="false">
     <mat-toolbar>
-        <span>
+        <span class="right-align-spacer"></span>
+        <span class="centered-logo">
             <a [routerLink]="['/']" title="Welcome">
                 <img src="/assets/icon.png" alt="Run4IT logo">
             </a>
-        </span>      
+        </span>
+        <span class="right-align-spacer"></span>     
     </mat-toolbar>
 </header>
 
@@ -41,9 +43,11 @@
             </button>
             <mat-menu #menu="matMenu">
                 <a mat-menu-item *ngFor="let item of menuItems" [routerLink]="item.route">
+                    <mat-icon color="primary">{{ item.icon }}</mat-icon>
                     <span class="menu-item-vert">{{item.title}}</span>
                 </a>
                 <a mat-menu-item [routerLink]="['/profile']">
+                    <mat-icon color="primary">person</mat-icon>
                     <span class="menu-item-vert">Profile</span>
                 </a>
             </mat-menu>
@@ -51,24 +55,4 @@
 
     </mat-toolbar>
 </header>
-<div class="vertical-spacer">&nbsp;</div>
-
-<!--
-
-<div class="user-menu" *ngIf="userMenuOpen">
-    <div (click)="showUserMenu(false)" class="fancy-button">
-        <i class="material-icons-round">menu_open</i>
-        <span>Menu</span>
-    </div>
-    <div class="user-menu-contents">
-        <ul>
-            <li *ngFor="let item of menuItems">
-                <a [routerLink]="item.route">{{item.title}}</a>    
-            </li>
-            <li>
-                <a [routerLink]="['/profile']">Profile</a>
-            </li>
-        </ul>
-    </div>        
-</div>
--->
+<div class="vertical-spacer" *appShowAuthenticated="true">&nbsp;</div>
