@@ -5,84 +5,28 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
 }
-
-h1, h2, h3 { 
-    font-family: 'Open Sans', sans-serif;
-    color: rgb(8, 59, 102);
-    padding: 6px;
-}
-
-h1 {
-    font-size: 20px;
-}
-
-h2 {
-    font-size: 18px;
-}
-
-h3 {
-    font-size: 16px;
-}
-
-a {
-    color: rgb(8, 59, 102);
-}
-
-table {
-    width: 100%;
-}
-
-fieldset {
-    border: none;
-    padding: 5px;
-}
-
-input, button {
-    padding: 5px;
-}
-
-
-button {
-    background-color: rgb(8, 59, 102);
-    border: solid white 1px;
-    border-radius: 5px;
-    padding: 5px;
-    color: white;
-    cursor: pointer;
-}
-
-/* CARD */
-
-.card {
-    border: solid lightgray 1px; 
-}
-
-.card-top {
-    background-color: white;
-    border-bottom: solid lightgray 1px; 
-}
-
 
 /*
-    LAYOUT COMPONENTS RULES
+    PAGE MAIN LAYOUT
 */
-body {
-    background-color:rgb(248, 248, 248);
+html, body {
+    height: 100%;
+}
+body { 
+    background-color:#e1e7ed;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    min-width: 320px;
 }
 
 app-root {
+    background-color:rgb(245, 245, 245);
     display: flex;
     flex-wrap: wrap;
     width: 100%;
 }
 
-/*
-    LAYOUT ELEMENTS RULES
-*/
-.section {
+header, footer, .layout-section {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -90,32 +34,37 @@ app-root {
     align-items: center;
 }
 
-/* Top bar with logo and menu */
-.logo-bar, .menu-bar {
-    height: 36px;
-    padding-top: 4px;
-}
-.menu-bar {
-    background-color: white;
-    border-bottom: solid 1px lightgray;
-    display: block;
+/*
+    COMMON HEADERS 
+*/
+h1, h2, h3 {
+    color: rgb(8, 59, 102);
 }
 
-/* Welcome content */
-.welcome {
-    width: 100%;
-    height: 30%;
-    display: flex;
-    flex-direction: column;  
+h1 {
+    padding-bottom: 20px;
 }
 
-.welcome-button {
-    width: 50%;
-    height: 40%;
-    display: flex;    
+h2 {
+    font-style: italic;
+    padding-bottom: 10px;
 }
 
-/* Default content, used on pages with user content */
+h3 {
+    padding-bottom: 5px;
+}
+
+
+/*
+    CONTENTS CONTAINERS
+*/
+.simple-centered-content {
+    margin: 50px auto;
+}
+
+
+/*
+
 .main-container {
     width: 100%;
     margin: 10px auto;
@@ -136,45 +85,20 @@ app-root {
     width: 50%;
 }
 
-/* Sign up, Sign in content, page not found */
+
 .auth-content, .not-found-content {
     margin: 50px auto;
 }
 
-/* Footer */
-.footer {
-    height: auto;
-    padding: 10px 2px;
-}
 
-.footer p, .footer a {
-    padding: 1px;
-    font-size: x-small;
-    background-color:rgb(248, 248, 248);;
-}
-
-.footer img {
-    height: 10px;
-}
-
-/*
-    MEDIA DEPENDENT RULES
-*/
-
-/* Mobile Styles */
 @media only screen and (max-width: 400px) {
 
     .sub-content-50 {
         width: 100%;
     }
-
-    .welcome-button {
-        width: 100%;
-        height: 20%;
-    }
 }
 
-/* Tablet Styles */
+
 @media only screen and (min-width: 401px) and (max-width: 700px) {
 
     .sub-content-50 {
@@ -182,15 +106,16 @@ app-root {
     }
 }
   
-/* Desktop Styles */
+
 @media only screen and (min-width: 701px) and (max-width: 1080px) {
  
 }
+*/
 
-/* Max width */
 @media only screen and (min-width: 1081px) {
     app-root {
         margin: auto;
         width: 1080px;
     }
 } 
+
