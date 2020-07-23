@@ -13,14 +13,20 @@ div.auth-sub-content div {
 }
 
 form {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+.form-item-size {
+    width: 100%;
     max-width: 350px;
-    margin: auto;
 }
 
 .auth-content a img {
     height: 50px;
 }
 
-input, button {
-    width: 270px;
+button {
+    margin-top: 20px;
 }

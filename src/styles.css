@@ -42,16 +42,32 @@ h1, h2, h3 {
 }
 
 h1 {
-    padding-bottom: 20px;
+    padding: 10px 0 20px 0;
+    font-size: 24px;
 }
 
 h2 {
+    font-size: 22px;
     font-style: italic;
-    padding-bottom: 10px;
+    padding: 10px 0 10px 0;
 }
 
 h3 {
-    padding-bottom: 5px;
+    font-size: 20px;
+    padding: 5px 0 5px 0;
+}
+
+/*
+    MISC STANDARD FORMATTING (look 'n' feel)
+*/
+a {
+    text-decoration: none;
+    color: rgb(8, 59, 102);
+}
+
+fieldset {
+    border: none;
+    width: 100%;
 }
 
 
@@ -85,10 +101,6 @@ h3 {
     width: 50%;
 }
 
-
-.auth-content, .not-found-content {
-    margin: 50px auto;
-}
 
 
 @media only screen and (max-width: 400px) {

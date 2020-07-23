@@ -2,20 +2,40 @@
     <h1>Please register</h1>
     <app-notification></app-notification>
     <fieldset [disabled]="isSubmitting">
+
         <fieldset>
-            <input formControlName="username" placeholder="Username (profile name)" type="text">
+            <mat-form-field class="form-item-size">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username" type="text">
+            </mat-form-field>
         </fieldset>
+
         <fieldset>
-            <input formControlName="email" placeholder="Email (used for login)" type="text">
+            <mat-form-field class="form-item-size">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="email">
+            </mat-form-field>
         </fieldset>
+
         <fieldset>
-            <input formControlName="password" placeholder="Password" type="password">
+            <mat-form-field class="form-item-size">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password">
+            </mat-form-field>
         </fieldset>
+
         <fieldset>
-            <input formControlName="confirm_password" placeholder="Confirm password" type="password">
+            <mat-form-field class="form-item-size">
+                <mat-label>Confirm password</mat-label>
+                <input matInput formControlName="confirm_password" type="password">
+            </mat-form-field>
         </fieldset>
-        <button type="submit">
-            Create account
-        </button>
+
+        <fieldset>
+            <button mat-raised-button color="primary" class="form-item-size" type="submit">
+                Create account
+            </button>
+        </fieldset>
+
     </fieldset>
 </form>

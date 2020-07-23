@@ -29,6 +29,7 @@ div.welcome-message h2, div.welcome-message p {
 div.welcome-message p {
     color: rgb(4, 48, 86);
     font-style: italic;
+    font-weight: 600;
 }
 
 div.welcome-button {
@@ -50,5 +51,9 @@ div.credits p, div.credits a {
     padding: 1px;
     font-size: x-small;
     background-color:rgb(248, 248, 248);;
+}
+
+h1 {
+    font-size: 36px;
 }
 
