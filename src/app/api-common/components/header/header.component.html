@@ -1,0 +1,74 @@
+ <!-- For unauthenticated users -->
+<header *appShowAuthenticated="false">
+    <mat-toolbar>
+        <span>
+            <a [routerLink]="['/']" title="Welcome">
+                <img src="/assets/icon.png" alt="Run4IT logo">
+            </a>
+        </span>      
+    </mat-toolbar>
+</header>
+
+<!-- For authenticated users -->
+<header *appShowAuthenticated="true">
+    <mat-toolbar>
+        <span>
+            <a [routerLink]="['/dashboard']" title="Home">
+                <img src="/assets/icon.png" alt="Run4IT logo">
+            </a>    
+        </span>
+
+        <!-- Horizontal menu items shown on wide screens -->
+        <span class="menu-item-hor" *ngFor="let item of menuItems">
+            <a mat-button color="primary" [routerLink]="item.route">{{item.title}}</a>
+        </span>
+
+        <!-- Spacer for right-align-->
+        <span class="right-align-spacer"></span>
+
+        <!-- User icon with username shown on wide screens -->
+        <span class="user">
+            <a mat-flat-button color="primary" [routerLink]="['/profile']">
+                <mat-icon>person</mat-icon>
+                <span>{{ authUser.username }}</span>
+            </a>
+        </span>
+
+        <!-- Dropdown menu shown when screen isn't wide enough -->
+        <span class="menu">
+            <button mat-icon-button [matMenuTriggerFor]="menu" color="primary" aria-label="Main menu">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <a mat-menu-item *ngFor="let item of menuItems" [routerLink]="item.route">
+                    <span class="menu-item-vert">{{item.title}}</span>
+                </a>
+                <a mat-menu-item [routerLink]="['/profile']">
+                    <span class="menu-item-vert">Profile</span>
+                </a>
+            </mat-menu>
+        </span>
+
+    </mat-toolbar>
+</header>
+<div class="vertical-spacer">&nbsp;</div>
+
+<!--
+
+<div class="user-menu" *ngIf="userMenuOpen">
+    <div (click)="showUserMenu(false)" class="fancy-button">
+        <i class="material-icons-round">menu_open</i>
+        <span>Menu</span>
+    </div>
+    <div class="user-menu-contents">
+        <ul>
+            <li *ngFor="let item of menuItems">
+                <a [routerLink]="item.route">{{item.title}}</a>    
+            </li>
+            <li>
+                <a [routerLink]="['/profile']">Profile</a>
+            </li>
+        </ul>
+    </div>        
+</div>
+-->

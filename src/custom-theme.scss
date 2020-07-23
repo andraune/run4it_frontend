@@ -1,0 +1,106 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+// Define Run4IT palette
+// define a real custom palette (using http://mcg.mbitson.com)
+
+$run4it-primary-palette: (
+  50: #e1e7ed,
+  100: #b5c4d1,
+  200: #849db3,
+  300: #527694,
+  400: #2d587d,
+  500: #083b66,
+  600: #07355e,
+  700: #062d53,
+  800: #042649,
+  900: #021938,
+  A100: #6e9dff,
+  A200: #3b7bff,
+  A400: #0859ff,
+  A700: #004dee,
+  contrast: (
+    50: #083b66,
+    100: #083b66,
+    200: #083b66,
+    300: #083b66,
+    400: #083b66,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: #083b66,
+    A200: #083b66,
+    A400: #083b66,
+    A700: white,
+  )
+);
+
+$run4it-accent-palette: (
+  50: #f9ede2,
+  100: #efd3b7,
+  200: #e5b587,
+  300: #db9757,
+  400: #d38133,
+  500: #cb6b0f,
+  600: #c6630d,
+  700: #be580b,
+  800: #b84e08,
+  900: #ac3c04,
+  A100: #ffe1d5,
+  A200: #ffbca2,
+  A400: #ff976f,
+  A700: #ff8456,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: $black-87-opacity,
+    600: $black-87-opacity,
+    700: $black-87-opacity,
+    800: $black-87-opacity,
+    900: $black-87-opacity,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: $black-87-opacity,
+    A700: $black-87-opacity,
+  )
+);
+
+
+$run4it-frontend-primary: mat-palette($run4it-primary-palette);
+$run4it-frontend-accent: mat-palette($run4it-accent-palette);
+
+// The warn palette is optional (defaults to red).
+$run4it-frontend-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$run4it-frontend-theme: mat-light-theme((
+  color: (
+    primary: $run4it-frontend-primary,
+    accent: $run4it-frontend-accent,
+    warn: $run4it-frontend-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($run4it-frontend-theme);
+

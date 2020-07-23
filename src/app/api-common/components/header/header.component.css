@@ -1,0 +1,53 @@
+:host { 
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+header, mat-toolbar {
+    height: 50px;
+}
+
+header {
+    padding-top: 4px;
+}
+
+div.vertical-spacer {
+    width: 100%;
+    height: 50px;
+    border-top: solid 2px rgb(8, 59, 102);
+}
+
+/* Logo icon */
+a img {
+    height:40px;
+    margin-right: 20px;
+}
+
+/* Horizontal menu items */
+span.menu-item-hor a {
+  font-size: 18px;  
+}
+
+/* Spacer for right-align of icons */
+span.right-align-spacer {
+    flex: 1 1 auto;
+}
+
+/* Vertical menu items */
+span.menu-item-vert {
+    color: rgb(8, 59, 102);
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 650px) {
+    .user, span.menu-item-hor {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 651px) {
+    .menu {
+        display: none;
+    }
+}
