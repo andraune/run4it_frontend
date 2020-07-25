@@ -116,17 +116,16 @@ export class WeightHistoryComponent implements OnInit {
   private _updateWeightChartData()
   {
     this.weightChartData[0]["series"] = [];
-    var i = 1;
+    var dateOptions = { "year": "2-digit", "month": "short", "day": "numeric" };
   
-    this.weightList.forEach(weightData => {
-      
-      //var weightDate = new Date(weightData.createdAt);
-      var str = "2020-7-" + i;
+    this.weightList.forEach(weightData => {   
+      var weightDate = new Date(weightData.createdAt);
+      var formattedDate = Intl.DateTimeFormat("en-GB", dateOptions).format(weightDate);
+
       this.weightChartData[0]["series"].push({
-        "name": str,  //weightDate.toLocaleDateString(),
+        "name": formattedDate,
         "value" : weightData.weight
       });
-      ++i;
     });
 
     this.weightChartData = [... this.weightChartData];
