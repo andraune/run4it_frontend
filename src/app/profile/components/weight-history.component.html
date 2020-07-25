@@ -1,21 +1,3 @@
-<!-- Weight history graph -->
-<div class="sub-content-70">
-    <div class="chart-container">
-        <div class="chart">
-            <ngx-charts-line-chart 
-                [scheme]="weigthChartColorScheme"
-                [results]="weightChartData"
-                [legend]="false"
-                [timeline]="true"
-                [showXAxisLabel]="false"
-                [showYAxisLabel]="false"
-                [xAxis]="true"
-                [yAxis]="true">
-            </ngx-charts-line-chart>
-        </div>
-    </div>
-</div>
-
 <!-- Possibility to register new weight, and weight table -->
 <div class="sub-content-30">
     <div class="form-container">
@@ -59,4 +41,24 @@
 
     </div>
     
+</div>
+
+<!-- Weight history graph -->
+<div class="sub-content-70">
+    <div class="chart-container">
+        <div class="chart">
+            <ngx-charts-line-chart 
+                [scheme]="weigthChartColorScheme"
+                [results]="weightChartData"
+                [legend]="false"
+                [timeline]="false"
+                [showXAxisLabel]="false"
+                [showYAxisLabel]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [yScaleMax]="weightChartYMax"
+                [yScaleMin]="weightChartYMin">
+            </ngx-charts-line-chart>
+        </div>
+    </div>
 </div>

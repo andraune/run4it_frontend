@@ -60,7 +60,7 @@
                                 <mat-form-field class="form-item-size-small">
                                     <mat-label>Weight (kg)</mat-label>
                                     <input matInput formControlName="weight" type="text">
-                                    <mat-hint>Use "Weight" tab to edit</mat-hint>
+                                    <mat-hint>Use Weight tab to edit</mat-hint>
                                 </mat-form-field>
                             </fieldset>
 
@@ -77,35 +77,21 @@
             </div>      
         </mat-tab>
 
-
-
-
         <!-- WEIGHT HISTORY -->
         <mat-tab label="Weight" class="tab-item">
             <div class="tab-content">
-                <app-profile-weight-history>Loading</app-profile-weight-history>
+                <app-profile-weight-history>Loading ...</app-profile-weight-history>
             </div>
         </mat-tab>
 
         <!-- PREFERENCES -->
         <mat-tab label="Preferences" class="tab-item">
             <div class="tab-content">
-
-                <p>Not implemented yet. Should include selection of preferred units, notifications, cookies etc.</p>
-
-            </div>
-        </mat-tab>
-
-        <!-- POLAR -->
-        <mat-tab label="Polar" class="tab-item">
-            <div class="tab-content">
                 
-                <p>Not implemented yet. Should include Polar integration info.</p>
+                <p>Not implemented yet. Should include prefs, Polar integration info, etc.</p>
             
             </div>
         </mat-tab>
-
-
 
     </mat-tab-group>
 </div>

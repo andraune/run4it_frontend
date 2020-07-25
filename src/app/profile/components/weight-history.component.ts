@@ -26,6 +26,8 @@ export class WeightHistoryComponent implements OnInit {
 
   public weigthChartColorScheme = { domain: ['#083b66'] };
   public weightChartData: any[] = [{"name": "Weight", "series":[]}];
+  public weightChartYMin: number = 40;
+  public weightChartYMax: number = 120;
 
   constructor(
     private profileService: ProfileService,
@@ -115,18 +117,31 @@ export class WeightHistoryComponent implements OnInit {
 
   private _updateWeightChartData()
   {
+    var minWeight = 9999;
+    var maxWeight = 0
     this.weightChartData[0]["series"] = [];
-    var dateOptions = { "year": "2-digit", "month": "short", "day": "numeric" };
   
-    this.weightList.forEach(weightData => {   
+    this.weightList.slice().reverse().forEach(weightData => {   
       var weightDate = new Date(weightData.createdAt);
-      var formattedDate = Intl.DateTimeFormat("en-GB", dateOptions).format(weightDate);
 
       this.weightChartData[0]["series"].push({
-        "name": formattedDate,
+        "name": weightDate,
         "value" : weightData.weight
       });
+
+      if (weightData.weight < minWeight) {
+        minWeight = Math.round(weightData.weight / 10) * 10;
+      }
+
+      if (weightData.weight > maxWeight) {
+        maxWeight = 10 + (Math.round(weightData.weight / 10) * 10);
+      }
     });
+
+    if (maxWeight > minWeight) {
+      this.weightChartYMin = minWeight;
+      this.weightChartYMax = maxWeight;
+    }
 
     this.weightChartData = [... this.weightChartData];
   }
