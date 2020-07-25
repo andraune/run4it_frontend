@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Notification } from '../models';
-import { NotificationService } from '../services';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { NotificationService } from '../../services';
 
 
 @Component({

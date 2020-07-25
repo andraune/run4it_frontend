@@ -4,22 +4,37 @@
     width: 100%;
 }
 
-td:first-child {
-    width: 120px;
+.tab-group, .tab-item {
+    width: 100%;
+    min-height: 300px;
+    margin: 0;
+    padding: 0;
 }
 
-td {
-    padding: 3px;
+div.tab-content {
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-item-size {
+    width: 80%;
+    max-width: 350px;
+}
+
+.form-item-size-small {
+    width: 80%;
+    max-width: 200px;
+}
+
+.form-item-size-x-small {
+    width: 40%;
+    max-width: 150px;
 }
 
 button {
-    padding: 5px 15px;
-}
-
-input, select {
-    padding: 1px;
-}
-
-input.small {
-    width: 50px;
+    margin: 20px 10px 0 0;
+    width: 40%;
+    max-width: 150px;
 }

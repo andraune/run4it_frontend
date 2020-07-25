@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { first, finalize } from 'rxjs/operators';
 import { Profile, ProfileService, AuthenticationService, NotificationService, User } from '../api-common';
 
@@ -15,25 +15,11 @@ export class ProfileComponent implements OnInit {
   public currentUser: User;
   public userInfoForm: FormGroup;
   public isSubmitting = false;
-
-  public months = [
-    { name: 'Jan', val: 1, days: 31},
-    { name: 'Feb', val: 2, days: 29},
-    { name: 'Mar', val: 3, days: 31},
-    { name: 'Apr', val: 4, days: 30},
-    { name: 'May', val: 5, days: 31},
-    { name: 'Jun', val: 6, days: 30},
-    { name: 'Jul', val: 7, days: 31},
-    { name: 'Aug', val: 8, days: 31},
-    { name: 'Sep', val: 9, days: 30},
-    { name: 'Oct', val: 10, days: 31},
-    { name: 'Nov', val: 11, days: 30},
-    { name: 'Dec', val: 12, days: 31}
-  ];
-  public days = [];
+  public isEditEnabled = false;
+  public minDate : Date = new Date(new Date().getUTCFullYear() - 100, 0, 1);
+  public maxDate : Date = new Date(new Date().getUTCFullYear() - 12, 0, 1);
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private profileService: ProfileService,
     private authService: AuthenticationService,
@@ -43,11 +29,8 @@ export class ProfileComponent implements OnInit {
   {}
 
   ngOnInit() {
-    this._populateDays(2000, 0); // default: January 2000
     this.userInfoForm = this.formBuilder.group({
-      'birthYear': ['', Validators.compose([Validators.required, Validators.min(1900), Validators.max(2009)])], // TODO: Max-value given by current year
-      'birthMonth': [ 1 ],
-      'birthDay': [ 1 ],
+      'birthDate': ['', Validators.compose([Validators.required])],
       'weight': ['', Validators.compose([Validators.min(0), Validators.max(999)])],
       'height': ['', Validators.compose([Validators.required, Validators.min(0), Validators.max(299)])]
     });
@@ -71,8 +54,10 @@ export class ProfileComponent implements OnInit {
 
     if (canSubmit) {
       this.isSubmitting = true;
-      var birthDateStr = controls.birthYear.value + '-' + controls.birthMonth.value + '-' + controls.birthDay.value;
-      this.profileService.updateProfileUserInfo(this.currentUser.username, birthDateStr, controls.height.value, controls.weight.value.toString().replace(',', '.'))
+      this.isEditEnabled = false;
+      var birthDate = new Date(controls.birthDate.value);
+      var birthDateStr = birthDate.getFullYear() + '-' + (birthDate.getMonth() + 1) + '-' + birthDate.getDate();
+      this.profileService.updateProfileUserInfo(this.currentUser.username, birthDateStr, controls.height.value)
         .pipe(first())
           .subscribe(
             () => {
@@ -113,13 +98,18 @@ export class ProfileComponent implements OnInit {
       .subscribe();
   }
 
+  toggleEditProfileView()
+  {
+    if (this.isEditEnabled) {
+      this._updateUserInfoForm();
+    }
+
+    this.isEditEnabled = !this.isEditEnabled;
+  }
+
   private _updateUserInfoForm() {
     if (this.profile.birthDate) {
-      var birthDate = new Date(this.profile.birthDate);
-      this._populateDays(birthDate.getUTCFullYear(), birthDate.getUTCMonth());
-      this.userInfoForm.controls.birthYear.setValue(birthDate.getUTCFullYear());
-      this.userInfoForm.controls.birthMonth.setValue(birthDate.getUTCMonth() + 1);
-      this.userInfoForm.controls.birthDay.setValue(birthDate.getUTCDate());
+      this.userInfoForm.controls.birthDate.setValue(this.profile.birthDate);
     }
 
     if (this.profile.height) {
@@ -127,32 +117,7 @@ export class ProfileComponent implements OnInit {
     }
     
     if (this.profile.weight) {
-      this.userInfoForm.controls.weight.setValue(this.profile.weight);
-    }
-  }
-
-  onMonthChanged() {
-    this._populateDays(this.userInfoForm.controls.birthYear.value, this.userInfoForm.controls.birthMonth.value - 1);
-  }
-
-  onYearChanged() {
-    this._populateDays(this.userInfoForm.controls.birthYear.value, this.userInfoForm.controls.birthMonth.value - 1);
-  }
-
-  private _populateDays(year:number, month:number) {
-    this.days = [];
-    var i = 1;
-    while (i <= this.months[month].days) {
-      if (month == 1) { // February
-        const isLeapYear = (new Date(year, 1, 29).getMonth() == 1);
-
-        if (!isLeapYear && (i > 28)) {
-          break;
-        } 
-      }
-
-      this.days.push({num: i, numStr: i.toString().padStart(2, '0')});
-      i++;
+      this.userInfoForm.controls.weight.setValue(this.profile.weight.toFixed(1));
     }
   }
 }

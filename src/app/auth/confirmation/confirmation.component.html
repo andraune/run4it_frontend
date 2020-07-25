@@ -1,13 +1,22 @@
 <form [formGroup]="confirmationForm" (ngSubmit)="submitForm()">
     <h1>Please enter confirmation code</h1>
     <app-notification></app-notification>
+
     <fieldset [disabled]="isSubmitting">
+
         <fieldset>
             <input formControlName="username" type="hidden">
-            <input formControlName="confirmationCode" placeholder="Confirmation code" type="text" style="font-size: small;">
+            <mat-form-field class="form-item-size">
+                <mat-label>Confirmation code</mat-label>
+                <input matInput formControlName="confirmationCode" type="text" style="font-size: small;">
+            </mat-form-field>
         </fieldset>
-        <button type="submit">
-            Confirm email
-        </button>
+
+        <fieldset>
+            <button mat-raised-button color="primary" class="form-item-size" type="submit">
+                Confirm email
+            </button>
+        </fieldset>
+
     </fieldset>
 </form>

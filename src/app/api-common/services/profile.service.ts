@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, distinctUntilChanged, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
-import { Profile } from '../models';
+import { Profile, ProfileWeight } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
@@ -34,8 +34,20 @@ export class ProfileService {
         );
     }
 
-    updateProfileUserInfo(username: string, birthDate:string, height:number, weight:number) {  
-        return this.apiService.put(`/profiles/${username}`, { birthDate: birthDate, height: height, weight: weight})
+    getProfileWeightHistory(username: string) {
+        return this.apiService.get(`/profiles/${username}/weight`)
+            .pipe(
+                map(
+                    (data : ProfileWeight[]) => {
+                        console.log("Profile weight information retrieved.");
+                        return data;
+                    }                    
+                )
+            );
+    }
+
+    updateProfileUserInfo(username: string, birthDate:string, height:number) {  
+        return this.apiService.put(`/profiles/${username}`, { birthDate: birthDate, height: height})
             .pipe(
                 map(
                     (data: Profile) => {

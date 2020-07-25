@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../models';
-import { AuthenticationService } from '../services';
+import { User } from '../../models';
+import { AuthenticationService } from '../../services';
 
 @Component({
   selector: 'app-header',
@@ -13,9 +13,9 @@ export class HeaderComponent implements OnInit {
   public authUser: User;
   public userMenuOpen = false;
   public menuItems = [
-    {route: "/dashboard", title: "Dashboard"},
-    {route: "/workouts", title: "Workouts"},
-    {route: "/goals", title: "Goals"}
+    {route: "/dashboard", title: "Dashboard", icon: "dashboard" },
+    {route: "/workouts", title: "Workouts", icon: "directions_run" },
+    {route: "/goals", title: "Goals", icon: "flag" }
   ];
 
   constructor(private authService: AuthenticationService) {

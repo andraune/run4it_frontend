@@ -7,6 +7,9 @@ import { LoginComponent }    from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ApiCommonModule } from '../api-common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -14,7 +17,10 @@ import { ApiCommonModule } from '../api-common';
     FormsModule,
     ReactiveFormsModule,
     AuthRoutingModule,
-    ApiCommonModule
+    ApiCommonModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule
   ],
   declarations: [
     AuthComponent,

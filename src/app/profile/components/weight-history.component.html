@@ -1,0 +1,64 @@
+<!-- Possibility to register new weight, and weight table -->
+<div class="sub-content-30">
+    <div class="form-container">
+        <!-- Weight form -->
+        <form [formGroup]="weightForm" (ngSubmit)="submitWeightForm()"> 
+            <fieldset [disabled]="isSubmitting">                           
+                <fieldset>
+                    <mat-form-field class="weight-input">
+                        <mat-label>Weight</mat-label>
+                        <input matInput formControlName="weight" type="text">
+                        <mat-hint>kg</mat-hint>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" class="weight-btn" type="submit">Add</button>
+                </fieldset>
+            </fieldset>
+        </form>
+        <button mat-button color="primary" class="show-hide-btn" *ngIf="!displayWeightTable" (click)="toggleWeightTableView()">Display weight data</button>
+        <button mat-button color="primary" class="show-hide-btn" *ngIf="displayWeightTable" (click)="toggleWeightTableView()">Hide weight data</button>
+    </div>
+
+    <!-- Weight table -->
+    <div class="table-container" *ngIf="displayWeightTable">
+
+        <table mat-table [dataSource]="weightList" *ngIf="weightList.length > 0">
+            <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef>Date</th>
+                <td mat-cell *matCellDef="let item"> {{item.createdAt | date}} </td>
+            </ng-container>
+            <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef>Weight</th>
+                <td mat-cell *matCellDef="let item"> {{item.weight | number:'1.1-1'}} kg</td>
+            </ng-container>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div class="table-no-data" *ngIf="weightList.length == 0">
+            <mat-spinner *ngIf="!isFetchingError && isFetchingWeight" [diameter]="20" aria-label="Fetching weight history"></mat-spinner>
+            <button *ngIf="isFetchingError && !isFetchingWeight" mat-button color="warn" class="btn-as-label">Failed to load data</button>
+            <button *ngIf="!isFetchingError && !isFetchingWeight" mat-button color="primary" class="btn-as-label">No data</button>        
+        </div>
+
+    </div>
+    
+</div>
+
+<!-- Weight history graph -->
+<div class="sub-content-70">
+    <div class="chart-container">
+        <div class="chart">
+            <ngx-charts-line-chart 
+                [scheme]="weigthChartColorScheme"
+                [results]="weightChartData"
+                [legend]="false"
+                [timeline]="false"
+                [showXAxisLabel]="false"
+                [showYAxisLabel]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [yScaleMax]="weightChartYMax"
+                [yScaleMin]="weightChartYMin">
+            </ngx-charts-line-chart>
+        </div>
+    </div>
+</div>

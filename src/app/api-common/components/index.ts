@@ -1,3 +1,3 @@
-export * from './footer.component';
-export * from './header.component';
-export * from './notification.component';
+export * from './footer';
+export * from './header';
+export * from './notification';
