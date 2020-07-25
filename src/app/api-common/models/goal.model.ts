@@ -9,3 +9,10 @@ export interface Goal {
     categoryName: string;
     categoryUnit: string;
 }
+
+export interface GoalCategory {
+    id: number;
+    name: string;
+    unit: string;
+    workoutCategoryName: string;
+}

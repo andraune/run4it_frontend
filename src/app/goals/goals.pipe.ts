@@ -25,14 +25,27 @@ export class TimeToStartPipe implements PipeTransform {
 
         var retStr = "";
 
-        if (daysToGo > 3) {
+        if (daysToGo > 50) {
             retStr = startDate.getFullYear() + "-" + (startDate.getMonth() + 1).toString().padStart(2, "0")
+            var options = { year: 'numeric', month: 'short', day: 'numeric'};
                         + "-" + startDate.getDate().toString().padStart(2, "0");
+            retStr = new Intl.DateTimeFormat("en-GB", options).format(startDate);
+        }
+        else if (daysToGo > 3) {
+            var options = { year: 'numeric', month: 'short', day: 'numeric'};
+            var formattedDateWithYear = new Intl.DateTimeFormat("en-GB", options).format(startDate);
+            if (formattedDateWithYear.length > 4) {
+                retStr = formattedDateWithYear.substr(0, formattedDateWithYear.length-5);
+            }
         }
         else if (secondsToGo > 0) {
-            retStr = startDate.getFullYear() + "-" + (startDate.getMonth() + 1).toString().padStart(2, "0")
-                        + "-" + startDate.getDate().toString().padStart(2, "0")
-                        + " " + startDate.getHours().toString().padStart(2, "0") + ":" + startDate.getMinutes().toString().padStart(2, "0");
+            var options = { year: 'numeric', month: 'short', day: 'numeric'};
+            var formattedDateWithYear = new Intl.DateTimeFormat("en-GB", options).format(startDate);
+
+            if (formattedDateWithYear.length > 4) {
+                retStr = formattedDateWithYear.substr(0, formattedDateWithYear.length-5);
+                retStr += " " + startDate.getHours().toString().padStart(2, "0") + ":" + startDate.getMinutes().toString().padStart(2, "0");
+            }
         }
         else {
             retStr = "Started";
@@ -85,6 +98,47 @@ export class TimeToEndPipe implements PipeTransform {
     }
 }
 
+@Pipe({ name: 'timeSinceExpiry'})
+export class TimeSinceExpiryPipe implements PipeTransform {
+    transform(goalEndAt: string, currentTime: Date):string { 
+
+        const endDate = new Date(goalEndAt);
+        var secondsSinceEnd = (currentTime.getTime() - endDate.getTime()) / 1000;
+
+        if (secondsSinceEnd < 0) {
+            secondsSinceEnd = 0;
+        }
+
+        const daysSinceEnd = Math.floor(secondsSinceEnd / 86400);
+
+        var retStr = "";
+
+        if (daysSinceEnd > 50) {
+            var options = { year: 'numeric', month: 'short', day: 'numeric'};
+            retStr = new Intl.DateTimeFormat("en-GB", options).format(daysSinceEnd);
+        }
+        else if (daysSinceEnd > 1) {
+            var options = { year: 'numeric', month: 'short', day: 'numeric'};
+            var formattedDateWithYear = new Intl.DateTimeFormat("en-GB", options).format(endDate);
+            if (formattedDateWithYear.length > 4) {
+                retStr = formattedDateWithYear.substr(0, formattedDateWithYear.length-5);
+            }    
+        }
+        else if (secondsSinceEnd > 3600) {
+            var hours = Math.round(secondsSinceEnd / 3600);
+            retStr = hours.toString() + " hours ago";
+        }
+        else if (secondsSinceEnd > 0) {
+            var minutes = Math.round(secondsSinceEnd / 60);
+            retStr = minutes.toString() + " minutes ago";
+        }
+        else {
+            retStr = "Active";
+        }
+
+        return retStr;
+    }
+}
 
 @Pipe({ name: 'formatLabel' })
 export class FormatLabelPipe implements PipeTransform {

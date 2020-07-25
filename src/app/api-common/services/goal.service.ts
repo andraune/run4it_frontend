@@ -3,16 +3,18 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
-import { Goal } from '../models';
+import { Goal, GoalCategory } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class GoalService {
     private activeGoalsSubject: BehaviorSubject<Goal[]>;
-    public activeGoals: Observable<Goal[]>; 
+    public activeGoals: Observable<Goal[]>;  
     private futureGoalsSubject: BehaviorSubject<Goal[]>;
     public futureGoals: Observable<Goal[]>;
     private expiredGoalsSubject: BehaviorSubject<Goal[]>;
     public expiredGoals: Observable<Goal[]>;
+    private goalCategoriesSubject: BehaviorSubject<GoalCategory[]>;
+    public goalCategories: Observable<GoalCategory[]>;
 
     constructor(private apiService: ApiService) {
         this.activeGoalsSubject = new BehaviorSubject<Goal[]>([] as Goal[]);
@@ -21,6 +23,8 @@ export class GoalService {
         this.futureGoals = this.futureGoalsSubject.asObservable();
         this.expiredGoalsSubject = new BehaviorSubject<Goal[]>([] as Goal[]);
         this.expiredGoals = this.expiredGoalsSubject.asObservable();
+        this.goalCategoriesSubject = new BehaviorSubject<GoalCategory[]>([] as GoalCategory[]);
+        this.goalCategories = this.goalCategoriesSubject.asObservable();
     }
 
     getActiveGoals(username: string): Observable<Goal[]> {
@@ -68,6 +72,23 @@ export class GoalService {
             catchError(
                 error => {
                     this.expiredGoalsSubject.next([] as Goal[]);
+                    return throwError(error);
+                }
+            )
+        );
+    }
+
+    getGoalCategories(): Observable<GoalCategory[]> {
+        return this.apiService.get('/goal_categories').pipe(
+            map(
+                data => {
+                    this.goalCategoriesSubject.next(data);
+                    return this.goalCategoriesSubject.value;
+                }
+            ),
+            catchError(
+                error => {
+                    this.goalCategoriesSubject.next([] as GoalCategory[]);
                     return throwError(error);
                 }
             )

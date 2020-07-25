@@ -1,20 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { GoalsComponent } from './goals.component';
+import { GoalViewComponent } from './view/goal-view.component';
+import { GoalCreateComponent } from './new/goal-create.component';
 
-import { ActiveGoalsResolver, FutureGoalsResolver, ExpiredGoalsResolver } from './goals-resolver.service';
+import { ActiveGoalsResolver, FutureGoalsResolver, ExpiredGoalsResolver, GoalCategoriesResolver } from './goals-resolver.service';
 import { AuthenticatedGuard } from '../api-common';
+import { GoalsComponent } from './goals.component';
 
 const goalRoutes: Routes = [
   {
     path: 'goals',
+    component: GoalsComponent,
     canActivate: [AuthenticatedGuard],
-    resolve: { active: ActiveGoalsResolver, future: FutureGoalsResolver, expired: ExpiredGoalsResolver },
+    resolve: { active: ActiveGoalsResolver, future: FutureGoalsResolver, expired: ExpiredGoalsResolver, categories: GoalCategoriesResolver },
     children: [
       {
         path: '',
-        component: GoalsComponent
+        redirectTo: 'view',
+        pathMatch: 'full'
+      },
+      {
+        path: 'view',
+        component: GoalViewComponent
+      },
+      {
+        path: 'new',
+        component: GoalCreateComponent
       }
     ]
   }  

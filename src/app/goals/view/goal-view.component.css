@@ -1,0 +1,113 @@
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+div.main-column-content {
+    margin: 2px auto 20px auto;
+    width: 100%;
+}
+
+div.add-goal-btn-content {
+    padding: 20px 0;
+    text-align: center;
+}
+
+div.side-column-content {
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 100%;
+    max-width: 340px;
+    background-color: rgb(242, 242, 242);
+    border: solid 1px lightgrey;
+    border-bottom: none;
+}
+
+div.side-column-content:last-child {   
+    border-bottom: solid 1px lightgrey;
+}
+
+div.side-column-content h3 {
+    text-align: center;
+}
+
+div.side-column-content ul {
+    list-style-type: none;
+    list-style-position: inside;
+    padding: 5px;
+}
+
+div.side-column-content ul li {
+    padding: 3px 0;
+}
+
+button.add-goal-btn {
+    display: block;
+    margin: 10px auto;
+    width: 75%;
+    max-width: 200px;
+}
+
+
+table {
+    border-collapse: collapse;
+}
+th {
+    background-color: rgb(8, 59, 102);
+    border-right: solid 1px rgb(248, 248, 248);
+    color: white;
+}
+
+th:last-child {
+    border-right: none;
+}
+
+td {
+    background-color: white;
+    color: rgb(8, 59, 102);
+}
+
+td, th {
+    border-bottom: solid 1px rgb(248, 248, 248);
+    font-weight: normal;
+    font-size: small;
+    padding: 5px;
+    margin: 0;
+    text-align: center;
+}
+
+span.meter-label-min, span.meter-label-max, span.meter-label {
+    color: rgb(8, 59, 102);
+    display: inline-block;
+    font-size: x-small;
+    min-width: 30px;
+    max-width: 40px;
+}
+
+span.meter-label {
+    font-weight: 600;
+}
+
+span.meter-label-min {
+    text-align: right;
+}
+
+span.meter-label-max {
+    text-align: left;
+}
+
+meter {
+    padding: 2px;
+    min-width: 90px;
+    width: 50%;
+    max-width: 160px;
+}
+
+td.meter {
+    min-width: 170px;
+}
+
+table.goal-list {
+    min-width: 350px;
+}

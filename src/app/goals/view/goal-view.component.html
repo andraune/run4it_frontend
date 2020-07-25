@@ -1,0 +1,82 @@
+<!-- TWO COLUMN LAYOUT, MAIN COLUMN -->
+<div class="sub-content-70">
+    <app-notification></app-notification>
+
+    <!-- GOAL VIEWER -->
+    <div class="main-column-content" *ngIf="activeGoals.length > 0">
+
+        <div>
+            Current goals info, alternatively 
+            view to create new goals
+        </div>
+
+    </div>
+
+    <!-- ADD GOAL BUTTON -->
+    <div class="main-column-content" *ngIf="activeGoals.length == 0">
+        <div class="add-goal-btn-content">
+            <em>Really, no goals? Come on and Run4IT!</em>
+            <br /><br />
+            <button class="add-goal-btn" [routerLink]="['/goals/new']">Add Goal</button>
+        </div>
+    </div>
+</div>
+
+<!-- TWO COLUMN LAYOUT, RIGHT-SIDE COLUMN -->
+<div class="sub-content-30">
+
+    <div class="side-column-content" *ngIf="activeGoals.length > 0">
+        <div class="add-goal-btn-content">
+            <button class="add-goal-btn" [routerLink]="['/goals/new']">Add Goal</button>
+        </div>
+    </div>
+
+    <!-- FUTURE GOALS -->
+    <div class="side-column-content">
+
+        <h3>Upcoming goals</h3>
+        <ul>
+            <li *ngFor="let goal of futureGoals">
+                <span>{{ goal.categoryName }} {{ goal.targetValue }}{{ goal.categoryUnit }}, </span>
+                <span>{{ currentTime | timeToStart:goal.startAt }}</span>
+            </li>
+            <li *ngIf="futureGoals.length == 0">
+                <em>None</em>
+            </li>
+        </ul>
+    </div>
+
+    <!-- EXPIRED GOALS -->
+    <div class="side-column-content">
+        <h3>Finished goals</h3>
+        <ul>
+            <li *ngFor="let goal of expiredGoals">
+                <span>{{ goal.categoryName }} {{ goal.targetValue }}{{ goal.categoryUnit }}, </span>
+                <span>{{ goal.endAt | timeSinceExpiry:currentTime }}</span>
+            </li>
+            <li *ngIf="expiredGoals.length == 0">
+                <em>None</em>
+            </li>
+        </ul>
+    </div>
+
+    <!-- GOALS STATS -->
+    <div class="side-column-content">
+        <h3>Goal stats</h3>
+        <ul>
+            <li>
+                Completed goals: {{ goalsCompleted }}
+            </li>
+            <li *ngIf="expiredGoals.length > 0">
+                Completed rate: {{ goalsSuccessRate }}%
+            </li>
+            <li>
+                Total finished goals: {{ expiredGoals.length }}
+            </li>
+            <li *ngIf="expiredGoals.length == 0">
+                <em>No goals completed</em>
+            </li>
+        </ul>
+    </div> 
+
+</div>
