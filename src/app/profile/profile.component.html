@@ -1,82 +1,111 @@
 <app-header></app-header>
-<div class="section main-container">
-    <app-notification></app-notification>
-    <div class="sub-content-100">
-      <h1>{{ profile.username | uppercase }}</h1>  
-    </div>
+<app-notification></app-notification>
 
-    <div class="sub-content-50">
-        <div class="card">
-            <h3 class="card-top">Account</h3> 
-            <fieldset [disabled]="isSubmitting">  
-                <table>
-                    <tr>
-                        <td>Username: </td>
-                        <td>{{ profile.username  }}</td>
-                    </tr>
-                    <tr>
-                        <td>Email: </td>
-                        <td>{{ currentUser.email  }}</td>
-                    </tr>
-                    <tr>
-                        <td>Password: </td>
-                        <td>
-                            <i style="font-size:smaller">TODO: Add support for reset</i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>
-                            <button (click)="logout()">Sign Out</button>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </div>
-    </div>
+<div class="layout-section main-container">
 
-    <div class="sub-content-50">
-        <div class="card">
-            <h3 class="card-top">User information</h3>
-            <form [formGroup]="userInfoForm" (ngSubmit)="submitUserInfoForm()"> 
-                <fieldset [disabled]="isSubmitting">  
-                    <table>
-                        <tr>
-                            <td>Member since: </td>
-                            <td>{{ profile.createdAt | date  }}</td>
-                        </tr>
-                        <tr>
-                            <td>Date of birth: </td>
-                            <td>
-                                <input formControlName="birthYear" (change)="onYearChanged()" class="small" placeholder="Year" type="text" maxlength="4"> - 
-                                <select formControlName="birthMonth" (change)="onMonthChanged()">
-                                    <option *ngFor="let month of months" [ngValue]="month.val">{{month.name}}</option>
-                                </select> -
-                                <select formControlName="birthDay">
-                                    <option *ngFor="let day of days" [ngValue]="day.num">{{day.numStr}}</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Height: </td>
-                            <td>
-                                <input formControlName="height" class="small" placeholder="Height" type="text"> cm
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Weight: </td>
-                            <td><input  formControlName="weight" class="small" placeholder="Weight" type="text"> kg</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>
-                                <button>Update</button>
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </form>
-        </div>
-    </div>
+    <mat-tab-group class="tab-group" animationDuration="500ms">
 
+        <!-- PROFILE INFO -->
+        <mat-tab label="Profile" class="tab-item">
+            <div class="tab-content">
+
+                <!-- CREDENTIALS -->
+                <div class="sub-content-50">
+                    <fieldset>
+                        <mat-form-field class="form-item-size">
+                            <mat-label>Profile name</mat-label>
+                            <input matInput type="text" value="{{ profile.username }}" readonly>
+                        </mat-form-field>
+                    </fieldset>
+                    <fieldset>
+                        <mat-form-field class="form-item-size">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" value="{{ currentUser.email }}" readonly>
+                        </mat-form-field>
+                    </fieldset>
+                    <fieldset>
+                        <mat-form-field class="form-item-size">
+                            <mat-label>Member since</mat-label>
+                            <input matInput type="text" value="{{ profile.createdAt | date  }}" readonly>
+                        </mat-form-field>
+                    </fieldset>
+                    <fieldset>
+                        <button mat-raised-button color="primary" disabled>Change password</button>
+                        <button mat-raised-button color="warn" (click)="logout()">Sign out</button>
+                    </fieldset>
+                </div>
+
+                <!-- PROFILE INFORMATION -->
+                <div class="sub-content-50">
+                    <form [formGroup]="userInfoForm" (ngSubmit)="submitUserInfoForm()"> 
+                        <fieldset [disabled]="isSubmitting">
+
+                            <fieldset [disabled]="!isEditEnabled">
+                                <mat-form-field class="form-item-size-small">
+                                <mat-label>Birth date (d/m/y)</mat-label>
+                                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="birthDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                            </fieldset>
+                              
+                            <fieldset [disabled]="!isEditEnabled">
+                                <mat-form-field class="form-item-size-small">
+                                    <mat-label>Height (cm)</mat-label>
+                                    <input matInput formControlName="height" type="number">
+                                </mat-form-field>
+                            </fieldset>                            
+
+                            <fieldset disabled="true">
+                                <mat-form-field class="form-item-size-small">
+                                    <mat-label>Weight (kg)</mat-label>
+                                    <input matInput formControlName="weight" type="text">
+                                    <mat-hint>Use "Weight" tab to edit</mat-hint>
+                                </mat-form-field>
+                            </fieldset>
+
+                            <fieldset>
+                                <button mat-raised-button type="button" (click)="toggleEditProfileView()" *ngIf="!isEditEnabled">Enable edit</button>
+                                <button mat-raised-button color="accent" type="button" (click)="toggleEditProfileView()" *ngIf="isEditEnabled">Cancel edit</button>
+                                <button mat-raised-button color="primary" type="submit">Update</button>
+                            </fieldset>
+
+                        </fieldset>
+                    </form>
+                </div>
+
+            </div>      
+        </mat-tab>
+
+
+
+
+        <!-- WEIGHT HISTORY -->
+        <mat-tab label="Weight" class="tab-item">
+            <div class="tab-content">
+                <app-profile-weight-history>Loading</app-profile-weight-history>
+            </div>
+        </mat-tab>
+
+        <!-- PREFERENCES -->
+        <mat-tab label="Preferences" class="tab-item">
+            <div class="tab-content">
+
+                <p>Not implemented yet. Should include selection of preferred units, notifications, cookies etc.</p>
+
+            </div>
+        </mat-tab>
+
+        <!-- POLAR -->
+        <mat-tab label="Polar" class="tab-item">
+            <div class="tab-content">
+                
+                <p>Not implemented yet. Should include Polar integration info.</p>
+            
+            </div>
+        </mat-tab>
+
+
+
+    </mat-tab-group>
 </div>

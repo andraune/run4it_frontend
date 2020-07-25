@@ -16,7 +16,6 @@ html, body {
 body { 
     background-color:#e1e7ed;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    min-width: 320px;
 }
 
 app-root {
@@ -24,15 +23,71 @@ app-root {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    min-width: 300px;
 }
 
-header, footer, .layout-section {
+@media only screen and (min-width: 1081px) {
+    app-root {
+        margin: auto;
+        width: 1080px;
+    }
+} 
+
+header, footer, div.layout-section {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
+
+/*
+    CONTENTS CONTAINERS
+*/
+
+/* Intended for simple pages without header, such as login, page not found etc. */
+div.simple-centered-content {
+    margin: 50px auto;
+}
+
+/* Main container for standard page, can be further divided by sub-content containers. Typically combined with layout-section class  */
+div.main-container {
+    width: 100%;
+    padding: 0 15px;
+    align-items: flex-start;
+    justify-content: left;
+}
+
+/* Sub-content, containers for dividing main content in sections. Auto-scale in case of smaller screens */
+div.sub-content-100 {
+    width: 100%;
+}
+div.sub-content-70 {
+    width: 70%;
+}
+div.sub-content-50 {
+    width: 50%;
+}
+div.sub-content-30 {
+    width: 30%;
+}
+
+@media only screen and (max-width: 400px) {
+
+    div.sub-content-70, div.sub-content-50, div.sub-content-30 {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 700px) {
+
+    div.sub-content-70, div.sub-content-50, div.sub-content-30 {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+}
+
 
 /*
     COMMON HEADERS 
@@ -69,65 +124,3 @@ fieldset {
     border: none;
     width: 100%;
 }
-
-
-/*
-    CONTENTS CONTAINERS
-*/
-.simple-centered-content {
-    margin: 50px auto;
-}
-
-
-/*
-
-.main-container {
-    width: 100%;
-    margin: 10px auto;
-    padding: 10px;
-    align-items: flex-start;
-    justify-content: left;
-}
-
-.sub-content-100, .sub-content-50 {
-    padding: 3px;
-}
-
-.sub-content-100 {
-    width: 100%;
-}
-
-.sub-content-50 {
-    width: 50%;
-}
-
-
-
-@media only screen and (max-width: 400px) {
-
-    .sub-content-50 {
-        width: 100%;
-    }
-}
-
-
-@media only screen and (min-width: 401px) and (max-width: 700px) {
-
-    .sub-content-50 {
-        width: 100%;
-    }
-}
-  
-
-@media only screen and (min-width: 701px) and (max-width: 1080px) {
- 
-}
-*/
-
-@media only screen and (min-width: 1081px) {
-    app-root {
-        margin: auto;
-        width: 1080px;
-    }
-} 
-

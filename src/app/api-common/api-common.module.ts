@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { FooterComponent, HeaderComponent, NotificationComponent } from './components';
 import { AuthenticatedGuard, NotAuthenticatedGuard} from './guards';
 import { ErrorInterceptor, JsonHeaderInterceptor, AuthInterceptor } from './interceptors';
@@ -27,10 +27,11 @@ import { ShowAuthenticatedDirective } from './show-authenticated.directive';
     imports: [
         CommonModule,
         RouterModule,
-        MatToolbarModule,
-        MatIconModule,
         MatButtonModule,
+        MatDividerModule,
+        MatIconModule,
         MatMenuModule,
+        MatToolbarModule,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
