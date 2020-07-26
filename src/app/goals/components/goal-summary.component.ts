@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-
-import { User, AuthenticationService, Goal, GoalCategory, GoalService, ApiService } from '../../api-common';
+import { Router, Event, NavigationEnd } from '@angular/router';
+import { Goal, GoalService } from '../../api-common';
 
 
 @Component({
-  selector: 'app-goal-view',
-  templateUrl: './goal-view.component.html',
-  styleUrls: ['./goal-view.component.css']
+  selector: 'app-goal-summary',
+  templateUrl: './goal-summary.component.html',
+  styleUrls: ['../goals.component.css']
 })
-export class GoalViewComponent implements OnInit {
-    private currentUser: User;
+export class GoalSummaryComponent implements OnInit {
+
+    public isCreateNewRoute: boolean = false;
+    
     public activeGoals: Goal[] = [];
     public futureGoals: Goal[] = [];
     public expiredGoals: Goal[] = [];
@@ -17,15 +19,20 @@ export class GoalViewComponent implements OnInit {
     public goalsSuccessRate: number = 0;
     public currentTime: Date = new Date();
 
-    constructor(private authService: AuthenticationService, private goalService: GoalService) {
+    constructor(private router: Router, private goalService: GoalService) {
         setInterval(() => { this.currentTime = new Date() }, 60000);
+
+        router.events.subscribe(
+            (event: Event) => {
+                if (event instanceof NavigationEnd) {
+                    this.isCreateNewRoute = (event.url == "/goals/new");
+                }
+            }
+        );
+
     }
 
     ngOnInit() {
-        this.authService.authenticatedUser$.subscribe(
-            (userData: User) => this.currentUser = userData
-        );
-
         this.goalService.activeGoals.subscribe(
             (goalData: Goal[]) => { this.activeGoals = goalData; }
         );

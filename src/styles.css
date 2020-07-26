@@ -62,6 +62,9 @@ div.main-container {
 div.sub-content-100 {
     width: 100%;
 }
+div.sub-content-75 {
+    width: 75%;
+}
 div.sub-content-70 {
     width: 70%;
 }
@@ -71,10 +74,13 @@ div.sub-content-50 {
 div.sub-content-30 {
     width: 30%;
 }
+div.sub-content-25 {
+    width: 25%;
+}
 
 @media only screen and (max-width: 400px) {
 
-    div.sub-content-70, div.sub-content-50, div.sub-content-30 {
+    div.sub-content-80, div.sub-content-70, div.sub-content-50, div.sub-content-30, div.sub-content-25 {
         width: 100%;
         margin-bottom: 30px;
     }
@@ -82,7 +88,7 @@ div.sub-content-30 {
 
 @media only screen and (min-width: 401px) and (max-width: 700px) {
 
-    div.sub-content-70, div.sub-content-50, div.sub-content-30 {
+    div.sub-content-80, div.sub-content-70, div.sub-content-50, div.sub-content-30, div.sub-content-25 {
         width: 100%;
         margin-bottom: 30px;
     }
@@ -123,4 +129,11 @@ a {
 fieldset {
     border: none;
     width: 100%;
+}
+
+.tab-group, .tab-item {
+    width: 100%;
+    min-height: 300px;
+    margin: 0;
+    padding: 0;
 }

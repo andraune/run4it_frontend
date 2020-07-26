@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { GoalViewComponent } from './view/goal-view.component';
+import { GoalOverviewComponent } from './overview/goal-overview.component';
 import { GoalCreateComponent } from './new/goal-create.component';
+import { GoalComponent } from './goal/goal.component';
 
 import { ActiveGoalsResolver, FutureGoalsResolver, ExpiredGoalsResolver, GoalCategoriesResolver } from './goals-resolver.service';
 import { AuthenticatedGuard } from '../api-common';
@@ -17,17 +18,21 @@ const goalRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'view',
+        redirectTo: 'overview',
         pathMatch: 'full'
       },
       {
-        path: 'view',
-        component: GoalViewComponent
+        path: 'overview',
+        component: GoalOverviewComponent
       },
       {
         path: 'new',
         component: GoalCreateComponent
-      }
+      },
+      {
+        path: ':id',
+        component: GoalComponent
+      },
     ]
   }  
 ];
@@ -41,5 +46,3 @@ const goalRoutes: Routes = [
   ]
 })
 export class GoalsRoutingModule {}
-
-

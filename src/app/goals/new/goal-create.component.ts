@@ -6,7 +6,7 @@ import { User, AuthenticationService, NotificationService, Goal, GoalCategory, G
 @Component({
   selector: 'app-goal-create',
   templateUrl: './goal-create.component.html',
-  styleUrls: ['./goal-create.component.css']
+  styleUrls: ['../goals.component.css']
 })
 export class GoalCreateComponent implements OnInit {
 

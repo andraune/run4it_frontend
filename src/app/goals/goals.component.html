@@ -1,4 +1,16 @@
 <app-header></app-header>
+<app-notification></app-notification>
+
 <div class="layout-section main-container">
-    <router-outlet></router-outlet>
+
+    <!-- MAIN VIEW -->
+    <div class="sub-content-75">
+        <router-outlet></router-outlet>
+    </div>
+
+    <!-- SIDE COLUMN -->
+    <div class="sub-content-25">
+        <app-goal-summary></app-goal-summary>
+    </div>
+
 </div>
