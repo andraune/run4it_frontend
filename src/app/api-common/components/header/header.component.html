@@ -22,7 +22,7 @@
 
         <!-- Horizontal menu items shown on wide screens -->
         <span class="menu-item-hor" *ngFor="let item of menuItems">
-            <a mat-button color="primary" [routerLink]="item.route">{{item.title}}</a>
+            <a mat-button color="primary" [routerLink]="item.route" [routerLinkActive]="['active-menu-item']">{{item.title | uppercase}}</a>
         </span>
 
         <!-- Spacer for right-align-->

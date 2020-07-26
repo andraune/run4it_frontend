@@ -25,8 +25,13 @@ a img {
 
 /* Horizontal menu items */
 span.menu-item-hor a {
-  font-size: 18px;  
+  font-size: 16px;  
 }
+
+span.menu-item-hor a.active-menu-item {
+    font-weight: 700;
+    color: rgb(203,107,14);
+  }
 
 /* Spacer for right-align of icons */
 span.right-align-spacer {
