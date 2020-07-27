@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { AuthenticationService, Goal, GoalService } from '../../api-common';
+import { Goal, GoalService } from '../../api-common';
 
 
 @Component({

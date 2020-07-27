@@ -110,10 +110,8 @@ export class WeightHistoryComponent implements OnInit {
         this.isFetchingWeight = false;
         this.isFetchingError = true;
       }
-    )
-  }
-
-  
+    );
+  }  
 
   private _updateWeightChartData()
   {

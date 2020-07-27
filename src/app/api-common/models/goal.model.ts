@@ -8,6 +8,7 @@ export interface Goal {
     currentValue: number;
     categoryName: string;
     categoryUnit: string;
+    workoutCategoryName: string;
 }
 
 export interface GoalCategory {

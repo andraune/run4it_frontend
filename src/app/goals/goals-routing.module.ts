@@ -5,7 +5,8 @@ import { GoalOverviewComponent } from './overview/goal-overview.component';
 import { GoalCreateComponent } from './new/goal-create.component';
 import { GoalComponent } from './goal/goal.component';
 
-import { ActiveGoalsResolver, FutureGoalsResolver, ExpiredGoalsResolver, GoalCategoriesResolver } from './goals-resolver.service';
+import { ActiveGoalsResolver, FutureGoalsResolver, ExpiredGoalsResolver } from './goals-resolver.service';
+import { ProfileResolver } from '../profile/profile-resolver.service';
 import { AuthenticatedGuard } from '../api-common';
 import { GoalsComponent } from './goals.component';
 
@@ -14,7 +15,7 @@ const goalRoutes: Routes = [
     path: 'goals',
     component: GoalsComponent,
     canActivate: [AuthenticatedGuard],
-    resolve: { active: ActiveGoalsResolver, future: FutureGoalsResolver, expired: ExpiredGoalsResolver, categories: GoalCategoriesResolver },
+    resolve: { active: ActiveGoalsResolver, future: FutureGoalsResolver, expired: ExpiredGoalsResolver, profile: ProfileResolver },
     children: [
       {
         path: '',

@@ -7,7 +7,7 @@ import { GoalComponent } from './goal/goal.component';
 import { GoalSummaryComponent, GoalDetailsComponent } from './components';
 import { GoalCreateComponent } from './new/goal-create.component';
 import { GoalsRoutingModule } from './goals-routing.module';
-import { ActiveGoalsResolver, FutureGoalsResolver, ExpiredGoalsResolver, GoalCategoriesResolver } from './goals-resolver.service';
+import { ActiveGoalsResolver, FutureGoalsResolver, ExpiredGoalsResolver } from './goals-resolver.service';
 import { FormatLabelPipe, ProgressValuePipe, TimeToStartPipe, TimeSinceExpiryPipe, TimeToEndPipe } from './goals.pipe';
 import { ApiCommonModule } from '../api-common';
 
@@ -56,8 +56,7 @@ import { NgxChartsModule }from '@swimlane/ngx-charts';
 	providers: [
 		ActiveGoalsResolver,
 		FutureGoalsResolver,
-		ExpiredGoalsResolver,
-		GoalCategoriesResolver
+		ExpiredGoalsResolver
 	]
 })
 export class GoalsModule {}

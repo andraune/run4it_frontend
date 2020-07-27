@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { Goal, GoalService } from '../../api-common';
 
@@ -8,10 +9,11 @@ import { Goal, GoalService } from '../../api-common';
   templateUrl: './goal-summary.component.html',
   styleUrls: ['../goals.component.css']
 })
-export class GoalSummaryComponent implements OnInit {
+export class GoalSummaryComponent implements OnInit, OnDestroy {
 
     public isCreateNewRoute: boolean = false;
-    
+     
+    private subscriptions: Subscription[] = []
     public activeGoals: Goal[] = [];
     public futureGoals: Goal[] = [];
     public expiredGoals: Goal[] = [];
@@ -21,32 +23,39 @@ export class GoalSummaryComponent implements OnInit {
 
     constructor(private router: Router, private goalService: GoalService) {
         setInterval(() => { this.currentTime = new Date() }, 60000);
-
-        router.events.subscribe(
-            (event: Event) => {
-                if (event instanceof NavigationEnd) {
-                    this.isCreateNewRoute = (event.url == "/goals/new");
-                }
-            }
-        );
-
     }
 
     ngOnInit() {
-        this.goalService.activeGoals.subscribe(
-            (goalData: Goal[]) => { this.activeGoals = goalData; }
+        this.subscriptions.push(this.router.events.subscribe(
+                (event: Event) => {
+                    if (event instanceof NavigationEnd) {
+                        this.isCreateNewRoute = (event.url == "/goals/new");
+                    }
+                }
+            )
         );
 
-        this.goalService.futureGoals.subscribe(
-            (goalData: Goal[]) => { this.futureGoals = goalData; }
+        this.subscriptions.push(this.goalService.activeGoals.subscribe(
+                (goalData: Goal[]) => { this.activeGoals = goalData; }
+            )
         );
 
-        this.goalService.expiredGoals.subscribe(
-            (goalData: Goal[]) => {
-                this.expiredGoals = goalData;
-                this.updateGoalStats();
-            }
+        this.subscriptions.push(this.goalService.futureGoals.subscribe(
+                (goalData: Goal[]) => { this.futureGoals = goalData; }
+            )
         );
+
+        this.subscriptions.push(this.goalService.expiredGoals.subscribe(
+                (goalData: Goal[]) => {
+                    this.expiredGoals = goalData;
+                    this.updateGoalStats();
+                }
+            )
+        );
+    }
+
+    ngOnDestroy() {
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 
     private updateGoalStats() {

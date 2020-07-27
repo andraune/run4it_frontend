@@ -4,6 +4,7 @@ import { map, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
 import { Goal, GoalCategory } from '../models';
+import { GoalsComponent } from 'src/app/goals/goals.component';
 
 @Injectable({ providedIn: 'root' })
 export class GoalService {
@@ -13,8 +14,6 @@ export class GoalService {
     public futureGoals: Observable<Goal[]>;
     private expiredGoalsSubject: BehaviorSubject<Goal[]>;
     public expiredGoals: Observable<Goal[]>;
-    private goalCategoriesSubject: BehaviorSubject<GoalCategory[]>;
-    public goalCategories: Observable<GoalCategory[]>;
 
     constructor(private apiService: ApiService) {
         this.activeGoalsSubject = new BehaviorSubject<Goal[]>([] as Goal[]);
@@ -23,8 +22,6 @@ export class GoalService {
         this.futureGoals = this.futureGoalsSubject.asObservable();
         this.expiredGoalsSubject = new BehaviorSubject<Goal[]>([] as Goal[]);
         this.expiredGoals = this.expiredGoalsSubject.asObservable();
-        this.goalCategoriesSubject = new BehaviorSubject<GoalCategory[]>([] as GoalCategory[]);
-        this.goalCategories = this.goalCategoriesSubject.asObservable();
     }
 
     getActiveGoals(username: string): Observable<Goal[]> {
@@ -78,20 +75,25 @@ export class GoalService {
         );
     }
 
-    getGoalCategories(): Observable<GoalCategory[]> {
+    getGoalCategories() {
         return this.apiService.get('/goal_categories').pipe(
             map(
-                data => {
-                    this.goalCategoriesSubject.next(data);
-                    return this.goalCategoriesSubject.value;
-                }
-            ),
-            catchError(
-                error => {
-                    this.goalCategoriesSubject.next([] as GoalCategory[]);
-                    return throwError(error);
+               (data : GoalCategory[]) => {
+                console.log("Goal category information retrieved.");
+                    return data;
                 }
             )
         );
+    }
+
+    getGoalByID(username: string, id: number) {
+        return this.apiService.get(`/profiles/${username}/goals/${id}`).pipe(
+            map(
+               (data : Goal) => {
+                console.log("Goal retrieved in service ID " + data.id);
+                    return data;
+                }
+            )
+        );        
     }
 }

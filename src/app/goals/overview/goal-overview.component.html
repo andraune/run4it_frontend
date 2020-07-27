@@ -4,7 +4,7 @@
 
     <mat-tab class="tab-item" *ngFor="let goal of activeGoals" label="{{ goal.categoryName }} goal: {{ goal.targetValue }}{{ goal.categoryUnit }}">
         <div class="tab-content">
-            <app-goal-details [id]="goal.id"></app-goal-details>
+            <app-goal-details [id]="goal.id" [showHeading]="false"></app-goal-details>
         </div>    
     </mat-tab>
 

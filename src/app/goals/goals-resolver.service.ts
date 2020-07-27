@@ -3,7 +3,7 @@ import { Resolve } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { NotificationService, AuthenticationService, Goal, GoalCategory, GoalService } from '../api-common';
+import { NotificationService, AuthenticationService, Goal, GoalService } from '../api-common';
 
 @Injectable({ providedIn: 'root' })
 export class ActiveGoalsResolver implements Resolve<Goal[]> {
@@ -65,22 +65,5 @@ export class ExpiredGoalsResolver implements Resolve<Goal[]> {
           return throwError(err);
         }));
     }
-  }
-}
-
-@Injectable({ providedIn: 'root' })
-export class GoalCategoriesResolver implements Resolve<GoalCategory[]> {
-  constructor(
-    private notificationService: NotificationService,
-    private goalService: GoalService,
-  ) {}
-
-  resolve(): Observable<any> {
-
-      return this.goalService.getGoalCategories().pipe(
-        catchError((err) => {
-          this.notificationService.addError(0, 'resolve', 'Failed to preload goal categories.', false);
-          return throwError(err);
-        }));
   }
 }

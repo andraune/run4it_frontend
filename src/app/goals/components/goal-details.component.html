@@ -1,1 +1,9 @@
-Goal details, ID = {{ id }}
+<mat-spinner *ngIf="isLoading" [diameter]="20" aria-label="Retrieving goal information"></mat-spinner>
+
+
+<div *ngIf="!isLoading && goal != null" style="width:100%;">
+
+    <h1 *ngIf="showHeading">Goal Information</h1>
+    Goal details, ID = {{ goal.workoutCategoryName }}
+</div>
+
