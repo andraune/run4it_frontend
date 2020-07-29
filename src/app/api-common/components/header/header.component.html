@@ -1,5 +1,5 @@
  <!-- For unauthenticated users -->
-<header *appShowAuthenticated="false">
+<header class="white-bg-color" *appShowAuthenticated="false">
     <mat-toolbar>
         <span class="right-align-spacer"></span>
         <span class="centered-logo">
@@ -12,7 +12,7 @@
 </header>
 
 <!-- For authenticated users -->
-<header *appShowAuthenticated="true">
+<header class="white-bg-color" *appShowAuthenticated="true">
     <mat-toolbar>
         <span>
             <a [routerLink]="['/dashboard']" title="Home">
@@ -44,15 +44,15 @@
             <mat-menu #menu="matMenu">
                 <a mat-menu-item *ngFor="let item of menuItems" [routerLink]="item.route">
                     <mat-icon color="primary">{{ item.icon }}</mat-icon>
-                    <span class="menu-item-vert">{{item.title}}</span>
+                    <span class="menu-item-vert primary-color">{{item.title}}</span>
                 </a>
                 <a mat-menu-item [routerLink]="['/profile']">
                     <mat-icon color="primary">person</mat-icon>
-                    <span class="menu-item-vert">Profile</span>
+                    <span class="menu-item-vert primary-color">Profile</span>
                 </a>
             </mat-menu>
         </span>
-
     </mat-toolbar>
 </header>
-<div class="vertical-spacer" *appShowAuthenticated="true"></div>
+
+<div class="column-flex-container-nowrap vertical-padding white-bg-color" *appShowAuthenticated="true">&nbsp;</div>

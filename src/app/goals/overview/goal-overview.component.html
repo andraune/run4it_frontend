@@ -2,7 +2,7 @@
 <!-- GOAL VIEW -->
 <mat-tab-group class="tab-group" color="accent" *ngIf="activeGoals.length > 0">
 
-    <mat-tab class="tab-item" *ngFor="let goal of activeGoals" label="{{ goal.categoryName }} goal: {{ goal.targetValue }}{{ goal.categoryUnit }}">
+    <mat-tab class="tab-item" *ngFor="let goal of activeGoals" label="{{ goal | goalHeading }}">
         <div class="tab-content">
             <app-goal-details [id]="goal.id" [showHeading]="false"></app-goal-details>
         </div>    

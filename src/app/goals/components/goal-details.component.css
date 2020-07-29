@@ -1,0 +1,105 @@
+div.goal-heading-content {
+    width: 100%;
+    padding-bottom: 20px;
+    padding-right: 10px;
+}
+
+div.goal-heading-content h1 {
+    font-size: larger;
+    padding: 15px 0 10px 5px;
+}
+
+div.goal-statement-content {
+    width: 100%;
+    padding: 10px 0 30px 30px;
+}
+
+div.goal-statement-content em {
+    color: #707070;
+    font-weight: 500;
+    padding: 10px 0 20px 0;
+}
+
+div.goal-info-content {
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+/* Details with cards */
+div.goal-info-sub-content {
+    width: 50%;
+    min-width: 200px;
+    margin: 0 auto;
+    padding: 10px 5px 10px 5px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.goal-card {
+    margin: 0;
+    padding: 5px;
+}
+
+.card-heading {
+    text-align: center;
+}
+
+.card-content {
+    text-align: center;
+    padding-left: 15px;
+    font-size: medium;
+    font-weight: 500;
+}
+
+
+/* Hacky progress-bar */
+
+table.progress-bar {
+    border-collapse: collapse;
+    width: 100%;
+    height: 32px;
+}
+
+table.progress-bar td {
+    height: 100%;
+}
+
+td.progress-bar-start {
+    width: 50px;
+    text-align: right;
+}
+
+td.progress-bar-flag {
+    width: 30px;
+    text-align: left;
+}
+
+td.progress-bar {
+    border: solid 1px rgb(8, 59, 102);
+}
+
+td.progress-bar-end  {
+    border: solid 1px rgb(8, 59, 102);
+    width: 12px;
+}
+
+td.progress-bar-end img {
+    display: block;
+    width: 12px;
+    height: 32px;
+}
+
+div.progress {
+    height: 100%;
+    display: block;
+    float: left;
+    margin: 0;
+    padding-top: 4px;
+    text-align: right;
+}
+
+div.progress span {
+    display: block;
+    padding: 4px 5px 0 5px;
+}

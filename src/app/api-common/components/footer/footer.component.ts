@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, Event, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ApiService } from "../../services";
 
 @Component({
@@ -6,16 +8,37 @@ import { ApiService } from "../../services";
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, OnDestroy {
 
-  apiVersion: number;
+  public apiVersion: number;
+  public isWelcomePage: boolean = false;
 
-  constructor(private apiService: ApiService) {
+  private subscriptions: Subscription[] = [];
+  private welcomeUrl = "/";
+
+  constructor(private router: Router, private apiService: ApiService) {
   }
 
   ngOnInit() {
-    this.apiService.get("/").subscribe(
-      apiData => this.apiVersion = apiData.version,
-      error => this.apiVersion = 0);
+    this.subscriptions.push(
+      this.router.events.subscribe(
+        (event: Event) => {
+            if (event instanceof NavigationEnd) {
+                this.isWelcomePage = (event.url == this.welcomeUrl);
+            }
+        }
+      )
+    );
+
+    this.subscriptions.push(
+      this.apiService.get("/").subscribe(
+        apiData => this.apiVersion = apiData.version,
+        error => this.apiVersion = 0
+      )
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

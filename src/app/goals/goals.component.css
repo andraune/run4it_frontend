@@ -1,41 +1,19 @@
 :host {
-    display: flex;
-    flex-wrap: wrap;
     width: 100%;
+    display: flex;
+    flex-flow: column nowrap; 
+    justify-content: flex-start;
 }
 
-:host {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-}
 
-.tab-group {
-    padding-right: 15px !important; /* overloads style.css */
-}
 
 div.tab-content {
     width: 100%;
-    margin: 20px 0;
+    padding: 20px 0;
     display: flex;
     flex-wrap: wrap;
 }
 
 div.add-goal-btn-content {
     text-align: center;
-}
-
-div.side-column-content {
-    margin: 0 auto;
-    padding: 10px 0 10px 20px;
-    width: 100%;
-    max-width: 340px;
-}
-
-div.side-column-content h3 {
-    font-size: 14px;
-}
-
-.list-item-small {
-    font-size: small;
 }

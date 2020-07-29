@@ -1,15 +1,22 @@
 :host {
-    display: flex;
     width: 100%;
+    display: flex;
+    flex-flow: column nowrap; 
+    justify-content: flex-start; 
 }
 
-div.auth-sub-content {
-    width: 100%;
+div.centered-content-container { 
+    padding: 20px 0;
+    justify-content: center;
     text-align: center;
 }
 
-div.auth-sub-content div {
-    padding-top: 20px;
+.logo-img {
+    height: 50px;
+}
+
+h1 {
+    padding-bottom: 20px;
 }
 
 form {
@@ -21,10 +28,6 @@ form {
 .form-item-size {
     width: 100%;
     max-width: 350px;
-}
-
-.auth-content a img {
-    height: 50px;
 }
 
 button {

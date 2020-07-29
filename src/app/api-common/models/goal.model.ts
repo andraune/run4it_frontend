@@ -1,4 +1,4 @@
-export interface Goal {
+export class Goal {
     id: number;
     startAt: string;
     endAt: string;

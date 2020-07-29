@@ -128,11 +128,11 @@ export class WeightHistoryComponent implements OnInit {
       });
 
       if (weightData.weight < minWeight) {
-        minWeight = Math.round(weightData.weight / 10) * 10;
+        minWeight = Math.floor(weightData.weight / 10) * 10;
       }
 
       if (weightData.weight > maxWeight) {
-        maxWeight = 10 + (Math.round(weightData.weight / 10) * 10);
+        maxWeight = 10 + (Math.floor(weightData.weight / 10) * 10);
       }
     });
 

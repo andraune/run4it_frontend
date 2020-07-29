@@ -7,7 +7,7 @@ import { Goal, GoalService } from '../../api-common';
 @Component({
   selector: 'app-goal-summary',
   templateUrl: './goal-summary.component.html',
-  styleUrls: ['../goals.component.css']
+  styleUrls: ['../goals.component.css', './goal-summary.component.css']
 })
 export class GoalSummaryComponent implements OnInit, OnDestroy {
 

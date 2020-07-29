@@ -1,0 +1,21 @@
+<div class="chart-container" *ngIf="chartType != ''">
+    <div class="chart">
+        <ngx-charts-line-chart 
+            [scheme]="chartColorScheme"
+            [results]="chartData"
+            [legend]="false"
+            [timeline]="false"
+            [showXAxisLabel]="false"
+            [showYAxisLabel]="true"
+            [yAxisLabel]="chartLabelY"
+            [xAxis]="true"
+            [yAxis]="true"
+            [yScaleMax]="chartYMax"
+            [yScaleMin]="chartYMin">
+        </ngx-charts-line-chart>
+    </div>
+</div>
+
+<div class="no-chart" *ngIf="chartType == ''">
+    <span class="warn-color">Cannot show chart</span>
+</div>

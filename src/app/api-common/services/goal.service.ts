@@ -90,7 +90,6 @@ export class GoalService {
         return this.apiService.get(`/profiles/${username}/goals/${id}`).pipe(
             map(
                (data : Goal) => {
-                console.log("Goal retrieved in service ID " + data.id);
                     return data;
                 }
             )
