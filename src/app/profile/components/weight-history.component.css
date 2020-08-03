@@ -1,3 +1,10 @@
+:host {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap; 
+    justify-content: flex-start;
+}
+
 div.chart-container {
     width: 100%;
     max-width: 600px;
@@ -14,7 +21,7 @@ div.chart {
 }
 
 div.table-container {
-    margin: 20px auto;
+    padding: 20px auto;
     width: 90%;
     max-width: 300px;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
@@ -29,7 +36,7 @@ div.form-container {
 form {
     width: 90%;
     max-width: 300px;
-    margin-bottom: 10px;
+    padding-bottom: 10px;
 }
 
 div.table-header {

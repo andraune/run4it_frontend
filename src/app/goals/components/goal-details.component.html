@@ -1,0 +1,92 @@
+<mat-spinner *ngIf="isLoading" [diameter]="20" aria-label="Retrieving goal information"></mat-spinner>
+
+
+<div class="goal-info-content" *ngIf="!isLoading && goal == null">
+    <span class="warn-color">Failed to get goal information.</span>
+</div>
+
+
+<div *ngIf="!isLoading && goal != null" style="width:100%;">
+
+    <!-- HEADING (not shown in tab view)-->
+    <div class="goal-heading-content" *ngIf="showHeading">
+        <h1>
+            My {{ goal | goalHeading | lowercase }}
+        </h1>
+        <mat-divider></mat-divider>
+    </div>
+
+    <!-- GOAL STATEMENT -->
+    <div class="goal-statement-content">
+        <em>&#8220;{{ goal | goalStatement: currentTime }}&#8221;</em>
+    </div>
+
+    <!-- GOAL CHART -->
+    <div class="goal-info-content">
+        <app-goal-chart [goal]="goal"></app-goal-chart>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="goal-info-content">
+        <table class="progress-bar">
+            <tr>
+                <td class="progress-bar-start">
+                    <mat-icon color="primary" *ngIf="!isGoalStarted()">hourglass_top</mat-icon>
+                    <mat-icon color="primary" *ngIf="isGoalActive()">directions_run</mat-icon>
+                    <mat-icon color="primary" *ngIf="isGoalExpired()">hourglass_bottom</mat-icon>
+                </td>
+
+                <td class="progress-bar out-of-bounds-bg-color">
+                    <div class="progress primary-bg-color" style="width: {{ goal | goalProgressPercentage : false | number:'1.0-0' }}%;">
+                        <span class="white-color"  *ngIf="(goal | goalProgressPercentage : false)  >= 50">
+                            {{ goal | goalProgressPercentage : false | number:'1.1-1' }} %
+                        </span>
+                    </div>
+                    <div class="progress" *ngIf="(goal | goalProgressPercentage : false)  < 50">
+                        <span class="primary-color">{{ goal | goalProgressPercentage : false | number:'1.1-1' }} %</span>
+                    </div>
+                </td>
+
+                <td class="progress-bar-end"><img src="/assets/checked-icon.png" /></td>
+                <td class="progress-bar-flag">
+                    <mat-icon color="primary" *ngIf="!isGoalExpired()">flag</mat-icon>
+                    <mat-icon color="warn" *ngIf="isGoalExpired() && !isGoalCompleted()">close</mat-icon>
+                    <mat-icon color="primary" *ngIf="isGoalExpired() && isGoalCompleted()">emoji_events</mat-icon>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- GOAL SUMMARY -->
+    <div class="goal-info-content row-flex-container-wrap">
+
+        <div class="goal-info-sub-content">
+            <mat-card class="goal-card">
+                <mat-card-header>
+                  <div mat-card-avatar *ngIf="isGoalExpired() && isGoalCompleted()"><mat-icon color="accent">emoji_events</mat-icon></div>
+                  <div mat-card-avatar *ngIf="!isGoalExpired() || !isGoalCompleted()"><mat-icon color="primary">timeline</mat-icon></div>
+                  <mat-card-title class="primary-color card-heading">{{ goal.categoryName }}</mat-card-title>
+                  <mat-card-subtitle class="card-heading">{{ goal.workoutCategoryName }}&nbsp;</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="card-content">
+                  <p>{{ goal | goalTargetFormatted }}</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="goal-info-sub-content">
+            <mat-card class="goal-card">
+                <mat-card-header>
+                  <div mat-card-avatar><mat-icon class="card-avatar" color="primary">schedule</mat-icon></div>
+                  <mat-card-title class="primary-color card-heading">Period</mat-card-title>
+                  <mat-card-subtitle class="card-heading">{{ goal.startAt | date }} - {{ goal.endAt | date }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="card-content">
+                  <p>{{ goal | goalDaysLeft : currentTime }}</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </div>
+
+</div>

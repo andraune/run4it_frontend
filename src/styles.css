@@ -7,120 +7,118 @@
     box-sizing: border-box;
 }
 
+.primary-color {
+    color: rgb(8, 59, 102);
+}
+
+.accent-color {
+    color: rgb(203, 107, 14);
+}
+
+.warn-color {
+    color: rgb(244, 67, 54);
+}
+
+.white-color {
+    color: rgb(245, 245, 245);
+}
+
+.out-of-bounds-bg-color {
+    background-color: #e1e7ed;
+}
+
+.white-bg-color {
+    background-color: rgb(245, 245, 245);
+}
+
+.primary-bg-color {
+    background-color: rgb(8, 59, 102);;
+}
+
 /*
     PAGE MAIN LAYOUT
 */
 html, body {
     height: 100%;
 }
-body { 
-    background-color:#e1e7ed;
+body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-app-root {
-    background-color:rgb(245, 245, 245);
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    min-width: 300px;
-}
-
-@media only screen and (min-width: 1081px) {
-    app-root {
-        margin: auto;
-        width: 1080px;
-    }
-} 
-
-header, footer, div.layout-section {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
 
 /*
     CONTENTS CONTAINERS
 */
-
-/* Intended for simple pages without header, such as login, page not found etc. */
-div.simple-centered-content {
-    margin: 50px auto;
-}
-
-/* Main container for standard page, can be further divided by sub-content containers. Typically combined with layout-section class  */
-div.main-container {
+div.column-flex-container-nowrap {
     width: 100%;
-    padding: 0 15px;
-    align-items: flex-start;
-    justify-content: left;
+    display: flex;
+    flex-flow: column nowrap; 
 }
 
-/* Sub-content, containers for dividing main content in sections. Auto-scale in case of smaller screens */
-div.sub-content-100 {
+div.row-flex-container-wrap {
     width: 100%;
-}
-div.sub-content-70 {
-    width: 70%;
-}
-div.sub-content-50 {
-    width: 50%;
-}
-div.sub-content-30 {
-    width: 30%;
+    display: flex;
+    flex-flow: row wrap;    
 }
 
-@media only screen and (max-width: 400px) {
+div.main-content-padding {
+    padding: 0 15px 15px 15px;
+}
 
-    div.sub-content-70, div.sub-content-50, div.sub-content-30 {
-        width: 100%;
-        margin-bottom: 30px;
+/* Containers with width dep. on screen */
+div.media-aware-content-70 {
+    width: 70% !important;
+}
+
+div.media-aware-content-50 {
+    width: 50% !important;
+}
+
+div.media-aware-content-30 {
+    width: 30% !important;
+}
+
+@media only screen and (max-width: 700px) {
+    div.media-aware-content-50 {
+        width: 100% !important;
+        padding-bottom: 50px;
     }
 }
 
-@media only screen and (min-width: 401px) and (max-width: 700px) {
-
-    div.sub-content-70, div.sub-content-50, div.sub-content-30 {
-        width: 100%;
-        margin-bottom: 30px;
+@media only screen and (max-width: 640px) {
+    div.media-aware-content-70, div.media-aware-content-30 {
+        width: 100% !important;
+        padding-bottom: 50px;
     }
 }
 
 
 /*
-    COMMON HEADERS 
+    COMMON HEADERS
 */
 h1, h2, h3 {
     color: rgb(8, 59, 102);
 }
 
-h1 {
-    padding: 10px 0 20px 0;
-    font-size: 24px;
-}
-
-h2 {
-    font-size: 22px;
-    font-style: italic;
-    padding: 10px 0 10px 0;
-}
-
-h3 {
-    font-size: 20px;
-    padding: 5px 0 5px 0;
-}
-
 /*
-    MISC STANDARD FORMATTING (look 'n' feel)
+    COMMON FORMATTING
 */
-a {
-    text-decoration: none;
-    color: rgb(8, 59, 102);
+table {
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+}
+
+form {
+    width: 100%;
 }
 
 fieldset {
     border: none;
     width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(8, 59, 102);
 }

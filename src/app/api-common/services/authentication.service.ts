@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, filter, first, distinctUntilChanged, catchError, finalize } from 'rxjs/operators';
 
 import { ApiService } from './api.service';

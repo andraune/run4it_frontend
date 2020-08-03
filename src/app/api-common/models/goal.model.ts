@@ -1,4 +1,4 @@
-export interface Goal {
+export class Goal {
     id: number;
     startAt: string;
     endAt: string;
@@ -8,4 +8,12 @@ export interface Goal {
     currentValue: number;
     categoryName: string;
     categoryUnit: string;
+    workoutCategoryName: string;
+}
+
+export interface GoalCategory {
+    id: number;
+    name: string;
+    unit: string;
+    workoutCategoryName: string;
 }

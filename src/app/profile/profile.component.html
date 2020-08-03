@@ -1,16 +1,16 @@
 <app-header></app-header>
 <app-notification></app-notification>
 
-<div class="layout-section main-container">
+<div class="column-flex-container-nowrap main-content-padding white-bg-color">
 
-    <mat-tab-group class="tab-group" animationDuration="500ms">
+    <mat-tab-group color="accent" animationDuration="500ms">
 
         <!-- PROFILE INFO -->
-        <mat-tab label="Profile" class="tab-item">
+        <mat-tab label="Profile">
             <div class="tab-content">
 
                 <!-- CREDENTIALS -->
-                <div class="sub-content-50">
+                <div class="column-flex-container-nowrap media-aware-content-50">
                     <fieldset>
                         <mat-form-field class="form-item-size">
                             <mat-label>Profile name</mat-label>
@@ -30,13 +30,13 @@
                         </mat-form-field>
                     </fieldset>
                     <fieldset>
-                        <button mat-raised-button color="primary" disabled>Change password</button>
-                        <button mat-raised-button color="warn" (click)="logout()">Sign out</button>
+                        <button mat-raised-button class="wide" color="primary" disabled>Change password</button>
+                        <button mat-raised-button class="wide" (click)="logout()">Sign out</button>
                     </fieldset>
                 </div>
 
                 <!-- PROFILE INFORMATION -->
-                <div class="sub-content-50">
+                <div class="column-flex-container-nowrap media-aware-content-50">
                     <form [formGroup]="userInfoForm" (ngSubmit)="submitUserInfoForm()"> 
                         <fieldset [disabled]="isSubmitting">
 
@@ -65,9 +65,9 @@
                             </fieldset>
 
                             <fieldset>
-                                <button mat-raised-button type="button" (click)="toggleEditProfileView()" *ngIf="!isEditEnabled">Enable edit</button>
-                                <button mat-raised-button color="accent" type="button" (click)="toggleEditProfileView()" *ngIf="isEditEnabled">Cancel edit</button>
-                                <button mat-raised-button color="primary" type="submit">Update</button>
+                                <button mat-raised-button class="narrow" type="button" (click)="toggleEditProfileView()" *ngIf="!isEditEnabled">Enable edit</button>
+                                <button mat-raised-button class="narrow" color="accent" type="button" (click)="toggleEditProfileView()" *ngIf="isEditEnabled">Cancel edit</button>
+                                <button mat-raised-button class="narrow" color="primary" type="submit">Update</button>
                             </fieldset>
 
                         </fieldset>
@@ -78,17 +78,26 @@
         </mat-tab>
 
         <!-- WEIGHT HISTORY -->
-        <mat-tab label="Weight" class="tab-item">
+        <mat-tab label="Weight">
             <div class="tab-content">
                 <app-profile-weight-history>Loading ...</app-profile-weight-history>
             </div>
         </mat-tab>
 
         <!-- PREFERENCES -->
-        <mat-tab label="Preferences" class="tab-item">
+        <mat-tab label="Preferences">
             <div class="tab-content">
                 
                 <p>Not implemented yet. Should include prefs, Polar integration info, etc.</p>
+            
+            </div>
+        </mat-tab>
+
+        <!-- PREFERENCES -->
+        <mat-tab label="Stats">
+            <div class="tab-content">
+                
+                <p>Not implemented yet. Total workouts, run distance, climb. Best week, longest distance etc.</p>
             
             </div>
         </mat-tab>

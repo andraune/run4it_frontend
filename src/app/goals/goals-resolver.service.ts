@@ -5,7 +5,6 @@ import { catchError } from 'rxjs/operators';
 
 import { NotificationService, AuthenticationService, Goal, GoalService } from '../api-common';
 
-
 @Injectable({ providedIn: 'root' })
 export class ActiveGoalsResolver implements Resolve<Goal[]> {
   constructor(

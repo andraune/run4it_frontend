@@ -1,0 +1,18 @@
+div.side-column-content {
+    margin: 0 auto;
+    padding: 10px 0 10px 20px;
+    width: 100%;
+    max-width: 340px;
+}
+
+div.side-column-content h3 {
+    font-size: 14px;
+}
+
+.list-item-small {
+    font-size: small;
+}
+
+.centered-content {
+    text-align: center;
+}

@@ -1,20 +1,15 @@
 :host { 
-    display: flex;
-    flex-wrap: wrap;
     width: 100%;
-}
-
-header, mat-toolbar {
-    height: 50px;
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 header {
-    padding-top: 4px;
-}
-
-div.vertical-spacer {
+    height: 50px;
     width: 100%;
-    height: 40px;
+    display: flex;
+    flex-flow: row nowrap;
+    padding-top: 4px;
 }
 
 /* Logo icon */
@@ -25,8 +20,13 @@ a img {
 
 /* Horizontal menu items */
 span.menu-item-hor a {
-  font-size: 18px;  
+  font-size: 16px;  
 }
+
+span.menu-item-hor a.active-menu-item {
+    font-weight: 700;
+    color: rgb(203,107,14);
+  }
 
 /* Spacer for right-align of icons */
 span.right-align-spacer {
@@ -35,8 +35,12 @@ span.right-align-spacer {
 
 /* Vertical menu items */
 span.menu-item-vert {
-    color: rgb(8, 59, 102);
     font-size: 16px;
+}
+
+/* Extra padding for authenticated views */
+div.vertical-padding {
+    height: 50px;
 }
 
 @media only screen and (max-width: 650px) {

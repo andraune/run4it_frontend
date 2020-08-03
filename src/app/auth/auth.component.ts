@@ -23,7 +23,7 @@ export class AuthComponent implements OnInit {
                     this.showConfirmedLink = (event.url == this.confirmationUrl);
                 }
             }
-        )
+        );
     }
     
     ngOnInit() {}

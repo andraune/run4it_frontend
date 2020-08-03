@@ -1,0 +1,20 @@
+
+<!-- GOAL VIEW -->
+<mat-tab-group class="tab-group" color="accent" *ngIf="activeGoals.length > 0">
+
+    <mat-tab class="tab-item" *ngFor="let goal of activeGoals" label="{{ goal | goalHeading }}">
+        <div class="tab-content">
+            <app-goal-details [id]="goal.id" [showHeading]="false"></app-goal-details>
+        </div>    
+    </mat-tab>
+
+</mat-tab-group>
+
+<!-- ADD NEW GOAL -->
+<div class="add-goal-btn-content" *ngIf="activeGoals.length == 0">
+    <br /><br /><br />
+    <em>Really, no goals? Come on and Run4IT!</em>
+    <br /><br />
+    <button mat-raised-button color="primary" [routerLink]="['/goals/new']">Add goal</button>
+    <br /><br /><br />
+</div>

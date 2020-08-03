@@ -3,12 +3,13 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
-import { Goal } from '../models';
+import { Goal, GoalCategory } from '../models';
+import { GoalsComponent } from 'src/app/goals/goals.component';
 
 @Injectable({ providedIn: 'root' })
 export class GoalService {
     private activeGoalsSubject: BehaviorSubject<Goal[]>;
-    public activeGoals: Observable<Goal[]>; 
+    public activeGoals: Observable<Goal[]>;  
     private futureGoalsSubject: BehaviorSubject<Goal[]>;
     public futureGoals: Observable<Goal[]>;
     private expiredGoalsSubject: BehaviorSubject<Goal[]>;
@@ -72,5 +73,26 @@ export class GoalService {
                 }
             )
         );
+    }
+
+    getGoalCategories() {
+        return this.apiService.get('/goal_categories').pipe(
+            map(
+               (data : GoalCategory[]) => {
+                console.log("Goal category information retrieved.");
+                    return data;
+                }
+            )
+        );
+    }
+
+    getGoalByID(username: string, id: number) {
+        return this.apiService.get(`/profiles/${username}/goals/${id}`).pipe(
+            map(
+               (data : Goal) => {
+                    return data;
+                }
+            )
+        );        
     }
 }
