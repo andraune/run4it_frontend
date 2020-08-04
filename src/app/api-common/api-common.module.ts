@@ -17,6 +17,7 @@ import {
     NotificationService,
     ProfileService,
     UserService,
+    WorkoutService,
     AuthenticationService
 } from './services';
 
@@ -41,6 +42,7 @@ import { ShowAuthenticatedDirective } from './show-authenticated.directive';
         NotificationService,
         ProfileService,
         UserService,
+        WorkoutService,
         AuthenticationService,
         AuthenticatedGuard,
         NotAuthenticatedGuard
