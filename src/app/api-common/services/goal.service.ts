@@ -4,7 +4,6 @@ import { map, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
 import { Goal, GoalCategory } from '../models';
-import { GoalsComponent } from 'src/app/goals/goals.component';
 
 @Injectable({ providedIn: 'root' })
 export class GoalService {
@@ -25,7 +24,7 @@ export class GoalService {
     }
 
     getActiveGoals(username: string): Observable<Goal[]> {
-        return this.apiService.get(`/profiles/${username}/goals`).pipe(
+        return this.apiService.get(`/profiles/${username}/goals?filter=active`).pipe(
             map(
                 data => {
                     this.activeGoalsSubject.next(data);

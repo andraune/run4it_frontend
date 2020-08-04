@@ -46,6 +46,15 @@ export class ProfileService {
             );
     }
 
+    getProfileWeightHistoryForInterval(username: string, startDate:string, endDate:string) {
+        return this.apiService.get(`/profiles/${username}/weight?startAt=${startDate}&endAt=${endDate}`).pipe(
+            map((data : ProfileWeight[]) => {
+                    return data;
+                }
+            )
+        );        
+    }
+
     updateProfileUserInfo(username: string, birthDate:string, height:number) {  
         return this.apiService.put(`/profiles/${username}`, { birthDate: birthDate, height: height})
             .pipe(
