@@ -1,4 +1,4 @@
-<div class="chart-container" *ngIf="chartType != ''">
+<div class="chart-container" *ngIf="!isChartError && !isLoading">
     <div class="chart">
         <ngx-charts-line-chart 
             [scheme]="chartColorScheme"
@@ -15,7 +15,10 @@
         </ngx-charts-line-chart>
     </div>
 </div>
+<div class="chart-container" *ngIf="isLoading">
+    <mat-spinner [diameter]="20" aria-label="Retrieving chart information"></mat-spinner>
+</div>
 
-<div class="no-chart" *ngIf="chartType == ''">
+<div class="no-chart" *ngIf="isChartError">
     <span class="warn-color">Cannot show chart</span>
 </div>
