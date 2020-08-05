@@ -175,7 +175,7 @@ export class GoalStatementPipe implements PipeTransform {
         }
 
         else if (goal.categoryName == "Weight loss") {
-            statement += "lose " + (goal.startValue - goal.targetValue) + " " + goal.categoryUnit + " to reach my target weight of " +  goal.targetValue + " " + goal.categoryUnit + " ";
+            statement += "lose " + (goal.startValue - goal.targetValue).toFixed(1) + " " + goal.categoryUnit + " to reach my target weight of " +  goal.targetValue + " " + goal.categoryUnit + " ";
         }
 
         else if ((goal.categoryName == "Cumulative climb") && (goal.workoutCategoryName == "Running")) {

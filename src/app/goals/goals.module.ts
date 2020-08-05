@@ -32,8 +32,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper'; 
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxChartsModule }from '@swimlane/ngx-charts';
 
 @NgModule({
@@ -52,8 +55,11 @@ import { NgxChartsModule }from '@swimlane/ngx-charts';
 		MatListModule,
 		MatNativeDateModule,
 		MatProgressSpinnerModule,
+		MatStepperModule,
+		MatSelectModule,
 		MatTableModule,
 		MatTabsModule,
+		MatTooltipModule,
 		NgxChartsModule
 	],
 	declarations: [
