@@ -1,0 +1,49 @@
+div.goal-heading-content {
+    width: 100%;
+    padding-bottom: 20px;
+    padding-right: 10px;
+}
+
+div.goal-heading-content h1 {
+    font-size: larger;
+    padding: 15px 0 10px 5px;
+}
+
+div.goal-summary-content {
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+div.goal-summary-content h2 {
+    font-size: small;
+}
+
+div.goal-summary-content span {
+    font-size: smaller;
+}
+
+.category-select {
+    min-width: 300px;
+}
+
+.target-select {
+    width: 120px;
+}
+
+.date-select {
+    width: 160px;
+}
+
+.list-item {
+    font-size: smaller;
+}
+
+.list-item em {
+    font-style: normal;
+    font-weight: 500; 
+    padding: 0 5px;   
+}
+
+button {
+    margin: 10px 5px 5px 0px;
+}

@@ -1,3 +1,119 @@
-<!-- CREATE GOAL FORM -->
+<div class="column-flex-container-nowrap white-bg-color">
 
-Create new goal
+    <!-- HEADING (not shown in tab view)-->
+    <div class="goal-heading-content">
+        <h1>My new goal</h1>
+        <mat-divider></mat-divider>
+    </div>
+
+
+    <!-- CREATE GOAL FORM -->
+
+    <mat-vertical-stepper class="white-bg-color" [linear]="true" #stepper>
+
+        <mat-step [stepControl]="goalCategoryForm">
+            <form [formGroup]="goalCategoryForm">
+                <ng-template matStepLabel>{{ goalCategoryHeading }}</ng-template>
+                <mat-form-field class="category-select" [floatLabel]="'always'">
+                    <mat-label>Select category</mat-label>
+                    <mat-select formControlName="categoryID" [(value)]="selectedGoalCategoryID" (selectionChange)="selectedCategoryChanged()">
+                        <mat-option *ngFor="let cat of goalCategories" value="{{ cat.id }}">
+                            {{ cat.name }}{{ cat.workoutCategoryName != "" ? ", ":"" }}{{ cat.workoutCategoryName | lowercase }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div>
+                    <button mat-stroked-button color="primary" matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="goalTargetForm">
+            <form [formGroup]="goalTargetForm">
+                <ng-template matStepLabel>{{ goalTargetHeading }}</ng-template>
+                <mat-form-field class="target-select" [floatLabel]="'always'">
+                    <mat-label>{{ goalTargetInputHeading }}</mat-label>
+                    <input matInput formControlName="target" type="text" value="" (change)="selectedTargetChanged()">
+                    <span matSuffix>{{ selectedGoalCategory.unit }}</span>
+                    <mat-hint *ngIf="selectedGoalCategory.name=='Weight loss'">
+                        Current: {{ profile.weight | number:'1.1-1' }} kg
+                    </mat-hint>
+                </mat-form-field>
+                <span class="warn-color" *ngIf="(selectedGoalCategory.name=='Weight loss') && (profile.weight == 0)">
+                    <br />Cannot create weight loss goal, profile weight is not set.
+                </span>
+            </form>
+            <div>
+                <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+                <button mat-stroked-button color="primary" matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+        <mat-step [stepControl]="goalDatesForm">
+            <form [formGroup]="goalDatesForm">
+                <ng-template matStepLabel>{{ goalDatesHeading }}</ng-template>
+                <mat-form-field class="date-select" [floatLabel]="'always'">
+                    <mat-label>Start date (dd/mm/yyyy)</mat-label>
+                    <input matInput [min]="startDateMin" [matDatepicker]="startDatePicker" formControlName="startDate" (dateChange)="selectedGoalDateChanged()">
+                    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startDatePicker></mat-datepicker>
+                  </mat-form-field>
+                  <br />
+                  <mat-form-field class="date-select" [floatLabel]="'always'">
+                    <mat-label>End date (dd/mm/yyyy)</mat-label>
+                    <input matInput [min]="endDateMin" [matDatepicker]="endDatePicker" formControlName="endDate" (dateChange)="selectedGoalDateChanged()">
+                    <mat-hint matTooltip="End date is non-inclusive. If, for example, a goal is intended to last a complete month, select 1st of the next month as end date.">Non-inclusive</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endDatePicker></mat-datepicker>
+                  </mat-form-field>
+            </form>
+            <div>
+                <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+                <button mat-stroked-button color="primary" matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>Goal summary</ng-template>
+
+            <div class="goal-summary-content">
+                <mat-list>
+
+                    <!-- Weight loss specific -->
+                    <mat-list-item class="list-item" *ngIf="selectedGoalCategory.name == 'Weight loss'">
+                        Initial weight is  <em>{{ profile.weight | number:'1.1-1'}} kg</em>
+                    </mat-list-item>
+                    <mat-list-item class="list-item" *ngIf="selectedGoalCategory.name == 'Weight loss'">
+                        Target is to lose <em>{{ (profile.weight - goalTargetValue) | number:'1.1-1' }} kg</em>
+                    </mat-list-item> 
+                    
+                    <!-- Other than weight loss -->
+                    <mat-list-item class="list-item" *ngIf="selectedGoalCategory.name != 'Weight loss'">
+                        Target is to complete
+                        <em>
+                            {{ goalTargetValue }}
+                            {{ selectedGoalCategory.unit != "#" ? selectedGoalCategory.unit : "" }}
+                            {{ (selectedGoalCategory.unit != "#" ? selectedGoalCategory.name : "workouts") | lowercase }}
+                        </em>
+                    </mat-list-item> 
+                    <mat-list-item class="list-item" *ngIf="selectedGoalCategory.name != 'Weight loss'">
+                        Goal activity is <em>{{ selectedGoalCategory.workoutCategoryName | lowercase }}</em>
+                    </mat-list-item>
+                    <mat-list-item class="list-item">
+                        Goal duration is <em>{{ goalDurationDays }} {{ goalDurationDays == 1 ? "day" : "days" }}</em>,
+                        starting <em>{{ selectedGoalStartDate | date }}</em>
+                    </mat-list-item>                                
+                </mat-list>
+                <div>
+                    <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+                    <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
+                    <button mat-raised-button color="primary" (click)="createGoal()">Create goal</button>
+                </div>
+            </div>
+
+
+        </mat-step>
+    </mat-vertical-stepper>
+
+
+</div>
