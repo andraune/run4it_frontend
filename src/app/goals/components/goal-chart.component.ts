@@ -104,8 +104,8 @@ export class GoalChartComponent implements OnInit, OnChanges, OnDestroy {
         this.isLoading = true;
         const startDate = new Date(this.goal.startAt);
         const endDate = new Date(this.goal.endAt);
-        const startDateStr = startDate.getUTCFullYear() + '-' + (startDate.getUTCMonth() + 1) + '-' + startDate.getUTCDate();
-        const endDateStr = endDate.getUTCFullYear() + '-' + (endDate.getUTCMonth() + 1) + '-' + endDate.getUTCDate();
+        const startDateStr = startDate.getFullYear() + '-' + (startDate.getMonth() + 1) + '-' + startDate.getDate();
+        const endDateStr = endDate.getFullYear() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getDate();
 
         this.profileService.getProfileWeightHistoryForInterval(this.profile.username, startDateStr, endDateStr).pipe(take(1)).subscribe(
             (data: ProfileWeight[]) => {

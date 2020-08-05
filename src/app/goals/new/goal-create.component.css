@@ -38,12 +38,6 @@ div.goal-summary-content span {
     font-size: smaller;
 }
 
-.list-item em {
-    font-style: normal;
-    font-weight: 500; 
-    padding: 0 5px;   
-}
-
 button {
     margin: 10px 5px 5px 0px;
 }

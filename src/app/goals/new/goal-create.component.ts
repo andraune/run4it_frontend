@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { GoalService, ProfileService, NotificationService, Goal, GoalCategory, Profile, ProfileWeight } from '../../api-common';
@@ -10,7 +11,7 @@ import { GoalService, ProfileService, NotificationService, Goal, GoalCategory, P
   templateUrl: './goal-create.component.html',
   styleUrls: ['../goals.component.css', 'goal-create.component.css']
 })
-export class GoalCreateComponent implements OnInit {
+export class GoalCreateComponent implements OnInit, OnDestroy {
 
     private profileSubscription: Subscription = null;
     public profile: Profile;
@@ -38,13 +39,16 @@ export class GoalCreateComponent implements OnInit {
     public goalDatesForm: FormGroup;
     public selectedGoalStartDate: Date = null;
     public selectedGoalEndDate: Date = null;
+
+    public isSubmitting:boolean = false;
     
 
     constructor(
         private profileService: ProfileService,
         private goalService: GoalService,
         private notificationService: NotificationService,
-        private formBuilder: FormBuilder) {
+        private formBuilder: FormBuilder,
+        private router: Router) {
     }
 
     ngOnInit() {
@@ -130,7 +134,24 @@ export class GoalCreateComponent implements OnInit {
     }
 
     public createGoal() {
-        alert("Create clicked!");
+        this.isSubmitting = true;
+        var startValue = 0;
+       
+        if (this.selectedGoalCategory.name == "Weight loss") {
+            startValue = this.profile.weight;
+        }
+
+        this.goalService.createNewGoal(this.profile.username, this.selectedGoalStartDate, this.goalDurationDays, startValue, this.goalTargetValue, this.selectedGoalCategory.id)
+            .pipe(take(1)).subscribe(
+                data => {
+                    this.notificationService.addInfo(0, 'New goal', 'Goal created', true);
+                    this.router.navigateByUrl(`/goals/${data.id}`);
+                },
+                err => {
+                    this.notificationService.addError(0, '', 'Failed to create new goal.');
+                    this.isSubmitting = false;
+                }
+            );
     }
 
 

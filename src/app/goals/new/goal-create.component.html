@@ -81,33 +81,30 @@
 
                     <!-- Weight loss specific -->
                     <mat-list-item class="list-item" *ngIf="selectedGoalCategory.name == 'Weight loss'">
-                        Initial weight is  <em>{{ profile.weight | number:'1.1-1'}} kg</em>
+                        Initial weight is {{ profile.weight | number:'1.1-1'}} kg
                     </mat-list-item>
                     <mat-list-item class="list-item" *ngIf="selectedGoalCategory.name == 'Weight loss'">
-                        Target is to lose <em>{{ (profile.weight - goalTargetValue) | number:'1.1-1' }} kg</em>
+                        Target is to lose {{ (profile.weight - goalTargetValue) | number:'1.1-1' }} kg
                     </mat-list-item> 
                     
                     <!-- Other than weight loss -->
                     <mat-list-item class="list-item" *ngIf="selectedGoalCategory.name != 'Weight loss'">
-                        Target is to complete
-                        <em>
-                            {{ goalTargetValue }}
-                            {{ selectedGoalCategory.unit != "#" ? selectedGoalCategory.unit : "" }}
-                            {{ (selectedGoalCategory.unit != "#" ? selectedGoalCategory.name : "workouts") | lowercase }}
-                        </em>
+                        Target is to complete {{ goalTargetValue }}
+                        {{ selectedGoalCategory.unit != "#" ? selectedGoalCategory.unit : "" }}
+                        {{ (selectedGoalCategory.unit != "#" ? selectedGoalCategory.name : "workouts") | lowercase }}
                     </mat-list-item> 
                     <mat-list-item class="list-item" *ngIf="selectedGoalCategory.name != 'Weight loss'">
-                        Goal activity is <em>{{ selectedGoalCategory.workoutCategoryName | lowercase }}</em>
+                        Goal activity is {{ selectedGoalCategory.workoutCategoryName | lowercase }}
                     </mat-list-item>
                     <mat-list-item class="list-item">
-                        Goal duration is <em>{{ goalDurationDays }} {{ goalDurationDays == 1 ? "day" : "days" }}</em>,
-                        starting <em>{{ selectedGoalStartDate | date }}</em>
+                        Goal duration is {{ goalDurationDays }} {{ goalDurationDays == 1 ? "day" : "days" }},
+                        starting {{ selectedGoalStartDate | date }}
                     </mat-list-item>                                
                 </mat-list>
                 <div>
                     <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
                     <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
-                    <button mat-raised-button color="primary" (click)="createGoal()">Create goal</button>
+                    <button mat-raised-button color="primary" (click)="createGoal()" [disabled]="isSubmitting">Create goal</button>
                 </div>
             </div>
 

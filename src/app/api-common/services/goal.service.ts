@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { first, map, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
 import { Goal, GoalCategory } from '../models';
@@ -93,5 +93,20 @@ export class GoalService {
                 }
             )
         );        
+    }
+
+    createNewGoal(username: string, startDate:Date, duration:number, startValue:number, targetValue:number, categoryID:number) {
+        var startAtString = startDate.toISOString();
+        return this.apiService.post(`/profiles/${username}/goals`,
+                                    { startAt: startAtString, duration: duration, startValue: startValue,
+                                        targetValue: targetValue, categoryID: categoryID }
+                                    ).pipe(
+                                        map((data: Goal) => {
+                                                console.log("Goal created");
+                                                this.getFutureGoals(username).pipe(first()).subscribe();
+                                                return data;
+                                            }
+                                        )
+                                    );
     }
 }
