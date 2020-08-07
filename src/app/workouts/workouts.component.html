@@ -1,0 +1,16 @@
+<app-header></app-header>
+<app-notification></app-notification>
+
+<div class="row-flex-container-wrap main-content-padding white-bg-color">
+
+    <!-- MAIN VIEW -->
+    <div class="column-flex-container-nowrap media-aware-content-70">
+        <router-outlet></router-outlet>
+    </div>
+
+    <!-- SIDE COLUMN -->
+    <div class="column-flex-container-nowrap media-aware-content-30">
+        <app-workout-list></app-workout-list>
+    </div>
+
+</div>

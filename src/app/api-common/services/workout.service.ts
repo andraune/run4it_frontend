@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
 import { Workout, WorkoutCategory } from '../models';
@@ -8,7 +9,14 @@ import { Workout, WorkoutCategory } from '../models';
 @Injectable({ providedIn: 'root' })
 export class WorkoutService {
 
-    constructor(private apiService: ApiService) {}
+    private workoutListSubject: BehaviorSubject<Workout[]>;
+    public workoutList: Observable<Workout[]>; 
+
+    constructor(private apiService: ApiService) {
+        this.workoutListSubject = new BehaviorSubject<Workout[]>([] as Workout[]);
+        this.workoutList = this.workoutListSubject.asObservable();
+    }
+
 
     getWorkouts(username: string, limit:number = 0, offset:number = 0) {
 
@@ -25,12 +33,21 @@ export class WorkoutService {
         }
 
         return this.apiService.get(url).pipe(
-            map((data : Workout[]) => {
-                    return data;
+            map(
+                (data : Workout[]) => {
+                    this.workoutListSubject.next(data);    
+                    return this.workoutListSubject.value;
+                }
+            ),
+            catchError(
+                error => {
+                    this.workoutListSubject.next([] as Workout[]);
+                    return throwError(error);
                 }
             )
         );        
     }
+
 
     getWorkoutsForGoal(username: string, goalID:number) {
         return this.apiService.get(`/profiles/${username}/workouts?goalID=${goalID}`).pipe(

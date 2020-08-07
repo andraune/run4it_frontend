@@ -1,0 +1,115 @@
+<!-- Add workout button -->
+<div class="side-column-content centered-content" *ngIf="workoutCount > 0">
+    <button *ngIf="!isCreateNewRoute" mat-raised-button color="primary" [routerLink]="['/workouts/new']">Add Workout</button>
+    <span *ngIf="isCreateNewRoute"><br /><br /></span>
+</div>
+
+<!-- List of workouts -->
+<div class="side-column-content">
+    <h3>My workouts</h3> 
+    <mat-accordion class="accordion" multi="true" *ngIf="workoutCount > 0">
+
+        <mat-expansion-panel expanded="true" *ngIf="workoutListCurrentMonth.length > 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ workoutListCurrentMonth[0].startAt | date : 'MMMM' }}</mat-panel-title>
+            </mat-expansion-panel-header>   
+            <mat-list dense>
+                <mat-list-item *ngFor="let workout of workoutListCurrentMonth">
+                    <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
+                    <a [routerLink]="['/workouts', workout.id]">
+                        {{ workout.name }}
+                        <span class="list-item-date grey-color">{{ workout.startAt | date : 'MMM dd' }}</span>
+                    </a>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="true" *ngIf="workoutListPreviousMonth.length > 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ workoutListPreviousMonth[0].startAt | date : 'MMMM' }}</mat-panel-title>
+            </mat-expansion-panel-header>   
+            <mat-list dense>
+                <mat-list-item *ngFor="let workout of workoutListPreviousMonth" class="list-item-small">
+                    <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
+                    <a [routerLink]="['/workouts', workout.id]">
+                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd' }}
+                    </a>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="false" *ngIf="workoutListYearOffset0.length > 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ workoutListYearOffset0[0].startAt | date : 'yyyy' }}</mat-panel-title>
+            </mat-expansion-panel-header>   
+            <mat-list dense>
+                <mat-list-item *ngFor="let workout of workoutListYearOffset0" class="list-item-small">
+                    <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
+                    <a [routerLink]="['/workouts', workout.id]">
+                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd, yyyy' }}
+                    </a>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="false" *ngIf="workoutListYearOffset1.length > 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ workoutListYearOffset1[0].startAt | date : 'yyyy' }}</mat-panel-title>
+            </mat-expansion-panel-header>   
+            <mat-list dense>
+                <mat-list-item *ngFor="let workout of workoutListYearOffset1" class="list-item-small">
+                    <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
+                    <a [routerLink]="['/workouts', workout.id]">
+                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd, yyyy' }}
+                    </a>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="false" *ngIf="workoutListYearOffset2.length > 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ workoutListYearOffset2[0].startAt | date : 'yyyy' }}</mat-panel-title>
+            </mat-expansion-panel-header>   
+            <mat-list dense>
+                <mat-list-item *ngFor="let workout of workoutListYearOffset2" class="list-item-small">
+                    <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
+                    <a [routerLink]="['/workouts', workout.id]">
+                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd, yyyy' }}
+                    </a>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="false" *ngIf="workoutListYearOffset3.length > 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ workoutListYearOffset3[0].startAt | date : 'yyyy' }}</mat-panel-title>
+            </mat-expansion-panel-header>   
+            <mat-list dense>
+                <mat-list-item *ngFor="let workout of workoutListYearOffset3" class="list-item-small">
+                    <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
+                    <a [routerLink]="['/workouts', workout.id]">
+                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd, yyyy' }}
+                    </a>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="false" *ngIf="workoutListYearOffset4.length > 0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>{{ workoutListYearOffset4[0].startAt | date : 'yyyy' }} and older</mat-panel-title>
+            </mat-expansion-panel-header>   
+            <mat-list dense>
+                <mat-list-item *ngFor="let workout of workoutListYearOffset4" class="list-item-small">
+                    <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
+                    <a [routerLink]="['/workouts', workout.id]">
+                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd, yyyy' }}
+                    </a>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+
+    </mat-accordion>
+
+    <em *ngIf="workoutCount == 0">None</em>
+
+</div>

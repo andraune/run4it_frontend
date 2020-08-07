@@ -1,0 +1,22 @@
+<mat-spinner *ngIf="isLoadingWorkout" [diameter]="20" aria-label="Retrieving workout information"></mat-spinner>
+
+<div class="workout-info-content" *ngIf="!isLoadingWorkout && workout == null">
+    <span class="warn-color">Failed to get workout information.</span>
+</div>
+
+
+<div class="column-flex-container-nowrap white-bg-color" *ngIf="!isLoadingWorkout && workout != null">
+
+    <!-- HEADING -->
+    <div class="workout-heading-content">
+        <h1>
+            {{ workout.name }}
+        </h1>
+        <mat-divider></mat-divider>
+    </div>
+
+
+
+
+</div>
+

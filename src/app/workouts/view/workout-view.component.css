@@ -1,0 +1,16 @@
+
+div.workout-heading-content {
+    width: 100%;
+    padding-bottom: 20px;
+    padding-right: 10px;
+}
+
+div.workout-heading-content h1 {
+    font-size: larger;
+    padding: 15px 0 10px 5px;
+}
+
+div.workout-info-content {
+    width: 100%;
+    padding-bottom: 20px;
+}

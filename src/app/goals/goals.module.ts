@@ -16,9 +16,9 @@ import {
 	GoalHeadingPipe,
 	GoalStatementPipe,
 	GoalProgressPercentagePipe,
-	goalCategoryIconPipe,
-	goalTargetFormattedPipe,
-	goalDaysLeftPipe
+	GoalCategoryIconPipe,
+	GoalTargetFormattedPipe,
+	GoalDaysLeftPipe
 } from './goals.pipe';
 
 import { ApiCommonModule } from '../api-common';
@@ -76,9 +76,9 @@ import { NgxChartsModule }from '@swimlane/ngx-charts';
 		GoalHeadingPipe,
 		GoalStatementPipe,
 		GoalProgressPercentagePipe,
-		goalCategoryIconPipe,
-		goalTargetFormattedPipe,
-		goalDaysLeftPipe
+		GoalCategoryIconPipe,
+		GoalTargetFormattedPipe,
+		GoalDaysLeftPipe
 	],
 	providers: [
 		ActiveGoalsResolver,
