@@ -6,7 +6,7 @@
 
 <!-- List of workouts -->
 <div class="side-column-content">
-    <h3>My workouts</h3> 
+
     <mat-accordion class="accordion" multi="true" *ngIf="workoutCount > 0">
 
         <mat-expansion-panel expanded="true" *ngIf="workoutListCurrentMonth.length > 0">
@@ -32,7 +32,8 @@
                 <mat-list-item *ngFor="let workout of workoutListPreviousMonth" class="list-item-small">
                     <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
                     <a [routerLink]="['/workouts', workout.id]">
-                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd' }}
+                        {{ workout.name }}
+                        <span class="list-item-date grey-color">{{ workout.startAt | date : 'MMM dd' }}</span>
                     </a>
                 </mat-list-item>
             </mat-list>
@@ -46,7 +47,8 @@
                 <mat-list-item *ngFor="let workout of workoutListYearOffset0" class="list-item-small">
                     <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
                     <a [routerLink]="['/workouts', workout.id]">
-                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd, yyyy' }}
+                        {{ workout.name }}
+                        <span class="list-item-date grey-color">{{ workout.startAt | date : 'MMM dd, yyyy' }}</span>
                     </a>
                 </mat-list-item>
             </mat-list>
@@ -60,7 +62,8 @@
                 <mat-list-item *ngFor="let workout of workoutListYearOffset1" class="list-item-small">
                     <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
                     <a [routerLink]="['/workouts', workout.id]">
-                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd, yyyy' }}
+                        {{ workout.name }}
+                        <span class="list-item-date grey-color">{{ workout.startAt | date : 'MMM dd, yyyy' }}</span>
                     </a>
                 </mat-list-item>
             </mat-list>
@@ -74,7 +77,8 @@
                 <mat-list-item *ngFor="let workout of workoutListYearOffset2" class="list-item-small">
                     <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
                     <a [routerLink]="['/workouts', workout.id]">
-                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd, yyyy' }}
+                        {{ workout.name }}
+                        <span class="list-item-date grey-color">{{ workout.startAt | date : 'MMM dd, yyyy' }}</span>
                     </a>
                 </mat-list-item>
             </mat-list>
@@ -88,7 +92,8 @@
                 <mat-list-item *ngFor="let workout of workoutListYearOffset3" class="list-item-small">
                     <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
                     <a [routerLink]="['/workouts', workout.id]">
-                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd, yyyy' }}
+                        {{ workout.name }}
+                        <span class="list-item-date grey-color">{{ workout.startAt | date : 'MMM dd, yyyy' }}</span>
                     </a>
                 </mat-list-item>
             </mat-list>
@@ -102,7 +107,8 @@
                 <mat-list-item *ngFor="let workout of workoutListYearOffset4" class="list-item-small">
                     <mat-icon matListIcon color="primary" class="list-icon">{{ workout | workoutCategoryIcon }}</mat-icon>
                     <a [routerLink]="['/workouts', workout.id]">
-                        {{ workout.name }}, {{ workout.startAt | date : 'MMM dd, yyyy' }}
+                        {{ workout.name }}
+                        <span class="list-item-date grey-color">{{ workout.startAt | date : 'MMM dd, yyyy' }}</span>
                     </a>
                 </mat-list-item>
             </mat-list>

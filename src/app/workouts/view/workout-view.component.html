@@ -1,22 +1,40 @@
-<mat-spinner *ngIf="isLoadingWorkout" [diameter]="20" aria-label="Retrieving workout information"></mat-spinner>
-
-<div class="workout-info-content" *ngIf="!isLoadingWorkout && workout == null">
-    <span class="warn-color">Failed to get workout information.</span>
+<!-- ADD NEW WORKOUT -->
+<div class="centered-content" *ngIf="workoutList.length == 0">
+    <br /><br /><br />
+    <em>Really, no workouts? Come on and Run4IT!</em>
+    <br /><br />
+    <button mat-raised-button color="primary" [routerLink]="['/workouts/new']">Add Workout</button>
+    <br /><br /><br />
 </div>
 
+<!-- DISPLAY WORKOUT INFO -->
+<div class="column-flex-container-nowrap" *ngIf="workoutList.length > 0">
 
-<div class="column-flex-container-nowrap white-bg-color" *ngIf="!isLoadingWorkout && workout != null">
+    <!-- Loading spinner / error message in case of slow or no response -->
+    <mat-spinner *ngIf="isLoadingWorkout" [diameter]="20" aria-label="Retrieving workout information"></mat-spinner>
 
-    <!-- HEADING -->
-    <div class="workout-heading-content">
-        <h1>
-            {{ workout.name }}
-        </h1>
-        <mat-divider></mat-divider>
+    <div class="workout-info-content" *ngIf="!isLoadingWorkout && workout == null">
+        <span class="warn-color">Failed to get workout information.</span>
     </div>
 
+    <!-- Actual goal info -->
+    <div class="column-flex-container-nowrap" *ngIf="!isLoadingWorkout && workout != null">
 
+        <!-- Heading -->
+        <div class="workout-heading-content">
+            <h1>
+                {{ workout.name }}
+            </h1>
+            <mat-divider></mat-divider>
+        </div>
 
+        <div class="centered-content">
+            Content
+        </div>
+    </div>
 
 </div>
+
+
+
 

@@ -4,3 +4,7 @@
     flex-flow: column nowrap; 
     justify-content: flex-start;
 }
+
+.centered-content {
+    text-align: center;
+}
