@@ -1,16 +1,54 @@
-
-div.workout-heading-content {
-    width: 100%;
-    padding-bottom: 20px;
-    padding-right: 10px;
+div.workout-card-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 2px 4px 20px 0;
 }
 
-div.workout-heading-content h1 {
-    font-size: larger;
-    padding: 15px 0 10px 5px;
+.workout-card {
+    width: 100%;
+    padding: 0;
 }
 
-div.workout-info-content {
+.workout-card-header {
+    padding: 5px 3px;
+}
+
+.workout-card-icon {
+    transform: scale(0.9);
+    position: absolute;
+    top:8px;
+    left:3px;
+}
+
+.workout-card-title {
     width: 100%;
-    padding-bottom: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0;
+    padding-left: 25px;
+}
+
+.workout-card-subtitle {
+    font-size: 11px;
+    font-weight: 500;
+    margin: 0;
+    padding-left: 25px;
+}
+
+.workout-card-content {
+    padding: 10px 3px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+div.workout-map-container {
+    height: 300px;
+    background-color: white;
+}
+
+div.workout-route-container {
+    height: 40px;
+    background-color: white;
 }

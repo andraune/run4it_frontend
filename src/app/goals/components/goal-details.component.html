@@ -11,7 +11,7 @@
     <!-- HEADING (not shown in tab view)-->
     <div class="goal-heading-content" *ngIf="showHeading">
         <h1>
-            My {{ goal | goalHeading | lowercase }}
+            My {{ goal | goalHeading | titlecase }}
         </h1>
         <mat-divider></mat-divider>
     </div>

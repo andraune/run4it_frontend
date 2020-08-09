@@ -9,10 +9,17 @@ div.side-column-content h3 {
     font-size: 14px;
 }
 
-.list-item-small {
-    font-size: small;
-}
-
 .centered-content {
     text-align: center;
+}
+
+.goal-title {
+    font-weight: 600;
+}
+
+div.goal-count {
+    width: 100%;
+    text-align: right;
+    padding-right: 5px;
+    font-size: smaller;
 }

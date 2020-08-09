@@ -27,6 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -49,7 +50,8 @@ import { NgxChartsModule }from '@swimlane/ngx-charts';
 		MatButtonModule,
 		MatCardModule,
 		MatDatepickerModule,
-		MatDividerModule,
+        MatDividerModule,
+        MatExpansionModule,
 		MatIconModule,
 		MatInputModule,
 		MatListModule,

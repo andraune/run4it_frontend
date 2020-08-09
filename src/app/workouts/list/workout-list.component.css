@@ -18,3 +18,14 @@ div.side-column-content h3 {
 .list-icon {
     transform: scale(0.7);
 }
+
+.workout-title {
+    font-weight: 600;
+}
+
+div.period-workout-count {
+    width: 100%;
+    text-align: right;
+    padding-right: 5px;
+    font-size: smaller;
+}

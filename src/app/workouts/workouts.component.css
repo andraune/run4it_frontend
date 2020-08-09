@@ -8,3 +8,14 @@
 .centered-content {
     text-align: center;
 }
+
+div.workout-heading-content {
+    width: 100%;
+    padding-bottom: 20px;
+    padding-right: 10px;
+}
+
+div.workout-heading-content h1 {
+    font-size: medium;
+    padding: 20px 0 10px 5px;
+}

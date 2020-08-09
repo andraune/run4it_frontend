@@ -4,49 +4,59 @@
     <span *ngIf="isCreateNewRoute"><br /><br /></span>
 </div>
 
-<!-- List of future goals -->
+
 <div class="side-column-content">
+    <mat-accordion multi="true">
 
-    <h3>Upcoming goals</h3>
-    <mat-divider></mat-divider>
-    <mat-list *ngIf="futureGoals.length > 0">
-        <mat-list-item *ngFor="let goal of futureGoals" class="list-item-small">
-            <a [routerLink]="['/goals', goal.id]">
-                {{ goal.categoryName }} {{ goal.targetValue }}{{ goal.categoryUnit }},
-                {{ goal | goalTimeToStart:currentTime }}
-            </a>
-        </mat-list-item>
-    </mat-list>
-    <em *ngIf="futureGoals.length == 0">None</em>
+        <!-- List of future goals -->
+        <mat-expansion-panel expanded="true" class="out-of-bounds-bg-color">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="goal-title primary-color">Upcoming goals</mat-panel-title>
+                <mat-panel-description><div class="goal-count">{{ futureGoals.length }}</div></mat-panel-description>
+            </mat-expansion-panel-header> 
+            
+            <mat-list dense *ngIf="futureGoals.length > 0">
+                <mat-list-item *ngFor="let goal of futureGoals">
+                    <a [routerLink]="['/goals', goal.id]">
+                        {{ goal.categoryName }} {{ goal.targetValue }}{{ goal.categoryUnit }},
+                        {{ goal | goalTimeToStart:currentTime }}
+                    </a>
+                </mat-list-item>
+            </mat-list>
+            <em *ngIf="futureGoals.length == 0">None</em>
+        </mat-expansion-panel>
 
-</div>
+        <!-- List of finished goals -->
+        <mat-expansion-panel expanded="false" class="out-of-bounds-bg-color">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="goal-title primary-color">Finished goals</mat-panel-title>
+                <mat-panel-description><div class="goal-count">{{ expiredGoals.length }}</div></mat-panel-description>
+            </mat-expansion-panel-header> 
+            
+            <mat-list dense *ngIf="expiredGoals.length > 0">
+                <mat-list-item *ngFor="let goal of expiredGoals">
+                    <a [routerLink]="['/goals', goal.id]">
+                        {{ goal.categoryName }} {{ goal.targetValue }}{{ goal.categoryUnit }},
+                        {{ goal | goalTimeSinceExpiry:currentTime }}
+                    </a>
+                </mat-list-item>
+            </mat-list>
+            <em *ngIf="expiredGoals.length == 0">None</em>
+        </mat-expansion-panel>
 
-<!-- List of already expired goals -->
-<div class="side-column-content">
+        <!-- Goal statistics -->
+        <mat-expansion-panel expanded="false" class="out-of-bounds-bg-color">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="goal-title primary-color">Goal stats</mat-panel-title>
+            </mat-expansion-panel-header> 
+            
+            <mat-list dense *ngIf="expiredGoals.length > 0">
+                <mat-list-item>Completed goals: {{ goalsCompleted }}</mat-list-item>
+                <mat-list-item *ngIf="expiredGoals.length > 0">Completed rate: {{ goalsSuccessRate }}%</mat-list-item>
+                <mat-list-item>Total finished goals: {{ expiredGoals.length }}</mat-list-item>
+            </mat-list>
+            <em *ngIf="expiredGoals.length == 0" class="list-item-small">No goals completed</em>
+        </mat-expansion-panel>
 
-    <h3>Finished goals</h3>
-    <mat-divider></mat-divider>
-    <mat-list *ngIf="expiredGoals.length > 0">
-        <mat-list-item *ngFor="let goal of expiredGoals" class="list-item-small">
-            <a [routerLink]="['/goals', goal.id]">
-                {{ goal.categoryName }} {{ goal.targetValue }}{{ goal.categoryUnit }},
-                {{ goal | goalTimeSinceExpiry:currentTime }}
-            </a>
-        </mat-list-item>
-    </mat-list>
-    <em *ngIf="expiredGoals.length == 0">None</em>
-
-</div>
-
-<!-- Goal statistics -->
-<div class="side-column-content">
-    <h3>Goal stats</h3>
-    <mat-divider></mat-divider>
-    <mat-list *ngIf="expiredGoals.length > 0">
-        <mat-list-item class="list-item-small">Completed goals: {{ goalsCompleted }}</mat-list-item>
-        <mat-list-item class="list-item-small" *ngIf="expiredGoals.length > 0">Completed rate: {{ goalsSuccessRate }}%</mat-list-item>
-        <mat-list-item class="list-item-small">Total finished goals: {{ expiredGoals.length }}</mat-list-item>            
-    </mat-list>
-    <em *ngIf="expiredGoals.length == 0" class="list-item-small">No goals completed</em>
-
+    </mat-accordion>
 </div>
