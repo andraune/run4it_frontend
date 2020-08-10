@@ -24,6 +24,7 @@
     "@swimlane/ngx-charts": "^14.0.0",
     "jwt-decode": "^2.2.0",
     "minimist": "^1.2.5",
+    "ol": "^6.4.3",
     "rxjs": "^6.6.2",
     "tree-kill": "~1.2.2",
     "tslib": "^2.0.0",
