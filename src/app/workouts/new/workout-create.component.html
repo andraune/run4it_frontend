@@ -1,0 +1,69 @@
+<div class="column-flex-container-nowrap white-bg-color">
+
+    <!-- HEADING -->
+    <div class="workout-heading-content">
+        <h1>My New Workout</h1>
+        <mat-divider></mat-divider>
+    </div>
+
+    <!-- CREATE GOAL FORM -->
+
+    <mat-vertical-stepper class="white-bg-color" [linear]="true" #workoutstepper>
+
+        <mat-step [stepControl]="workoutCategoryForm">
+            <form [formGroup]="workoutCategoryForm">
+                <ng-template matStepLabel>{{ workoutCategoryHeading }}</ng-template>
+                <mat-form-field class="category-select" [floatLabel]="'always'">
+                    <mat-label>Select category</mat-label>
+                    <mat-select formControlName="categoryID" [(value)]="selectedWorkoutCategoryID" (selectionChange)="selectedCategoryChanged()">
+                        <mat-option *ngFor="let cat of workoutCategories" value="{{ cat.id }}">
+                            {{ cat.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="workout-form-element">
+                    <mat-radio-group formControlName="inputType" [required]="true" [(value)]="selectedInputMethod" aria-label="Select input method">
+                        <mat-radio-button value="upload" class="radio-button">File upload</mat-radio-button>
+                        <mat-radio-button value="manual" class="radio-button">Manual entry</mat-radio-button>
+                    </mat-radio-group>                 
+                </div>
+                <div class="workout-form-element">
+                    <button mat-stroked-button color="primary" matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="workoutFileUploadForm" *ngIf="selectedInputMethod == 'upload'">
+            <form [formGroup]="workoutFileUploadForm">
+                <ng-template matStepLabel>Workout: File upload</ng-template>
+                <mat-form-field class="file-select" [floatLabel]="'always'">
+                    <mat-label>File name</mat-label>
+                    <input #fileInput type="file" accept=".gpx,.tcx" (change)="fileInputChanged($event)" hidden="true" onclick="this.value=null" />
+                    <input matInput type="text" value="{{selectedFileName}}" readonly />
+                    <mat-hint>{{ this.selectedFileSize > 0 ? this.selectedFileSize + " kB" : "" }}</mat-hint>
+                </mat-form-field>
+                <button mat-stroked-button class="browse-button" color="primary" (click)="fileInput.click()">Select file</button>
+
+                <div class="workout-form-element">
+                    <button mat-raised-button color="warn" (click)="workoutstepper.reset();resetForms();">Reset</button>
+                    <button mat-raised-button color="primary" (click)="uploadWorkoutFile()" [disabled]="isSubmitting || !canUpload">Upload</button>
+                    <mat-spinner *ngIf="isSubmitting" [diameter]="20" aria-label="Uploading file"></mat-spinner>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="workoutManualInputForm" *ngIf="selectedInputMethod != 'upload'">
+            <form [formGroup]="workoutManualInputForm">
+                <ng-template matStepLabel>Workout data: Manual entry</ng-template>
+                Add workout data, such as name and duration.
+            </form>
+        </mat-step>
+
+        <mat-step *ngIf="selectedInputMethod != 'upload'">
+            <ng-template matStepLabel>Workout additional data</ng-template>
+            Add extra workout data, such as distance, climb.
+        </mat-step>
+
+    </mat-vertical-stepper>
+
+</div>

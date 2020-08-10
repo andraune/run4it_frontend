@@ -19,6 +19,10 @@ export class ApiService {
     post(path: string, body: Object = {}): Observable<any> {
         return this.http.post(`${environment.apiUrl}${path}`, JSON.stringify(body));
     }
+
+    postUpload(path: string, formData: FormData): Observable<any> {
+        return this.http.post(`${environment.apiUrl}${path}`, formData);
+    }
     
     delete(path: string): Observable<any> {
         return this.http.delete(`${environment.apiUrl}${path}`);

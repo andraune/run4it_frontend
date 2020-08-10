@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { first, map, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
 import { Workout, WorkoutCategory } from '../models';
@@ -75,5 +75,20 @@ export class WorkoutService {
                 }
             )
         );        
+    }
+
+    createWorkoutByUpload(username: string, categoryID:number, fileToUpload:File) {
+        const uploadUrl: string = `/profiles/${username}/workouts/gpx/${categoryID}`;
+        const formData: FormData = new FormData();
+        formData.append("gpxfile", fileToUpload, fileToUpload.name);
+
+        return this.apiService.postUpload(uploadUrl, formData).pipe(
+            map((data: Workout) => {
+                    console.log("Workout created");
+                    this.getWorkouts(username, 20).pipe(first()).subscribe();
+                    return data;
+                }
+            )
+        );
     }
 }

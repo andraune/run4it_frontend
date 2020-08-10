@@ -1,0 +1,23 @@
+div.workout-form-element {
+    padding: 15px 0;
+}
+
+.category-select {
+    min-width: 190px;
+}
+
+.file-select {
+    min-width: 190px;
+}
+
+.radio-button {
+    padding-right: 10px;
+}
+
+.browse-button {
+    margin-left: 15px;
+}
+
+button {
+    margin: 10px 5px 5px 0px;
+}
