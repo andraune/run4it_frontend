@@ -249,7 +249,7 @@ export class GoalProgressPercentagePipe implements PipeTransform {
 }
 
 @Pipe({ name: 'goalCategoryIcon' })
-export class goalCategoryIconPipe implements PipeTransform {
+export class GoalCategoryIconPipe implements PipeTransform {
     transform(goal: Goal): string {
         if (goal.categoryName == "Weight loss") {
             return "replay_5";
@@ -266,7 +266,7 @@ export class goalCategoryIconPipe implements PipeTransform {
 }
 
 @Pipe({ name: 'goalTargetFormatted' })
-export class goalTargetFormattedPipe implements PipeTransform {
+export class GoalTargetFormattedPipe implements PipeTransform {
     transform(goal: Goal): string {
         var returnStr: string = "";
         
@@ -285,7 +285,7 @@ export class goalTargetFormattedPipe implements PipeTransform {
 }
 
 @Pipe({ name: 'goalDaysLeft' })
-export class goalDaysLeftPipe implements PipeTransform {
+export class GoalDaysLeftPipe implements PipeTransform {
     transform(goal: Goal, currentTime: Date): string {
         const startDate = new Date(goal.startAt);
         const endDate = new Date(goal.endAt);

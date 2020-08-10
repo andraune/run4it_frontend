@@ -9,15 +9,21 @@ div.side-column-content h3 {
     font-size: 14px;
 }
 
-.centered-content {
-    text-align: center;
+.list-item-date{
+    font-size: smaller;
+    padding-left: 5px;
+    vertical-align: bottom;
 }
 
-.goal-title {
+.list-icon {
+    transform: scale(0.7);
+}
+
+.workout-title {
     font-weight: 600;
 }
 
-div.goal-count {
+div.period-workout-count {
     width: 100%;
     text-align: right;
     padding-right: 5px;

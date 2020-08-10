@@ -5,7 +5,16 @@
     justify-content: flex-start;
 }
 
+div.goal-heading-content {
+    width: 100%;
+    padding-bottom: 20px;
+    padding-right: 10px;
+}
 
+div.goal-heading-content h1 {
+    font-size: medium;
+    padding: 20px 0 10px 5px;
+}
 
 div.tab-content {
     width: 100%;

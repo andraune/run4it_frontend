@@ -11,14 +11,14 @@
     <!-- HEADING (not shown in tab view)-->
     <div class="goal-heading-content" *ngIf="showHeading">
         <h1>
-            My {{ goal | goalHeading | lowercase }}
+            My {{ goal | goalHeading | titlecase }}
         </h1>
         <mat-divider></mat-divider>
     </div>
 
     <!-- GOAL STATEMENT -->
     <div class="goal-statement-content">
-        <em>&#8220;{{ goal | goalStatement: currentTime }}&#8221;</em>
+        <em class="grey-color">&#8220;{{ goal | goalStatement: currentTime }}&#8221;</em>
     </div>
 
     <!-- GOAL CHART -->

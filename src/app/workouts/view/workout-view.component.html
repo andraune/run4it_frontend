@@ -1,0 +1,77 @@
+<!-- ADD NEW WORKOUT, SHOWN IF NO WORKOUTS -->
+<div class="centered-content" *ngIf="workoutList.length == 0">
+    <br /><br /><br />
+    <em>Really, no workouts? Come on and Run4IT!</em>
+    <br /><br />
+    <button mat-raised-button color="primary" [routerLink]="['/workouts/new']">Add Workout</button>
+    <br /><br /><br />
+</div>
+
+<!-- SPINNER / ERROR MESSAGE IN CASE OF SLOW OR NO RESPONSE -->
+<div class="centered-content" *ngIf="workoutList.length > 0">
+    <!-- Loading spinner / error message in case of slow or no response -->
+    <mat-spinner *ngIf="isLoadingWorkout" [diameter]="20" aria-label="Retrieving workout information"></mat-spinner>
+
+    <div class="workout-info-content" *ngIf="!isLoadingWorkout && workout == null">
+        <span class="warn-color">Failed to get workout information.</span>
+    </div>
+</div>
+
+<!-- WORKOUT DATA -->
+<div class="column-flex-container-nowrap" *ngIf="workoutList.length > 0 && !isLoadingWorkout && workout != null">
+
+    <!-- Heading -->
+    <div class="workout-heading-content">
+        <h1>{{ workout.name | titlecase }}</h1>
+        <mat-divider></mat-divider>
+    </div>
+
+    <!-- Information cards, common for all workouts -->
+    <div class="row-flex-container-wrap">
+        <div class="workout-card-container media-aware-content-25" *ngFor="let card of workoutGeneralCards">
+            <mat-card class="workout-card">
+                <mat-card-header class="workout-card-header">
+                    <mat-card-title class="workout-card-title primary-color">
+                        {{ card.title | uppercase }}
+                        <mat-icon color="primary" class="workout-card-icon">{{ card.icon }}</mat-icon>
+                    </mat-card-title>
+                    <mat-card-subtitle class="workout-card-subtitle">{{ card.subtitle }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="workout-card-content">{{ card.content }}</mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <!-- Map -->
+    <div class="column-flex-container-nowrap workout-map-container">
+        map...
+    </div>
+    <!-- route directly below, or selector to choose route/ distance -->
+    <div class="column-flex-container-nowrap workout-route-container">
+        route selection
+    </div>
+
+    <!-- Information cards, workout specific -->
+    <div class="row-flex-container-wrap" *ngIf="workoutSpecificCards.length > 0">
+        <div class="workout-card-container media-aware-content-25" *ngFor="let card of workoutSpecificCards">
+            <mat-card class="workout-card">
+                <mat-card-header class="workout-card-header">
+                    <mat-card-title class="workout-card-title primary-color">
+                        {{ card.title | uppercase }}
+                        <mat-icon class="workout-card-icon">{{ card.icon }}</mat-icon>
+                    </mat-card-title>
+                    <mat-card-subtitle class="workout-card-subtitle">{{ card.subtitle }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="workout-card-content">{{ card.content }}</mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <!-- Splits, weather etc?-->
+    <div class="column-flex-container-nowrap">
+        splits etc.
+    </div>
+</div>
+

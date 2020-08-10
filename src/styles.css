@@ -23,6 +23,10 @@
     color: rgb(245, 245, 245);
 }
 
+.grey-color {
+    color: #707070
+}
+
 .out-of-bounds-bg-color {
     background-color: #e1e7ed;
 }
@@ -78,15 +82,18 @@ div.media-aware-content-30 {
     width: 30% !important;
 }
 
-@media only screen and (max-width: 700px) {
-    div.media-aware-content-50 {
-        width: 100% !important;
-        padding-bottom: 50px;
+div.media-aware-content-25 {
+    width: 25% !important;
+}
+
+@media only screen and (max-width: 860px) {
+    div.media-aware-content-25 {
+        width: 50% !important;
     }
 }
 
 @media only screen and (max-width: 640px) {
-    div.media-aware-content-70, div.media-aware-content-30 {
+    div.media-aware-content-70, div.media-aware-content-50, div.media-aware-content-30 {
         width: 100% !important;
         padding-bottom: 50px;
     }
@@ -118,7 +125,16 @@ fieldset {
     width: 100%;
 }
 
-a {
+a, a:visited {
     text-decoration: none;
     color: rgb(8, 59, 102);
+}
+
+/* Angular material overrides */
+div.mat-card-header-text {
+    margin: 0 !important;
+}
+
+div.mat-list-item-content {
+    padding: 0 2px !important;
 }
