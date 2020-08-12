@@ -5,6 +5,7 @@ import { WorkoutListComponent } from './list/workout-list.component';
 import { WorkoutViewComponent } from './view/workout-view.component';
 import { WorkoutCreateComponent} from './new/workout-create.component';
 import { WorkoutsComponent } from './workouts.component';
+import { WorkoutMapComponent } from './components';
 import { WorkoutsRoutingModule } from './workouts-routing.module';
 import { WorkoutListResolver } from './workouts-resolver.service';
 
@@ -33,6 +34,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { NgxChartsModule }from '@swimlane/ngx-charts';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 @NgModule({
 	imports: [
@@ -56,13 +58,15 @@ import { NgxChartsModule }from '@swimlane/ngx-charts';
         MatSelectModule,
         MatStepperModule,
         MatToolbarModule,
-		NgxChartsModule
+        NgxChartsModule,
+        GoogleMapsModule
 	],
 	declarations: [
         WorkoutsComponent,
         WorkoutListComponent,
         WorkoutViewComponent,
         WorkoutCreateComponent,
+        WorkoutMapComponent,
         WorkoutCategoryIconPipe,
         WorkoutTimeOfDayStringPipe,
         WorkoutDurationStringPipe

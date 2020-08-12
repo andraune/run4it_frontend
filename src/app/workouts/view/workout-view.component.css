@@ -43,11 +43,6 @@ div.workout-card-container {
     font-weight: 600;
 }
 
-div.workout-map-container {
-    height: 300px;
-    background-color: white;
-}
-
 div.workout-route-container {
     height: 40px;
     background-color: white;

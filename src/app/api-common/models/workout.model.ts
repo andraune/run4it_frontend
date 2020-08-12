@@ -15,7 +15,7 @@ export interface WorkoutCategory {
     supportsGpsData: string;
 }
 
-export class Workout {
+export interface Workout {
     id: number;
     name: string;
     startAt: string;
