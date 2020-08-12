@@ -115,7 +115,7 @@ export class WorkoutViewComponent implements OnInit, OnChanges, OnDestroy {
         this.workoutGeneralCards.push(this._generateCard("Duration", "Workout time", "schedule", this.durationStringPipe.transform(this.workout)));
 
         // Heart rate
-        var heartRate = 144;
+        var heartRate = 0;
 
         if (this.workout.trackSummary && this.workout.trackSummary.heartBpm > 0) {
             heartRate = Math.round(this.workout.trackSummary.heartBpm);

@@ -1,0 +1,10 @@
+div.map-container {
+    height: 350px;
+    width: 100%;
+}
+
+div.no-map-data {
+    width: 100%;
+    padding: 20px 0px;
+    text-align: center;
+}
