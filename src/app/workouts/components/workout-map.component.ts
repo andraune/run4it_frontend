@@ -57,7 +57,7 @@ export class WorkoutMapComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private _addRoute(map:google.maps.Map, trackData:WorkoutExtendedTrackDataPoint[]) {
         var polyLine = new google.maps.Polyline({
-            strokeColor: '#ff0000', // todo: add warn color
+            strokeColor: 'rgb(244, 67, 54)',
             strokeOpacity: 1.0,
             strokeWeight: 3
         });
