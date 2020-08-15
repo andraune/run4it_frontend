@@ -153,7 +153,7 @@ export class WorkoutViewComponent implements OnInit, OnChanges, OnDestroy {
             this.workoutSpecificCards.push(this._generateCard("Total climb", "m", "terrain", this.workout.climb ? this.workout.climb.toFixed(0) : "-"));
 
             // TBD
-            this.workoutSpecificCards.push(this._generateCard("TBD", "cadence?", "help", "best split?"));
+            this.workoutSpecificCards.push(this._generateCard("TBD", "Cadence/Split", "help", "-"));
 
         }
     }

@@ -41,9 +41,10 @@ export class WorkoutMapComponent implements OnInit, AfterViewInit, OnDestroy {
             const mapOptions: google.maps.MapOptions = { 
                 center: this._getCenterCoordinates(this.workout.trackData),
                 zoom: 10,
-                fullscreenControl: false,
+                fullscreenControl: true,
                 mapTypeControl: false,
-                streetViewControl: false
+                streetViewControl: false,
+                scaleControl: true,
             };
 
             this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
@@ -79,12 +80,13 @@ export class WorkoutMapComponent implements OnInit, AfterViewInit, OnDestroy {
         // Add markers for start and end
         var startMarker = new google.maps.Marker({
             position: new google.maps.LatLng(trackData[0].latitude, trackData[0].longitude),
+            icon: { url: `https://maps.google.com/mapfiles/kml/paddle/go.png` },
             map: map
         });
 
         var endMarker = new google.maps.Marker({
             position: new google.maps.LatLng(trackData[trackData.length-1].latitude, trackData[trackData.length-1].longitude),
-            icon: { url: `https://maps.google.com/mapfiles/ms/icons/green-dot.png` },
+            icon: { url: `https://maps.google.com/mapfiles/kml/paddle/red-square.png` },
             map: map
         });
     }
