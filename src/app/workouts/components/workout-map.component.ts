@@ -41,6 +41,7 @@ export class WorkoutMapComponent implements OnInit, AfterViewInit, OnDestroy {
             const mapOptions: google.maps.MapOptions = { 
                 center: this._getCenterCoordinates(this.workout.trackData),
                 zoom: 10,
+                clickableIcons: false,
                 fullscreenControl: true,
                 mapTypeControl: false,
                 streetViewControl: false,

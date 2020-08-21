@@ -91,4 +91,22 @@ export class WorkoutService {
             )
         );
     }
+
+    createWorkout(username: string, categoryID:number, name:string, startDate:Date, duration:number, distance:number = 0, climb:number = 0, heartRate:number = 0) {
+        const uploadUrl: string = `/profiles/${username}/workouts`;
+        var startAtString = startDate.toISOString();
+
+        return this.apiService.post(
+            uploadUrl,
+            { name: name, startAt:startAtString, duration:Math.round(duration), distance:Math.round(distance), 
+                climb:Math.round(climb), heartRate:Math.round(heartRate), edited:true, categoryID: categoryID }
+        ).pipe(
+            map((data: Workout) => {
+                    console.log("Workout created");
+                    this.getWorkouts(username, 20).pipe(first()).subscribe();
+                    return data;
+                }
+            )
+        );
+    }
 }

@@ -34,8 +34,10 @@ export class WorkoutCreateComponent implements OnInit, OnDestroy {
 
     // Step 2 - manual entry
     public workoutManualInputForm: FormGroup;
+    public startDateMax: Date;
 
-    // Step 3
+    // Step 3 - manual entry
+    public workoutOptionalInputForm: FormGroup;
 
 
     public canUpload: boolean = false;
@@ -62,6 +64,18 @@ export class WorkoutCreateComponent implements OnInit, OnDestroy {
 
         this.workoutManualInputForm = this.formBuilder.group({
             'name': ["", Validators.required],
+            'startDate': ["", Validators.required],
+            'startTimeHours': ["", Validators.compose([Validators.required, Validators.min(0), Validators.max(23)])],
+            'startTimeMinutes': ["", Validators.compose([Validators.required, Validators.min(0), Validators.max(59)])],
+            'durationHours': ["", Validators.compose([Validators.required, Validators.min(0), Validators.max(99)])],
+            'durationMinutes': ["", Validators.compose([Validators.required, Validators.min(0), Validators.max(59)])],
+            'durationSeconds': ["", Validators.compose([Validators.required, Validators.min(0), Validators.max(59)])],
+        });
+
+        this.workoutOptionalInputForm = this.formBuilder.group({
+            'distance': [""],
+            'climb': [""],
+            'heartRate': [""],
         });
         
         this._getWorkoutCategoryList();
@@ -84,6 +98,7 @@ export class WorkoutCreateComponent implements OnInit, OnDestroy {
         this.selectedFile = null;
         this.selectedFileSize = 0;
         this.selectedFileName = "";
+        this.startDateMax = new Date();
         this._updateHeadings();
     }
 
@@ -103,11 +118,25 @@ export class WorkoutCreateComponent implements OnInit, OnDestroy {
         this._updateHeadings();
     }
 
+    public selectedInputTypeChanged($event:any) {
+        this.selectedInputMethod = $event.value;      
+    }
+
     public fileInputChanged($event: any) {
         this.selectedFile = $event.target.files[0];
         this.selectedFileName = this.selectedFile.name;
         this.selectedFileSize = Math.round(this.selectedFile.size / 1024);
         this.canUpload = (this.selectedFileName && (this.selectedFileName != ""));
+    }
+
+    public selectedTimeChanged($event: any) {
+        var valueStr:string = "" + $event.target.value;
+        $event.target.value = valueStr.padStart(2, "0");
+    }
+
+    public selectedDistanceChanged($event) {
+        var valueStr:string = "" + $event.target.value;
+        $event.target.value = valueStr.replace(",", ".");       
     }
 
     public uploadWorkoutFile() {
@@ -127,11 +156,53 @@ export class WorkoutCreateComponent implements OnInit, OnDestroy {
         else {
             this.notificationService.addError(0, '', 'Failed to upload file, invalid data.');
         }
-
-        
-
-        
     }
+
+    public createManualWorkout() {
+        if (!this.isSubmitting) {
+            this.isSubmitting = true;
+            const name: string = this.workoutManualInputForm.controls["name"].value;
+            var date: Date = this.workoutManualInputForm.controls["startDate"].value;
+            date.setHours(this.workoutManualInputForm.controls["startTimeHours"].value);
+            date.setMinutes(this.workoutManualInputForm.controls["startTimeMinutes"].value);
+
+            var durationSeconds:number = (3600 * this.workoutManualInputForm.controls["durationHours"].value);
+            durationSeconds += (60 * this.workoutManualInputForm.controls["durationMinutes"].value);
+            durationSeconds += this.workoutManualInputForm.controls["durationSeconds"].value;
+
+            var distanceMeters = 0;
+            if (this.workoutOptionalInputForm.controls["distance"].value &&  (this.workoutOptionalInputForm.controls["distance"].value > 0)) {
+                distanceMeters = (1000.0 * this.workoutOptionalInputForm.controls["distance"].value);
+            }
+
+            var climbMeters = 0;
+            if (this.workoutOptionalInputForm.controls["climb"].value &&  (this.workoutOptionalInputForm.controls["climb"].value > 0)) {
+                climbMeters = this.workoutOptionalInputForm.controls["climb"].value;
+            }
+
+            var heartRateBpm = 0;
+            if (this.workoutOptionalInputForm.controls["heartRate"].value &&  (this.workoutOptionalInputForm.controls["heartRate"].value > 0)) {
+                heartRateBpm = this.workoutOptionalInputForm.controls["heartRate"].value;
+            }
+
+            this.workoutService.createWorkout(
+                this.profile.username, this.selectedWorkoutCategory.id, name, date, durationSeconds, distanceMeters, climbMeters, heartRateBpm
+            ).pipe(take(1)).subscribe(
+                (data:Workout) => {
+                    this.notificationService.addInfo(0, 'New workout', 'Workout created', true);
+                    this.router.navigateByUrl(`/workouts/${data.id}`);
+                },
+                error => {
+                    this.notificationService.addError(0, '', 'Failed to create workout.');
+                    this.resetForms();
+                }
+            );
+        }
+        else {
+            this.notificationService.addError(0, '', 'Failed to save workout, already processing a post.');
+        }
+    }
+
 
     private _updateHeadings() {
         const categoryPrefix = "Workout category";
