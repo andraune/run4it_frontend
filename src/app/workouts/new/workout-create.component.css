@@ -18,6 +18,25 @@ div.workout-form-element {
     margin-left: 15px;
 }
 
+.date-select {
+    width: 125px;
+}
+
+.time-select {
+    width: 40px;
+}
+
+.distance-hr-climb-select {
+    width: 90px;
+}
+
 button {
     margin: 10px 5px 5px 0px;
+}
+
+label {
+    display:block;
+    font-size: small;
+    font-weight: 500;
+    padding-bottom: 10px;
 }

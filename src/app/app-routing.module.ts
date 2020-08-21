@@ -21,6 +21,7 @@ const appRoutes: Routes = [
             {
                 enableTracing: environment.enableRouteTracing,
                 preloadingStrategy: PreloadAllModules,
+                scrollPositionRestoration: 'enabled',
             }
         )
     ],
