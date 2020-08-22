@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
         .subscribe(
           data => {
             this.notificationService.addInfo(0, 'New user', `User '${data.username}'  has been registered. Check email for verification code.`, true);
-            this.router.navigate(['/confirmation'], { queryParams: {username: data.username}});           
+            this.router.navigate(['/auth/confirmation'], { queryParams: {username: data.username}});           
           },
           err => {
             this.isSubmitting = false;
