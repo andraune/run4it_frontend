@@ -13,7 +13,7 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
 
     public isCreateNewRoute: boolean = false;
      
-    private subscriptions: Subscription[] = []
+    private subscriptions: Subscription[] = [];
 
     public workoutCount: number = 0;
     public workoutListCurrentMonth: Workout[] = [];

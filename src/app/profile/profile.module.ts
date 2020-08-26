@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile.component';
-import { WeightHistoryComponent } from './components';
+import { WeightHistoryComponent, ProfilePreferencesComponent } from './components';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileResolver } from './profile-resolver.service';
 import { ApiCommonModule } from '../api-common';
@@ -36,7 +36,8 @@ import { NgxChartsModule }from '@swimlane/ngx-charts';
   ],
   declarations: [
     ProfileComponent,
-    WeightHistoryComponent
+    WeightHistoryComponent,
+    ProfilePreferencesComponent
   ],
   providers: [ ProfileResolver ]
 })
