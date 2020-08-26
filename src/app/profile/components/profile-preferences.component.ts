@@ -35,18 +35,18 @@ export class ProfilePreferencesComponent implements OnInit, OnDestroy {
 
     public canShowConnectToPolarButton() {
         if (this.polarUser) {
-           return ((this.polarUser.authUrl == null) || (this.polarUser.authUrl == '')); 
+           return ((this.polarUser.memberID == null) || (this.polarUser.memberID == '')); 
         }
 
         return true;
     }
 
     public canShowPolarButton() {
-        return ((this.polarUser) && (this.polarUser.authUrl));
+        return ((this.polarUser) && (this.polarUser.authUrl) && (this.polarUser.authUrl != ""));
     }
 
     public isPolarTokenExpired() {
-        if ((this.polarUser) && (this.polarUser.polarUserID > 0)) {
+        if ((this.polarUser)) {
             const tokenExpiry = new Date(this.polarUser.accessTokenExpiresAt);
             const now = new Date();
             return (now >= tokenExpiry);

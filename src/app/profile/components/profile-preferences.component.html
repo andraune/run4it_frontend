@@ -3,7 +3,8 @@
     <h3>Polar integration</h3>
 
     <div class="column-flex-container-nowrap">
-        MemberID: {{ polarUser.memberID }}<br /><br /><br />
+        MemberID: {{ polarUser.memberID }}<br />
+        PolarUserID: {{ polarUser.polarUserID }}<br /><br /><br />
     </div>
     <div *ngIf="canShowConnectToPolarButton()">
         <button mat-button color="primary" (click)="registerPolarConnectRequest()" [disabled]="isFetchingPolar">I want to connect to my Polar Flow account.</button>
