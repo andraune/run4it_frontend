@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, distinctUntilChanged, catchError } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
-import { Profile, ProfileWeight } from '../models';
+import { Profile, ProfileWeight, PolarUser } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
@@ -49,6 +49,24 @@ export class ProfileService {
     getProfileWeightHistoryForInterval(username: string, startDate:string, endDate:string) {
         return this.apiService.get(`/profiles/${username}/weight?startAt=${startDate}&endAt=${endDate}`).pipe(
             map((data : ProfileWeight[]) => {
+                    return data;
+                }
+            )
+        );        
+    }
+
+    getProfilePolarUser(username: string) {
+        return this.apiService.get(`/profiles/${username}/polar`).pipe(
+            map((data : PolarUser) => {
+                    return data;
+                }
+            )
+        );        
+    }
+
+    registerProfilePolarUser(username: string) {
+        return this.apiService.post(`/profiles/${username}/polar`).pipe(
+            map((data : PolarUser) => {
                     return data;
                 }
             )

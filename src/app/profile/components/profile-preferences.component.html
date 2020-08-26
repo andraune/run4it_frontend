@@ -1,0 +1,21 @@
+<div class="column-flex-container-nowrap">
+    
+    <h3>Polar integration</h3>
+
+    <div class="column-flex-container-nowrap">
+        MemberID: {{ polarUser.memberID }}<br /><br /><br />
+    </div>
+    <div *ngIf="canShowConnectToPolarButton()">
+        <button mat-button color="primary" (click)="registerPolarConnectRequest()" [disabled]="isFetchingPolar">I want to connect to my Polar Flow account.</button>
+    </div>
+    <div *ngIf="canShowPolarButton()">
+        <a mat-stroked-button color="primary" href="{{ polarUser.authUrl }}" target="_blank" [disabled]="isFetchingPolar" (click)="startCallbackPolling()">Connect Polar</a><br />
+    </div>
+    <div *ngIf="canShowPolarButton() && isPolarTokenExpired()">
+        Polar authorization has expired.
+    </div>
+    <div *ngIf="isFetchingPolar">
+        <mat-spinner [diameter]="20" aria-label="Retrieving Polar information"></mat-spinner>
+    </div>
+
+</div>
