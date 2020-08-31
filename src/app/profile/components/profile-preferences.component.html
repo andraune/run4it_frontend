@@ -1,22 +1,48 @@
-<div class="column-flex-container-nowrap">
-    
-    <h3>Polar integration</h3>
+<!-- PREFERENCES -->
+<div class="column-flex-container-nowrap media-aware-content-50">
+    <div class="prefs-content">
+        <h3>Preferences</h3>
+        Preferences are not implemented yet.<br /><br />
+        Possible:
+        <ul>
+            <li>Preferred units</li>
+            <li>Notifications</li>
+            <li>Gender (for calory calc)</li>
+            <li>Time zone</li>
+        </ul>
+    </div>
+</div>
 
-    <div class="column-flex-container-nowrap">
-        MemberID: {{ polarUser.memberID }}<br />
-        PolarUserID: {{ polarUser.polarUserID }}<br /><br /><br />
-    </div>
-    <div *ngIf="canShowConnectToPolarButton()">
-        <button mat-button color="primary" (click)="registerPolarConnectRequest()" [disabled]="isFetchingPolar">I want to connect to my Polar Flow account.</button>
-    </div>
-    <div *ngIf="canShowPolarButton()">
-        <a mat-stroked-button color="primary" href="{{ polarUser.authUrl }}" target="_blank" [disabled]="isFetchingPolar" (click)="startCallbackPolling()">Connect Polar</a><br />
-    </div>
-    <div *ngIf="canShowPolarButton() && isPolarTokenExpired()">
-        Polar authorization has expired.
-    </div>
-    <div *ngIf="isFetchingPolar">
-        <mat-spinner [diameter]="20" aria-label="Retrieving Polar information"></mat-spinner>
-    </div>
+<div class="column-flex-container-nowrap media-aware-content-50">
+    <div class="prefs-content">
+        <h3>Third-party integration</h3>
 
+        <mat-divider></mat-divider>
+
+        <label class="accent-color">POLAR FLOW</label>
+        <div class="third-party">
+            <div *ngIf="canShowConnected()">
+                Connected with member ID '{{ polarUser.memberID }}'!
+            </div>
+            <div *ngIf="canShowConnectToPolarButton()">
+                <button mat-button color="primary" (click)="registerPolarConnectRequest()" [disabled]="isFetchingPolar">I want to connect to my Polar Flow account.</button>
+            </div>
+            <div *ngIf="canShowPolarButton()">
+                <a mat-raised-button color="primary" href="{{ polarUser.authUrl }}" target="_blank" [disabled]="isFetchingPolar" (click)="startCallbackPolling()">Connect Polar</a>
+            </div>
+            <div *ngIf="canShowPolarButton() && isPolarTokenExpired()">
+                Polar authorization has expired. {{ polarUser.accessTokenExpiresAt }}
+            </div>
+            <div *ngIf="isFetchingPolar">
+                <mat-spinner [diameter]="20" aria-label="Retrieving Polar information"></mat-spinner>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <label class="accent-color">GARMIN, FITBIT</label>
+        <div class="third-party">
+            <span>Not supported (yet).</span>
+        </div>     
+    </div>
 </div>
