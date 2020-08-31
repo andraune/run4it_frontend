@@ -1,0 +1,32 @@
+:host {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    text-align: left;
+}
+
+h3 {
+    font-size: medium;
+    padding-bottom: 20px;
+}
+
+div.prefs-content {
+    width: 100%;
+    padding-right: 20px;
+}
+
+div.third-party {
+    padding: 0 0 15px 10px;
+}
+
+div.third-party div, div.third-party span {
+    padding: 10px 0;
+    font-size: smaller;
+}
+
+label {
+    display:block;
+    font-size: small;
+    font-weight: 500;
+    padding: 10px 5px;
+}

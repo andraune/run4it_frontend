@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Profile, PolarUser, ProfileService } from '../../api-common';
-import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -12,12 +11,15 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class ProfilePreferencesComponent implements OnInit, OnDestroy {
 
-    private polarCallbackStartDate: Date = null;
+    
     private subscriptions: Subscription[] = [];
     public profile: Profile = {} as Profile;
 
     public polarUser: PolarUser = {} as PolarUser;  
     public isFetchingPolar: boolean = false;
+
+    private polarWaitSubscription: Subscription = null;
+    private polarWaitStartDate: Date = null;
 
     constructor(private profileService: ProfileService)
     {
@@ -33,6 +35,12 @@ export class ProfilePreferencesComponent implements OnInit, OnDestroy {
         this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 
+    public canShowConnected() {
+        if (this.polarUser && (this.polarUser.polarUserID > 0)) {
+            return !this.isPolarTokenExpired();
+        }
+    }
+
     public canShowConnectToPolarButton() {
         if (this.polarUser) {
            return ((this.polarUser.memberID == null) || (this.polarUser.memberID == '')); 
@@ -46,7 +54,7 @@ export class ProfilePreferencesComponent implements OnInit, OnDestroy {
     }
 
     public isPolarTokenExpired() {
-        if ((this.polarUser)) {
+        if ((this.polarUser && this.polarUser.accessTokenExpiresAt)) {
             const tokenExpiry = new Date(this.polarUser.accessTokenExpiresAt);
             const now = new Date();
             return (now >= tokenExpiry);
@@ -71,8 +79,24 @@ export class ProfilePreferencesComponent implements OnInit, OnDestroy {
     }
 
     public startCallbackPolling() {
-        this.polarCallbackStartDate = new Date();
-        console.log("Should start polling of Polar status. Check every X secs and stop we get updatedDate > polarCallbackStartDate");
+        if (this.polarWaitSubscription == null) {
+            this.polarWaitStartDate = new Date();
+            this.polarWaitSubscription = interval(6000).subscribe(
+                () => {
+                    var isRegistered: boolean = this.canShowConnected();
+
+                    if ((!isRegistered) && (!this.isFetchingPolar)) {
+                        this._getPolarUser();
+                    }
+
+                    const now = new Date();
+                    if (isRegistered || ((now.getTime() - this.polarWaitStartDate.getTime()) > 60000)) {
+                        this.polarWaitSubscription.unsubscribe();
+                        this.polarWaitSubscription = null;
+                    }  
+                }
+            );
+        }
     }
 
     private _getPolarUser() {
