@@ -24,7 +24,7 @@
     "@angular/router": "^10.2.0",
     "@swimlane/ngx-charts": "^14.0.0",
     "jwt-decode": "^2.2.0",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "rxjs": "^6.6.3",
     "tree-kill": "~1.2.2",
     "tslib": "^2.0.3",
